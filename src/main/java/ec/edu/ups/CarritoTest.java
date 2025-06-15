@@ -6,9 +6,13 @@ import ec.edu.ups.modelo.Producto;
 import ec.edu.ups.servicio.CarritoService;
 import ec.edu.ups.servicio.CarritoServiceImpl;
 
+import javax.swing.*;
+
 public class CarritoTest {
 
     public static void main(String[] args) {
+
+
 
         // Crear servicio de carrito
         CarritoService carrito = new CarritoServiceImpl();
@@ -39,5 +43,9 @@ public class CarritoTest {
         carrito.vaciarCarrito();
 
         System.out.println("Carrito vaciado. ¿Vacío ahora? " + carrito.estaVacio());
+
+
+
+
     }
 }
