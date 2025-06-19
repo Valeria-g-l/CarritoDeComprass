@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class ProductoListaView extends JFrame {
+public class ProductoListaView extends JInternalFrame {
     private JTextField txtBuscar;
     private JButton btnBuscar;
     private JTable tblProductos;
@@ -21,7 +21,6 @@ public class ProductoListaView extends JFrame {
         setTitle("Productos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
-        setLocationRelativeTo(null);
         setVisible(true);
 
         modelo = new DefaultTableModel();

@@ -1,127 +1,101 @@
 package ec.edu.ups.vista;
 
-import ec.edu.ups.modelo.Producto;
-
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.util.List;
 
-public class ProductoModificarView extends JFrame {
-
-    // Panel principal (form)
-    private JPanel PanelCuatro;
-
-    // Componentes de la vista
-    private JTextField textField1; // Campo para buscar por código
-    private JButton buscarButton;
-    private JTable table1;
-    private JButton eliminarButton;
-    private JTextField txtName;
+public class ProductoModificarView extends  JInternalFrame{
+    private JTextField txtCodigo;
+    private JTextField txtNombre;
     private JTextField txtPrecio;
-    private JButton modificarButton;
+    private JButton btnActualizar;
+    private JPanel PanelPrincipal;
+    private JLabel lblTitulo;
+    private JLabel lblCodigo;
+    private JLabel lblNombre;
+    private JLabel lblPrecio;
 
-    // Otros paneles auxiliares si los usas
-    private JPanel Panel1;
-    private JLabel LblName;
-    private JLabel LblPrecio;
-
-
-    private JLabel LblCodigo;
-
-    // Modelo para la tabla
-    private DefaultTableModel modelo;
-
-    public ProductoModificarView() {
-        setTitle("Modificar Producto");
-        setContentPane(PanelCuatro);
-        setSize(600, 400);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        // Configurar la tabla
-        modelo = new DefaultTableModel(new Object[]{"Código", "Nombre", "Precio"}, 0);
-        table1.setModel(modelo);
-
+    public  ProductoModificarView(){
+        setContentPane(PanelPrincipal);
+        setTitle("Datos del Producto");
+        setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
+        setSize(500, 500);
+        setResizable(true);
         setVisible(true);
     }
 
-    // ------------------- Métodos útiles -------------------
-
-    public void cargarDatos(List<Producto> listaProductos) {
-        modelo.setRowCount(0); // Limpia la tabla
-        for (Producto producto : listaProductos) {
-            modelo.addRow(new Object[]{
-                    producto.getCodigo(),
-                    producto.getNombre(),
-                    producto.getPrecio()
-            });
-        }
+    public JPanel getPanel(){
+        return PanelPrincipal;
     }
-
-    public void limpiarCampos() {
-        textField1.setText("");
-        txtName.setText("");
-        txtPrecio.setText("");
+    public void setPanel(JPanel PanelPrincipal){
+        this.PanelPrincipal = PanelPrincipal;
     }
-
-    // ------------------- Getters -------------------
-
+    public JLabel getLabelTitulo() {
+        return lblTitulo;
+    }
+    public void setLabelTitulo(JLabel lblTitulo) {
+        this.lblTitulo = lblTitulo;
+    }
     public JTextField getTxtCodigo() {
-        return textField1;
+        return txtCodigo;
     }
-
+    public void setTxtCodigo(JTextField txtCodigo) {
+        this.txtCodigo = txtCodigo;
+    }
     public JTextField getTxtNombre() {
-        return txtName;
+        return txtNombre;
     }
-
+    public void setTxtNombre(JTextField txtNombre) {
+        this.txtNombre = txtNombre;
+    }
     public JTextField getTxtPrecio() {
         return txtPrecio;
     }
-
-    public JButton getBuscarButton() {
-        return buscarButton;
+    public void setTxtPrecio(String TxtPrecio) {
+        this.txtPrecio = txtPrecio;
+    }
+    public JButton getBtnActualizar() {
+        return btnActualizar;
+    }
+    public void setBtnActualizar(JButton btnActualizar) {
+        this.btnActualizar = btnActualizar;
     }
 
-    public JButton getModificarButton() {
-        return modificarButton;
+    public JLabel getlblCodigo(){
+
+        return lblCodigo;
+    }
+    public void setlblCodigo(JLabel lblCodigo){
+        this.lblCodigo = lblCodigo;
+    }
+    public JLabel getlblNombre(){
+        return lblNombre;
+    }
+    public void setlblNombre(JLabel lblNombre){
+        this.lblNombre = lblNombre;
+    }
+    public JLabel getlblPrecio(){
+        return lblPrecio;
+    }
+    public void setlblPrecio(JLabel lblPrecio){
+        this.lblPrecio = lblPrecio;
     }
 
-    public JButton getEliminarButton() {
-        return eliminarButton;
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
     }
 
-    public JTable getTable() {
-        return table1;
+    public boolean mostrarMensajePregunta(String mensaje) {
+        int respuesta = JOptionPane.showConfirmDialog(
+                this,
+                mensaje,
+                "Confirmar",
+                JOptionPane.YES_NO_OPTION
+        );
+        return respuesta == JOptionPane.YES_OPTION;
     }
 
-    public JPanel getPanel1() {
-        return Panel1;
-    }
-
-    public void setPanel1(JPanel panel1) {
-        this.Panel1 = panel1;
-    }
-
-    public JLabel getLblName() {
-        return LblName;
-    }
-
-    public void setLblName(JLabel lblName) {
-        LblName = lblName;
-    }
-
-    public JLabel getLblPrecio() {
-        return LblPrecio;
-    }
-
-    public void setLblPrecio(JLabel lblPrecio) {
-        LblPrecio = lblPrecio;
-    }
-    public JLabel getLblCodigo() {
-        return LblCodigo;
-    }
-
-    public void setLblCodigo(JLabel lblCodigo) {
-        LblCodigo = lblCodigo;
+    public void limpiarCampos() {
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtPrecio.setText("");
     }
 }

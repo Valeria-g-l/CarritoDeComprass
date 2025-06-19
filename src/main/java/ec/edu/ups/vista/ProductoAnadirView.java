@@ -7,56 +7,42 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class ProductoAnadirView extends JFrame {
-
-    private JPanel panelPrincipal;
-    private JTextField txtPrecio;
-    private JTextField txtNombre;
+public class ProductoAnadirView extends  JInternalFrame {
+    private JLabel labelTitulo;
     private JTextField txtCodigo;
-    private JButton btnAceptar;
-    private JButton btnLimpiar;
+    private JTextField txtNombre;
+    private JLabel LblCodigo;
+    private JLabel LblNombre;
+    private JTextField txtPrecio;
+    private JLabel LblPreecio;
+    private JPanel PanelPrincipal;
+    private JPanel PanelTitle;
+    private JButton btnGuardar;
+    private JButton btnCancelar;
+    private JButton BtnLimpiarr;
+
 
     public ProductoAnadirView() {
-
-        setContentPane(panelPrincipal);
-        setTitle("Datos del Producto");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 500);
-        //setResizable(false);
-        setLocationRelativeTo(null);
-        setVisible(false);
-        //pack();
-
-        btnLimpiar.addActionListener(new ActionListener() {
+        setContentPane(PanelPrincipal);
+        setTitle("Agregar Producto");
+        setSize(400, 300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        BtnLimpiarr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                limpiarCampos();
+                txtCodigo.setText("");
+                txtNombre.setText("");
+                txtPrecio.setText("");
             }
         });
     }
-
-    public JPanel getPanelPrincipal() {
-        return panelPrincipal;
+    public JLabel getLabelTitulo() {
+        return labelTitulo;
     }
 
-    public void setPanelPrincipal(JPanel panelPrincipal) {
-        this.panelPrincipal = panelPrincipal;
-    }
-
-    public JTextField getTxtPrecio() {
-        return txtPrecio;
-    }
-
-    public void setTxtPrecio(JTextField txtPrecio) {
-        this.txtPrecio = txtPrecio;
-    }
-
-    public JTextField getTxtNombre() {
-        return txtNombre;
-    }
-
-    public void setTxtNombre(JTextField txtNombre) {
-        this.txtNombre = txtNombre;
+    public void setLabelTitulo(JLabel labelTitulo) {
+        this.labelTitulo = labelTitulo;
     }
 
     public JTextField getTxtCodigo() {
@@ -67,22 +53,80 @@ public class ProductoAnadirView extends JFrame {
         this.txtCodigo = txtCodigo;
     }
 
-    public JButton getBtnAceptar() {
-        return btnAceptar;
+    public JTextField getTxtNombre() {
+        return txtNombre;
     }
 
-    public void setBtnAceptar(JButton btnAceptar) {
-        this.btnAceptar = btnAceptar;
+    public void setTxtNombre(JTextField txtNombre) {
+        this.txtNombre = txtNombre;
     }
 
-    public JButton getBtnLimpiar() {
-        return btnLimpiar;
+    public JLabel getLblCodigo() {
+        return LblCodigo;
     }
 
-    public void setBtnLimpiar(JButton btnLimpiar) {
-        this.btnLimpiar = btnLimpiar;
+    public void setLblCodigo(JLabel LblCodigo) {
+        this.LblCodigo = LblCodigo;
     }
 
+    public JLabel getLblNombre() {
+        return LblNombre;
+    }
+
+    public void setLblNombre(JLabel LblNombre) {
+        this.LblNombre = LblNombre;
+    }
+
+    public JTextField getTxtPrecio() {
+        return txtPrecio;
+    }
+
+    public void setTxtPrecio(JTextField txtPrecio) {
+        this.txtPrecio = txtPrecio;
+    }
+
+    public JLabel getLblPrecio() {
+        return LblPreecio;
+    }
+
+    public void setLblPrecio(JLabel LblPrecio) {
+        this.LblPreecio = LblPrecio;
+    }
+
+    public JPanel getPanelPrincipal() {
+        return PanelPrincipal;
+    }
+
+    public void setPanelPrincipal(JPanel PanelPrincipal) {
+        this.PanelPrincipal = PanelPrincipal;
+    }
+
+    public JPanel getPanelTitle() {
+        return PanelTitle;
+    }
+
+    public void setPanelTitle(JPanel PanelTitle) {
+        this.PanelTitle = PanelTitle;
+    }
+
+    public JButton getBtnGuardar() {
+        return btnGuardar;
+    }
+
+    public void setBtnGuardar(JButton btnGuardar) {
+        this.btnGuardar = btnGuardar;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setBtnCancelar(JButton btnCancelar) {
+        this.btnCancelar = btnCancelar;
+    }
+    public JButton getBtnLimpiarr() {
+        return BtnLimpiarr;
+    }
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }
@@ -94,8 +138,30 @@ public class ProductoAnadirView extends JFrame {
     }
 
     public void mostrarProductos(List<Producto> productos) {
-        for (Producto producto : productos) {
-            System.out.println(producto);
-        }
+
     }
+
+
+
+    {
+        btnGuardar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+    }
+
+
 }
+
+
+
+
+
