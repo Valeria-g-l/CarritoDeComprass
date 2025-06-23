@@ -140,4 +140,5 @@ public class MenuPrincipalView extends JFrame {
     public void setjDesktopPane(JDesktopPane jDesktopPane) {
         this.jDesktopPane = jDesktopPane;
     }
+    //AsSs
 }
