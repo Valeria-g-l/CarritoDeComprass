@@ -67,5 +67,13 @@ public class Carrito {
     public boolean estaVacio() {
         return items.isEmpty();
     }
+
+    public char[] calcularSubtotal() {
+        return null;
+    }
+
+    public char[] calcularIVA() {
+        return null;
+    }
 }
 

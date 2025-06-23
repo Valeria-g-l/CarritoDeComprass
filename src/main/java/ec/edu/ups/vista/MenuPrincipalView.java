@@ -14,6 +14,9 @@ public class MenuPrincipalView extends JFrame {
     private JMenuItem menuItemBuscarProducto;
 
     private JMenuItem menuItemCrearCarrito;
+    private JMenuItem menuItemEliminarCarrito;
+    private JMenuItem menuItemActualizarCarrito;
+    private JMenuItem menuItemBuscarCarrito;
 
     private JDesktopPane jDesktopPane;
 
@@ -30,6 +33,9 @@ public class MenuPrincipalView extends JFrame {
         menuItemBuscarProducto = new JMenuItem("Buscar Producto");
 
         menuItemCrearCarrito = new JMenuItem("Crear Carrito");
+        menuItemEliminarCarrito = new JMenuItem("Eliminar Carrito");
+        menuItemActualizarCarrito = new JMenuItem("Actualizar Carrito");
+        menuItemBuscarCarrito = new JMenuItem("Buscar Carrito");
 
         menuBar.add(menuProducto);
         menuBar.add(menuCarrito);
@@ -40,6 +46,9 @@ public class MenuPrincipalView extends JFrame {
         menuProducto.add(menuItemBuscarProducto);
 
         menuCarrito.add(menuItemCrearCarrito);
+        menuCarrito.add(menuItemEliminarCarrito);
+        menuCarrito.add(menuItemActualizarCarrito);
+        menuCarrito.add(menuItemBuscarCarrito);
 
         setJMenuBar(menuBar);
         setContentPane(jDesktopPane);
@@ -104,6 +113,24 @@ public class MenuPrincipalView extends JFrame {
 
     public void setMenuItemCrearCarrito(JMenuItem menuItemCrearCarrito) {
         this.menuItemCrearCarrito = menuItemCrearCarrito;
+    }
+    public JMenuItem getMenuItemEliminarCarrito() {
+        return menuItemEliminarCarrito;
+    }
+    public void setMenuItemEliminarCarrito(JMenuItem menuItemEliminarCarrito) {
+        this.menuItemEliminarCarrito = menuItemEliminarCarrito;
+    }
+    public JMenuItem getMenuItemActualizarCarrito() {
+        return menuItemActualizarCarrito;
+    }
+    public void setMenuItemActualizarCarrito(JMenuItem menuItemActualizarCarrito) {
+        this.menuItemActualizarCarrito = menuItemActualizarCarrito;
+    }
+    public JMenuItem getMenuItemBuscarCarrito() {
+        return menuItemBuscarCarrito;
+    }
+    public void setMenuItemBuscarCarrito(JMenuItem menuItemBuscarCarrito) {
+        this.menuItemBuscarCarrito = menuItemBuscarCarrito;
     }
 
     public JDesktopPane getjDesktopPane() {
