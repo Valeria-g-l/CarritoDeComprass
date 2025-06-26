@@ -1,6 +1,8 @@
 package ec.edu.ups.vista;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CarritoAnadirView extends JInternalFrame {
     private JTextField txtCodigo;
@@ -22,6 +24,7 @@ public class CarritoAnadirView extends JInternalFrame {
     private JLabel lblSubtotal;
     private JPanel PanelSecundario;
     private JPanel JPanel;
+    private JButton btnCancelar;
 
     public CarritoAnadirView() {
         super("Carrito de Compras", true, true, false, true);
@@ -35,6 +38,18 @@ public class CarritoAnadirView extends JInternalFrame {
         tblCarrito.setModel(modelo);
 
         cargarDatos();
+        BtnLimpiar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limpiarCampos();
+            }
+        });
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
     private void cargarDatos() {
         CBoxCantidad.removeAllItems();
@@ -133,10 +148,18 @@ public class CarritoAnadirView extends JInternalFrame {
     public void setBtnLimpiar(JButton btnLimpiar) {
         this.BtnLimpiar = btnLimpiar;
     }
+    public void limpiarCampos() {
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtPrecio.setText("");
+    }
 
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    public void limpiarCamposProducto() {
     }
 }
 

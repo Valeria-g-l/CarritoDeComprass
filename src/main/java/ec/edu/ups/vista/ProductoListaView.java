@@ -4,7 +4,8 @@ import ec.edu.ups.modelo.Producto;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ProductoListaView extends JInternalFrame {
@@ -14,6 +15,9 @@ public class ProductoListaView extends JInternalFrame {
     private JLabel lblBuscar;
     private DefaultTableModel modelo;
     private JPanel PanelTerciario;
+    private JButton btnCancelar;
+    private JPanel lblTitulo;
+    private JLabel lblTitule;
 
 
     public ProductoListaView() {
@@ -28,6 +32,12 @@ public class ProductoListaView extends JInternalFrame {
         modelo.setColumnIdentifiers(columnas);
         tblProductos.setModel(modelo);
 
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
 
     public JTextField getTxtBuscar() {

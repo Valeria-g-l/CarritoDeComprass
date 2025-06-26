@@ -33,7 +33,7 @@ public class CarritoController {
         carritoAnadirView.getBtnAñadir().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                anadirProducto();
+                buscarProductoEnCarrito();
             }
         });
 
@@ -62,6 +62,25 @@ public class CarritoController {
         mostrarTotales();
 
     }
+    private void buscarProductoEnCarrito() {
+        String txtCod = carritoAnadirView.getTxtCodigo().getText().trim();
+        if (!txtCod.matches("\\d+")) {
+            carritoAnadirView.mostrarMensaje("Código inválido.");
+            return;
+        }
+
+        int codigo = Integer.parseInt(txtCod);
+        Producto producto = productoDAO.buscarPorCodigo(codigo);
+
+        if (producto != null) {
+            carritoAnadirView.getTxtNombre().setText(producto.getNombre());
+            carritoAnadirView.getTxtPrecio().setText(String.valueOf(producto.getPrecio()));
+        } else {
+            carritoAnadirView.mostrarMensaje("Producto no encontrado.");
+            carritoAnadirView.limpiarCamposProducto();
+        }
+    }
+
 
     private void cargarProductos(){
 

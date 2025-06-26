@@ -1,6 +1,8 @@
 package ec.edu.ups.vista;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ProductoModificarView extends  JInternalFrame{
     private JTextField txtCodigo;
@@ -12,6 +14,8 @@ public class ProductoModificarView extends  JInternalFrame{
     private JLabel lblCodigo;
     private JLabel lblNombre;
     private JLabel lblPrecio;
+    private JButton btnLimpiar;
+    private JButton btnCancelar;
 
     public  ProductoModificarView(){
         setContentPane(PanelPrincipal);
@@ -20,12 +24,33 @@ public class ProductoModificarView extends  JInternalFrame{
         setSize(500, 500);
         setResizable(true);
         setVisible(true);
+        btnActualizar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        btnLimpiar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limpiarCampos();
+
+            }
+        });
+        btnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
 
     public JPanel getPanel(){
+
         return PanelPrincipal;
     }
     public void setPanel(JPanel PanelPrincipal){
+
         this.PanelPrincipal = PanelPrincipal;
     }
     public JLabel getLabelTitulo() {
@@ -57,6 +82,18 @@ public class ProductoModificarView extends  JInternalFrame{
     }
     public void setBtnActualizar(JButton btnActualizar) {
         this.btnActualizar = btnActualizar;
+    }
+    public JButton getBtnLimpiar() {
+        return btnLimpiar;
+    }
+    public void setBtnLimpiar(JButton btnLimpiar) {
+        this.btnLimpiar = btnLimpiar;
+    }
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+    public void setBtnCancelar(JButton btnCancelar) {
+        this.btnCancelar = btnCancelar;
     }
 
     public JLabel getlblCodigo(){
@@ -98,4 +135,5 @@ public class ProductoModificarView extends  JInternalFrame{
         txtNombre.setText("");
         txtPrecio.setText("");
     }
+
 }
