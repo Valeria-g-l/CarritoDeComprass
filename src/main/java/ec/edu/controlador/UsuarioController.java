@@ -1,0 +1,47 @@
+package ec.edu.controlador;
+
+import ec.edu.dao.UsuarioDAO;
+import ec.edu.modelo.Usuario;
+import ec.edu.vista.LoginView;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class UsuarioController {
+
+    private Usuario usuario;
+    private final UsuarioDAO usuarioDAO;
+    private final LoginView loginView;
+
+    public UsuarioController(UsuarioDAO usuarioDAO, LoginView loginView) {
+        this.usuarioDAO = usuarioDAO;
+        this.loginView = loginView;
+        this.usuario = null;
+        configurarEventosEnVistas();
+    }
+
+    private void configurarEventosEnVistas(){
+        loginView.getBtnIngresar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                autenticar();
+            }
+        });
+    }
+
+    private void autenticar(){
+        String username = loginView.getTxtUsuario().getText();
+        String contrasenia = loginView.getTxtContraseña().getText();
+
+        usuario = usuarioDAO.autenticar(username, contrasenia);
+        if(usuario == null){
+            loginView.mostrarMensaje("Usuario o contraseña incorrectos.");
+        }else{
+            loginView.dispose();
+        }
+    }
+
+    public Usuario getUsuarioAutenticado(){
+        return usuario;
+    }
+}//usuaeiik

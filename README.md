@@ -16,7 +16,7 @@ Implementar un sistema educativo que simula un **carrito de compras**, utilizand
 - 💻 **Java 21**
 - 🧰 **IntelliJ IDEA** (recomendado con el plugin de diseñador gráfico de interfaces Swing)
 - ☕ **Swing** para la interfaz gráfica
-- 📦 Estructura modular basada en paquetes: `modelo`, `dao`, `controlador`, `vista`, y `servicio`
+- 📦 Estructura modular basada en paquetes: `ec.edu.modelo`, `dao`, `controlador`, `vista`, y `servicio`
 
 ---
 
