@@ -3,6 +3,7 @@ package ec.edu.vista;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 public class ProductoModificarView extends  JInternalFrame{
     private JTextField txtCodigo;
@@ -17,7 +18,7 @@ public class ProductoModificarView extends  JInternalFrame{
     private JButton btnLimpiar;
     private JButton btnCancelar;
 
-    public  ProductoModificarView(){
+    public  ProductoModificarView(ResourceBundle mensajes){
         setContentPane(PanelPrincipal);
         setTitle("Datos del Producto");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);

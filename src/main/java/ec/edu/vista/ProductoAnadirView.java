@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class ProductoAnadirView extends  JInternalFrame {
     private JLabel labelTitulo;
@@ -20,9 +21,10 @@ public class ProductoAnadirView extends  JInternalFrame {
     private JButton btnGuardar;
     private JButton btnCancelar;
     private JButton BtnLimpiarr;
+    private ResourceBundle mensajes;
 
 
-    public ProductoAnadirView() {
+    public ProductoAnadirView(ResourceBundle mensajes) {
         setContentPane(PanelPrincipal);
         setTitle("Agregar Producto");
         setSize(400, 300);
@@ -156,6 +158,12 @@ public class ProductoAnadirView extends  JInternalFrame {
                 System.exit(0);
             }
         });
+    }
+    public void setMensajes(ResourceBundle mensajes) {
+        this.mensajes = mensajes;
+
+        setTitle(mensajes.getString("titulo.agregarProducto"));
+
     }
 
 

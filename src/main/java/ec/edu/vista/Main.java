@@ -35,25 +35,24 @@ public class Main {
                     Usuario usuarioAutenticado = usuarioController.getUsuarioAutenticado();
 
                     if (usuarioAutenticado != null) {
-
-
                         String idiomaSeleccionado = loginView.getIdiomaSeleccionado();
+
                         Locale locale;
                         switch (idiomaSeleccionado) {
-                            case "English":
+                            case "en":
                                 locale = new Locale("en");
                                 break;
-                            case "Français":
+                            case "fr":
                                 locale = new Locale("fr");
                                 break;
                             default:
                                 locale = new Locale("es");
                         }
+
                         ResourceBundle mensajes = ResourceBundle.getBundle("messages", locale);
 
                         ProductoDAO productoDAO = new ProductoDAOMemoria();
                         CarritoDAO carritoDAO = new CarritoDAOMemoria();
-
 
                         MenuPrincipalView menuPrincipal = new MenuPrincipalView(mensajes);
                         ProductoAnadirView productoAnadirView = new ProductoAnadirView(mensajes);
@@ -62,21 +61,25 @@ public class Main {
                         ProductoModificarView productoModificarView = new ProductoModificarView(mensajes);
                         CarritoAnadirView carritoAnadirView = new CarritoAnadirView(mensajes);
 
-                        ProductoController productoController = new ProductoController(productoDAO,
-                                productoAnadirView, productoListaView, productoModificarView, productoEliminarView);
-                        CarritoController carritoController = new CarritoController(carritoDAO, productoDAO, carritoAnadirView);
+                        ProductoController productoController = new ProductoController(
+                                productoDAO, productoAnadirView, productoListaView, productoModificarView, productoEliminarView);
+                        CarritoController carritoController = new CarritoController(
+                                carritoDAO, productoDAO, carritoAnadirView);
 
-
-                        menuPrincipal.mostrarMensaje(mensajes.getString("bienvenido") + ": " + usuarioAutenticado.getUsername());
+                        menuPrincipal.mostrarMensaje(mensajes.getString("app.titulo") + "\n" +
+                                mensajes.getString("bienvenido") + ": " + usuarioAutenticado.getUsername());
 
                         if (usuarioAutenticado.getRol().equals(Rol.USUARIO)) {
                             menuPrincipal.deshabilitarMenusAdministrador();
                         }
 
+                        menuPrincipal.configurarMenusPorRol(usuarioAutenticado);
+
                         configurarEventosMenu(menuPrincipal, productoAnadirView, productoListaView,
-                                productoModificarView, productoEliminarView, carritoAnadirView);
+                                productoModificarView, productoEliminarView, carritoAnadirView, mensajes);
 
                         menuPrincipal.setVisible(true);
+
                     } else {
                         JOptionPane.showMessageDialog(null, "No se inició sesión. Saliendo...");
                         System.exit(0);
@@ -91,7 +94,9 @@ public class Main {
                                               ProductoListaView listaView,
                                               ProductoModificarView modificarView,
                                               ProductoEliminarView eliminarView,
-                                              CarritoAnadirView carritoAnadirView) {
+                                              CarritoAnadirView carritoAnadirView,
+                                              ResourceBundle mensajes) {
+
         menu.getMenuItemCrearProducto().addActionListener(e -> {
             if (!anadirView.isVisible()) {
                 menu.getjDesktopPane().add(anadirView);
@@ -127,24 +132,23 @@ public class Main {
             }
         });
 
-
         menu.getMenuItemVerMisCarritos().addActionListener(e -> {
-            System.out.println(" Ver mis carritos aún no implementado");
+            JOptionPane.showMessageDialog(menu, mensajes.getString("mensaje.noImplementado"));
         });
 
         menu.getMenuItemModificarMiCarrito().addActionListener(e -> {
-            System.out.println(" Modificar mis carritos aún no implementado");
+            JOptionPane.showMessageDialog(menu, mensajes.getString("mensaje.noImplementado"));
         });
 
         menu.getMenuItemCambiarContrasenia().addActionListener(e -> {
-            System.out.println(" Cambiar contraseña aún no implementado");
+            JOptionPane.showMessageDialog(menu, mensajes.getString("mensaje.noImplementado"));
         });
 
         menu.getMenuItemCerrarSesion().addActionListener(e -> {
             int confirmacion = JOptionPane.showConfirmDialog(
                     menu,
-                    mensajes.getString("confirmacion.cerrarSesion"),
-                    mensajes.getString("titulo.cerrarSesion"),
+                    mensajes.getString("menu.salir.cerrar"),
+                    mensajes.getString("menu.salir.salir"),
                     JOptionPane.YES_NO_OPTION
             );
             if (confirmacion == JOptionPane.YES_OPTION) {
@@ -154,5 +158,6 @@ public class Main {
                 new UsuarioController(new UsuarioDAOMemoria(), nuevoLogin);
             }
         });
+
     }
 }

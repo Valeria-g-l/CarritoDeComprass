@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class ProductoListaView extends JInternalFrame {
     private JTextField txtBuscar;
@@ -20,7 +21,7 @@ public class ProductoListaView extends JInternalFrame {
     private JLabel lblTitule;
 
 
-    public ProductoListaView() {
+    public ProductoListaView(ResourceBundle mensajes) {
         setContentPane(PanelTerciario);
         setTitle("Productos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

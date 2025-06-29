@@ -3,6 +3,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 public class CarritoAnadirView extends JInternalFrame {
     private JTextField txtCodigo;
@@ -26,7 +27,7 @@ public class CarritoAnadirView extends JInternalFrame {
     private JPanel JPanel;
     private JButton btnCancelar;
 
-    public CarritoAnadirView() {
+    public CarritoAnadirView(ResourceBundle mensajes) {
         super("Carrito de Compras", true, true, false, true);
         setContentPane(JPanel);
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);

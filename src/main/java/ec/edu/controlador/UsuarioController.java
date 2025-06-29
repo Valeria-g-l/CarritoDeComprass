@@ -36,8 +36,8 @@ public class UsuarioController {
         loginView.getBtnRegistrarse().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RegistrarUsuarioView registroView = new RegistrarUsuarioView(); // tu nueva ventana
-                new RegistroController(usuarioDAO, registroView); // y su controlador
+                RegistrarUsuarioView registroView = new RegistrarUsuarioView();
+                new RegistroController(usuarioDAO, registroView);
                 registroView.setVisible(true);
             }
         });
@@ -53,10 +53,10 @@ public class UsuarioController {
         String idiomaSeleccionado = loginView.getIdiomaSeleccionado();
         Locale locale;
         switch (idiomaSeleccionado) {
-            case "English":
+            case "En":
                 locale = new Locale("en");
                 break;
-            case "Français":
+            case "Fr":
                 locale = new Locale("fr");
                 break;
             default:

@@ -7,7 +7,7 @@ public class LoginView extends JFrame {
     private JPanel PanelPrincipal;
     private JLabel lblTitulo;
     private JLabel lblIdioma;
-    private JComboBox CBoxIdioma;
+    private JComboBox<String> CBoxIdioma;
     private JLabel lblUsuario;
     private JTextField TxtUsuario;
     private JLabel LblContraseña;
@@ -23,6 +23,11 @@ public class LoginView extends JFrame {
         setSize(600, 400);
         setLocationRelativeTo(null);
         setContentPane(PanelPrincipal);
+
+        CBoxIdioma.addItem("Español");
+        CBoxIdioma.addItem("English");
+        CBoxIdioma.addItem("Français");
+
     }
 
     private void $$$setupUI$$$() {
@@ -90,6 +95,18 @@ public class LoginView extends JFrame {
     public void setBtnRegistrarse(JButton btnRegistrarse) {
         BtnRegistrarse = btnRegistrarse;
     }
+    public String getIdiomaSeleccionado() {
+        String seleccion = (String) CBoxIdioma.getSelectedItem();
+        if (seleccion.equalsIgnoreCase("Español")) {
+            return "es";
+        } else if (seleccion.equalsIgnoreCase("English")) {
+            return "en";
+        } else if (seleccion.equalsIgnoreCase("Français")) {
+            return "fr";
+        }
+        return "es";
+    }
+
 
 
     public void mostrarMensaje(String mensaje) {

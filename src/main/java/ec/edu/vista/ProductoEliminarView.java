@@ -1,6 +1,7 @@
 package ec.edu.vista;
 
 import javax.swing.*;
+import java.util.ResourceBundle;
 
 public class ProductoEliminarView  extends  JInternalFrame{
     private JTextField txtCodigo;
@@ -12,7 +13,7 @@ public class ProductoEliminarView  extends  JInternalFrame{
     private JPanel PanelSecundario;
     private JButton BtnEliminar;
 
-    public ProductoEliminarView() {
+    public ProductoEliminarView(ResourceBundle mensajes) {
         setContentPane(PanelPrincipal);
         setTitle("Edición de Productos");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);

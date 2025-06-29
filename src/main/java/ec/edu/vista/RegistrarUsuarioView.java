@@ -1,6 +1,7 @@
 package ec.edu.vista;
 
 import javax.swing.*;
+import java.util.ResourceBundle;
 
 public class RegistrarUsuarioView extends JFrame {
     private JPanel PanelPrincipal;
