@@ -2,63 +2,76 @@ package ec.edu.vista;
 
 import ec.edu.controlador.CarritoController;
 import ec.edu.controlador.ProductoController;
+import ec.edu.controlador.UsuarioController;
 import ec.edu.dao.CarritoDAO;
 import ec.edu.dao.ProductoDAO;
+import ec.edu.dao.UsuarioDAO;
 import ec.edu.dao.impl.ProductoDAOMemoria;
+import ec.edu.dao.impl.UsuarioDAOMemoria;
 import ec.edu.modelo.Carrito;
+import ec.edu.modelo.Usuario;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        SwingUtilities.invokeLater(() -> {
 
-                MenuPrincipalView menuPrincipal = new MenuPrincipalView();
-
-
-                ProductoAnadirView productoAnadirView = new ProductoAnadirView();
-                ProductoListaView productoListaView = new ProductoListaView();
-                ProductoEliminarView productoEliminarView = new ProductoEliminarView();
-                ProductoModificarView productoModificarView = new ProductoModificarView();
-                CarritoAnadirView carritoAnadirView = new CarritoAnadirView();
+            LoginView loginView = new LoginView();
+            UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
+            UsuarioController usuarioController = new UsuarioController(usuarioDAO, loginView);
 
 
-                ProductoDAO productoDAO = new ProductoDAOMemoria();
-                CarritoDAO carritoDAO = new CarritoDAO() {
-                    @Override
-                    public void crear(Carrito carrito) {
-
-                    }
-
-                    @Override
-                    public Carrito buscarPorCodigo(int codigo) {
-                        return null;
-                    }
-
-                    @Override
-                    public void actualizar(Carrito carrito) {
-
-                    }
-
-                    @Override
-                    public void eliminar(int codigo) {
-
-                    }
-
-                    @Override
-                    public List<Carrito> listarTodos() {
-                        return List.of();
-                    }
-                };
-                new ProductoController(productoDAO, productoAnadirView, productoListaView, productoModificarView, productoEliminarView);
-
-                new CarritoController(carritoDAO, productoDAO, carritoAnadirView);
+            loginView.setVisible(true);
 
 
-                configurarEventosMenu(menuPrincipal, productoAnadirView, productoListaView,
-                        productoModificarView, productoEliminarView, carritoAnadirView);
+            while (usuarioController.getUsuarioAutenticado() == null) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+
+
+            Usuario usuarioAutenticado = usuarioController.getUsuarioAutenticado();
+
+
+            MenuPrincipalView menuPrincipal = new MenuPrincipalView();
+
+
+            ProductoAnadirView productoAnadirView = new ProductoAnadirView();
+            ProductoListaView productoListaView = new ProductoListaView();
+            ProductoEliminarView productoEliminarView = new ProductoEliminarView();
+            ProductoModificarView productoModificarView = new ProductoModificarView();
+            CarritoAnadirView carritoAnadirView = new CarritoAnadirView();
+
+
+            ProductoDAO productoDAO = new ProductoDAOMemoria();
+            CarritoDAO carritoDAO = new CarritoDAO() {
+                @Override
+                public void crear(Carrito carrito) {}
+                @Override
+                public Carrito buscarPorCodigo(int codigo) { return null; }
+                @Override
+                public void actualizar(Carrito carrito) {}
+                @Override
+                public void eliminar(int codigo) {}
+                @Override
+                public List<Carrito> listarTodos() { return List.of(); }
+            };
+
+
+            new ProductoController(productoDAO, productoAnadirView, productoListaView, productoModificarView, productoEliminarView);
+            new CarritoController(carritoDAO, productoDAO, carritoAnadirView);
+
+
+            configurarEventosMenu(menuPrincipal, productoAnadirView, productoListaView,
+                    productoModificarView, productoEliminarView, carritoAnadirView);
+
+
+            menuPrincipal.setVisible(true);
         });
     }
 
@@ -92,11 +105,6 @@ public class Main {
         menu.getMenuItemCrearCarrito().addActionListener(ev -> {
             AnadirView.setVisible(true);
             menu.getjDesktopPane().add(AnadirView);
-
         });
-
     }
 }
-
-
-
