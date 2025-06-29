@@ -83,4 +83,9 @@ public class UsuarioDAOMemoria implements UsuarioDAO {
 
         return usuariosEncontrados;
     }
+
+    @Override
+    public void guardar(Usuario nuevoUsuario) {
+        usuarios.add(nuevoUsuario);
+    }
 }

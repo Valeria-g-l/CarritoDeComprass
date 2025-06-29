@@ -26,8 +26,8 @@ public class ProductoAnadirView extends  JInternalFrame {
         setContentPane(PanelPrincipal);
         setTitle("Agregar Producto");
         setSize(400, 300);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
         BtnLimpiarr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

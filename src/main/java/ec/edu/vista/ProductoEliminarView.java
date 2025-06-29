@@ -18,7 +18,7 @@ public class ProductoEliminarView  extends  JInternalFrame{
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
         setLocation(100,500);
-        setVisible(true);
+
 
     }
 

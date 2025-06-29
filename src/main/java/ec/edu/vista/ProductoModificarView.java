@@ -23,7 +23,7 @@ public class ProductoModificarView extends  JInternalFrame{
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
         setResizable(true);
-        setVisible(true);
+
         btnActualizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

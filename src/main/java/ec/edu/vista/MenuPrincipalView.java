@@ -1,5 +1,8 @@
 package ec.edu.vista;
 
+import ec.edu.modelo.Rol;
+import ec.edu.modelo.Usuario;
+
 import javax.swing.*;
 
 public class MenuPrincipalView extends JFrame {
@@ -7,6 +10,7 @@ public class MenuPrincipalView extends JFrame {
 
     private JMenu menuProducto;
     private JMenu menuCarrito;
+    private JMenu menuSalir;
 
     private JMenuItem menuItemCrearProducto;
     private JMenuItem menuItemEliminarProducto;
@@ -14,9 +18,11 @@ public class MenuPrincipalView extends JFrame {
     private JMenuItem menuItemBuscarProducto;
 
     private JMenuItem menuItemCrearCarrito;
-    private JMenuItem menuItemEliminarCarrito;
-    private JMenuItem menuItemActualizarCarrito;
-    private JMenuItem menuItemBuscarCarrito;
+    private JMenuItem menuItemVerMisCarritos;
+    private JMenuItem menuItemModificarMiCarrito;
+    private JMenuItem menuItemCambiarContrasenia;
+    private JMenuItem menuItemCerrarSesion;
+
 
     private JDesktopPane jDesktopPane;
 
@@ -26,6 +32,8 @@ public class MenuPrincipalView extends JFrame {
 
         menuProducto = new JMenu("Producto");
         menuCarrito = new JMenu("Carrito");
+        menuSalir = new JMenu("Salir");
+
 
         menuItemCrearProducto = new JMenuItem("Crear Producto");
         menuItemEliminarProducto = new JMenuItem("Eliminar Producto");
@@ -33,12 +41,16 @@ public class MenuPrincipalView extends JFrame {
         menuItemBuscarProducto = new JMenuItem("Buscar Producto");
 
         menuItemCrearCarrito = new JMenuItem("Crear Carrito");
-        menuItemEliminarCarrito = new JMenuItem("Eliminar Carrito");
-        menuItemActualizarCarrito = new JMenuItem("Actualizar Carrito");
-        menuItemBuscarCarrito = new JMenuItem("Buscar Carrito");
+        menuItemVerMisCarritos = new JMenuItem("Ver Mis Carritos");
+        menuItemModificarMiCarrito = new JMenuItem("Modificar Mi Carrito");
+        menuItemCambiarContrasenia = new JMenuItem("Cambiar Contraseña");
+        menuItemCerrarSesion = new JMenuItem("Cerrar Sesión");
+
 
         menuBar.add(menuProducto);
         menuBar.add(menuCarrito);
+        menuBar.add(menuSalir);
+
 
         menuProducto.add(menuItemCrearProducto);
         menuProducto.add(menuItemEliminarProducto);
@@ -46,98 +58,93 @@ public class MenuPrincipalView extends JFrame {
         menuProducto.add(menuItemBuscarProducto);
 
         menuCarrito.add(menuItemCrearCarrito);
-        menuCarrito.add(menuItemEliminarCarrito);
-        menuCarrito.add(menuItemActualizarCarrito);
-        menuCarrito.add(menuItemBuscarCarrito);
+        menuCarrito.add(menuItemVerMisCarritos);
+        menuCarrito.add(menuItemModificarMiCarrito);
+        menuSalir.add(menuItemCambiarContrasenia);
+        menuSalir.add(menuItemCerrarSesion);
+
 
         setJMenuBar(menuBar);
         setContentPane(jDesktopPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Sistema de Carrito de Compras En Línea");
+        setTitle("Sistema de Carrito de Compras en Línea");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
 
+
+
     public JMenuItem getMenuItemCrearProducto() {
         return menuItemCrearProducto;
-    }
-
-    public void setMenuItemCrearProducto(JMenuItem menuItemCrearProducto) {
-        this.menuItemCrearProducto = menuItemCrearProducto;
     }
 
     public JMenuItem getMenuItemEliminarProducto() {
         return menuItemEliminarProducto;
     }
 
-    public void setMenuItemEliminarProducto(JMenuItem menuItemEliminarProducto) {
-        this.menuItemEliminarProducto = menuItemEliminarProducto;
-    }
-
     public JMenuItem getMenuItemActualizarProducto() {
         return menuItemActualizarProducto;
-    }
-
-    public void setMenuItemActualizarProducto(JMenuItem menuItemActualizarProducto) {
-        this.menuItemActualizarProducto = menuItemActualizarProducto;
     }
 
     public JMenuItem getMenuItemBuscarProducto() {
         return menuItemBuscarProducto;
     }
 
-    public void setMenuItemBuscarProducto(JMenuItem menuItemBuscarProducto) {
-        this.menuItemBuscarProducto = menuItemBuscarProducto;
-    }
-
-    public JMenu getMenuProducto() {
-        return menuProducto;
-    }
-
-    public void setMenuProducto(JMenu menuProducto) {
-        this.menuProducto = menuProducto;
-    }
-
-    public JMenu getMenuCarrito() {
-        return menuCarrito;
-    }
-
-    public void setMenuCarrito(JMenu menuCarrito) {
-        this.menuCarrito = menuCarrito;
-    }
-
     public JMenuItem getMenuItemCrearCarrito() {
         return menuItemCrearCarrito;
     }
 
-    public void setMenuItemCrearCarrito(JMenuItem menuItemCrearCarrito) {
-        this.menuItemCrearCarrito = menuItemCrearCarrito;
+    public JMenuItem getMenuItemVerMisCarritos() {
+        return menuItemVerMisCarritos;
     }
-    public JMenuItem getMenuItemEliminarCarrito() {
-        return menuItemEliminarCarrito;
+    public JMenuItem getMenuItemModificarMiCarrito() {
+        return menuItemModificarMiCarrito;
     }
-    public void setMenuItemEliminarCarrito(JMenuItem menuItemEliminarCarrito) {
-        this.menuItemEliminarCarrito = menuItemEliminarCarrito;
+    public JMenuItem getMenuItemCambiarContrasenia() {
+        return menuItemCambiarContrasenia;
     }
-    public JMenuItem getMenuItemActualizarCarrito() {
-        return menuItemActualizarCarrito;
-    }
-    public void setMenuItemActualizarCarrito(JMenuItem menuItemActualizarCarrito) {
-        this.menuItemActualizarCarrito = menuItemActualizarCarrito;
-    }
-    public JMenuItem getMenuItemBuscarCarrito() {
-        return menuItemBuscarCarrito;
-    }
-    public void setMenuItemBuscarCarrito(JMenuItem menuItemBuscarCarrito) {
-        this.menuItemBuscarCarrito = menuItemBuscarCarrito;
+    public JMenuItem getMenuItemCerrarSesion() {
+        return menuItemCerrarSesion;
     }
 
     public JDesktopPane getjDesktopPane() {
         return jDesktopPane;
     }
 
-    public void setjDesktopPane(JDesktopPane jDesktopPane) {
-        this.jDesktopPane = jDesktopPane;
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
     }
-    //AsSs
+
+    public void deshabilitarMenusAdministrador() {
+        menuItemCrearProducto.setEnabled(false);
+        menuItemEliminarProducto.setEnabled(false);
+        menuItemActualizarProducto.setEnabled(false);
+        menuItemBuscarProducto.setEnabled(false);
+
+    }
+    public void configurarMenusPorRol(Usuario usuario) {
+        if (usuario.getRol() == Rol.USUARIO) {
+
+            menuProducto.setVisible(false);
+
+
+        } else if (usuario.getRol() == Rol.ADMINISTRADOR) {
+
+            menuProducto.setVisible(true);
+            menuCarrito.setVisible(true);
+        }
+    }
+
+
+    public void agregarVentanaInterna(JInternalFrame ventana) {
+        if (!ventana.isVisible()) {
+            jDesktopPane.add(ventana);
+            ventana.setVisible(true);
+            try {
+                ventana.setSelected(true);
+            } catch (java.beans.PropertyVetoException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
