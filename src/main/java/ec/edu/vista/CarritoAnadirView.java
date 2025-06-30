@@ -1,6 +1,7 @@
 package ec.edu.vista;
-import javax.swing.table.DefaultTableModel;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
@@ -39,6 +40,7 @@ public class CarritoAnadirView extends JInternalFrame {
         tblCarrito.setModel(modelo);
 
         cargarDatos();
+
         BtnLimpiar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -46,81 +48,110 @@ public class CarritoAnadirView extends JInternalFrame {
             }
         });
     }
+
     private void cargarDatos() {
         CBoxCantidad.removeAllItems();
-        for (int i = 0; i < 20; i++) {
-            CBoxCantidad.addItem(String.valueOf(i + 1));
+        for (int i = 1; i <= 20; i++) {
+            CBoxCantidad.addItem(i);
         }
     }
+
+    public DefaultTableModel getModelo() {
+        return (DefaultTableModel) tblCarrito.getModel();
+    }
+
     public JPanel getPanelPrincipal() {
         return PanelPrincipal;
     }
+
     public void setPanelPrincipal(JPanel PanelPrincipal) {
         this.PanelSecundario = PanelPrincipal;
     }
+
     public JPanel getPanelSecundario() {
         return PanelSecundario;
     }
+
     public void setPanelSecundario(JPanel PanelSecundario) {
         this.PanelSecundario = PanelSecundario;
     }
+
     public JPanel getPanel() {
         return JPanel;
     }
+
     public void setPanel(JPanel Panel) {
         this.JPanel = Panel;
     }
+
     public JTextField getTxtCodigo() {
         return txtCodigo;
     }
+
     public void setTxtCodigo(JTextField txtCodigo) {
         this.txtCodigo = txtCodigo;
     }
+
     public JTextField getTxtNombre() {
         return txtNombre;
     }
+
     public void setTxtNombre(JTextField txtNombre) {
         this.txtNombre = txtNombre;
     }
+
     public JTextField getTxtPrecio() {
         return txtPrecio;
     }
+
     public void setTxtPrecio(JTextField txtPrecio) {
         this.txtPrecio = txtPrecio;
     }
+
     public JComboBox getCBoxCantidad() {
         return CBoxCantidad;
     }
+
     public void setCBoxCantidad(JComboBox CBoxCantidad) {
         this.CBoxCantidad = CBoxCantidad;
     }
-    public JButton getbtnBuscar(){
+
+    public JButton getBtnBuscar() {
         return btnBuscar;
     }
-    public void setbtnBuscar(JButton btnBuscar){
+
+    public void setBtnBuscar(JButton btnBuscar) {
         this.btnBuscar = btnBuscar;
     }
-    public JButton getBtnAñadir(){
+
+    public JButton getBtnAñadir() {
         return BtnAñadir;
     }
-    public void setBtnBuscar(JButton btnBuscar){
-        this.btnBuscar = btnBuscar;
+
+    public void setBtnAñadir(JButton btnAñadir) {
+        this.BtnAñadir = btnAñadir;
     }
+
     public JTable getTblCarrito() {
         return tblCarrito;
     }
+
     public void setTblCarrito(JTable tblCarrito) {
         this.tblCarrito = tblCarrito;
     }
+
     public JTextField getTxtSubtotal() {
         return TxtSubtotal;
     }
+
     public void setTxtSubtotal(JTextField txtSubtotal) {
         this.TxtSubtotal = txtSubtotal;
     }
+
     public JTextField getTxtIVA() {
         return TxtIVA;
     }
+
     public void setTxtIVA(JTextField txtIVA) {
         this.TxtIVA = txtIVA;
     }
@@ -128,34 +159,38 @@ public class CarritoAnadirView extends JInternalFrame {
     public JTextField getTxtTotal() {
         return TxtTotal;
     }
+
     public void setTxtTotal(JTextField txtTotal) {
         this.TxtTotal = txtTotal;
     }
+
     public JButton getBtnGuardar() {
         return BtnGuardar;
     }
+
     public void setBtnGuardar(JButton btnGuardar) {
         this.BtnGuardar = btnGuardar;
     }
+
     public JButton getBtnLimpiar() {
         return BtnLimpiar;
     }
+
     public void setBtnLimpiar(JButton btnLimpiar) {
         this.BtnLimpiar = btnLimpiar;
     }
+
     public void limpiarCampos() {
         txtCodigo.setText("");
         txtNombre.setText("");
         txtPrecio.setText("");
     }
 
-
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
     public void limpiarCamposProducto() {
-        
+
     }
 }
-

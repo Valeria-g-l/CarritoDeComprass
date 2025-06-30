@@ -15,59 +15,59 @@ import ec.edu.modelo.Usuario;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Main {
+    private static UsuarioController usuarioController;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-
             UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
             LoginView loginView = new LoginView();
+            usuarioController = new UsuarioController(usuarioDAO, loginView);
             loginView.setVisible(true);
 
-            UsuarioController usuarioController = new UsuarioController(usuarioDAO, loginView);
+            final ProductoController[] productoController = new ProductoController[1];
+            final CarritoController[] carritoController = new CarritoController[1];
+            final UsuarioController[] usuarioControllerMenu = new UsuarioController[1];
 
             loginView.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     Usuario usuarioAutenticado = usuarioController.getUsuarioAutenticado();
+                    ResourceBundle mensajes = usuarioController.getMensajes();
 
                     if (usuarioAutenticado != null) {
-                        String idiomaSeleccionado = loginView.getIdiomaSeleccionado();
+                        MenuPrincipalView menuPrincipal = new MenuPrincipalView(mensajes);
 
-                        Locale locale;
-                        switch (idiomaSeleccionado) {
-                            case "en":
-                                locale = new Locale("en");
-                                break;
-                            case "fr":
-                                locale = new Locale("fr");
-                                break;
-                            default:
-                                locale = new Locale("es");
-                        }
 
-                        ResourceBundle mensajes = ResourceBundle.getBundle("messages", locale);
+                        usuarioControllerMenu[0] = new UsuarioController(usuarioDAO, menuPrincipal, usuarioAutenticado);
 
                         ProductoDAO productoDAO = new ProductoDAOMemoria();
                         CarritoDAO carritoDAO = new CarritoDAOMemoria();
 
-                        MenuPrincipalView menuPrincipal = new MenuPrincipalView(mensajes);
                         ProductoAnadirView productoAnadirView = new ProductoAnadirView(mensajes);
                         ProductoListaView productoListaView = new ProductoListaView(mensajes);
                         ProductoEliminarView productoEliminarView = new ProductoEliminarView(mensajes);
                         ProductoModificarView productoModificarView = new ProductoModificarView(mensajes);
+
                         CarritoAnadirView carritoAnadirView = new CarritoAnadirView(mensajes);
+                        CarritoListaView carritoListaView = new CarritoListaView();
+                        CarritoModificarView carritoModificarView = new CarritoModificarView();
 
-                        ProductoController productoController = new ProductoController(
-                                productoDAO, productoAnadirView, productoListaView, productoModificarView, productoEliminarView);
-                        CarritoController carritoController = new CarritoController(
-                                carritoDAO, productoDAO, carritoAnadirView);
+                        productoController[0] = new ProductoController(
+                                productoDAO, productoAnadirView,
+                                productoListaView, productoModificarView,
+                                productoEliminarView
+                        );
 
-                        menuPrincipal.mostrarMensaje(mensajes.getString("app.titulo") + "\n" +
-                                mensajes.getString("bienvenido") + ": " + usuarioAutenticado.getUsername());
+                        carritoController[0] = new CarritoController(
+                                carritoDAO, productoDAO,
+                                carritoAnadirView, carritoListaView,
+                                carritoModificarView
+                        );
+
+                        menuPrincipal.mostrarMensaje(mensajes.getString("mensaje.bienvenida") + ": " + usuarioAutenticado.getUsername());
 
                         if (usuarioAutenticado.getRol().equals(Rol.USUARIO)) {
                             menuPrincipal.deshabilitarMenusAdministrador();
@@ -75,11 +75,14 @@ public class Main {
 
                         menuPrincipal.configurarMenusPorRol(usuarioAutenticado);
 
-                        configurarEventosMenu(menuPrincipal, productoAnadirView, productoListaView,
-                                productoModificarView, productoEliminarView, carritoAnadirView, mensajes);
+                        configurarEventosMenu(menuPrincipal,
+                                productoAnadirView, productoListaView,
+                                productoModificarView, productoEliminarView,
+                                carritoAnadirView, carritoListaView,
+                                carritoModificarView, mensajes,
+                                carritoController[0], usuarioControllerMenu[0]);
 
                         menuPrincipal.setVisible(true);
-
                     } else {
                         JOptionPane.showMessageDialog(null, "No se inició sesión. Saliendo...");
                         System.exit(0);
@@ -95,7 +98,12 @@ public class Main {
                                               ProductoModificarView modificarView,
                                               ProductoEliminarView eliminarView,
                                               CarritoAnadirView carritoAnadirView,
-                                              ResourceBundle mensajes) {
+                                              CarritoListaView carritoListaView,
+                                              CarritoModificarView carritoModificarView,
+                                              ResourceBundle mensajes,
+                                              CarritoController carritoController,
+                                              UsuarioController usuarioController) {
+
 
         menu.getMenuItemCrearProducto().addActionListener(e -> {
             if (!anadirView.isVisible()) {
@@ -125,6 +133,7 @@ public class Main {
             }
         });
 
+
         menu.getMenuItemCrearCarrito().addActionListener(e -> {
             if (!carritoAnadirView.isVisible()) {
                 menu.getjDesktopPane().add(carritoAnadirView);
@@ -133,22 +142,47 @@ public class Main {
         });
 
         menu.getMenuItemVerMisCarritos().addActionListener(e -> {
-            JOptionPane.showMessageDialog(menu, mensajes.getString("mensaje.noImplementado"));
+            if (!carritoListaView.isVisible()) {
+                carritoController.cargarCarritosEnTabla();
+                menu.getjDesktopPane().add(carritoListaView);
+                carritoListaView.setVisible(true);
+            } else {
+                carritoController.cargarCarritosEnTabla();
+                carritoListaView.toFront();
+            }
         });
 
         menu.getMenuItemModificarMiCarrito().addActionListener(e -> {
-            JOptionPane.showMessageDialog(menu, mensajes.getString("mensaje.noImplementado"));
+            carritoModificarView.setCarritoController(carritoController);
+            carritoController.cargarCarritosEnComboModificar();
+
+            carritoModificarView.cargarProductosEnTabla();
+            carritoModificarView.actualizarTotales();
+
+            if (!carritoModificarView.isVisible()) {
+                menu.getjDesktopPane().add(carritoModificarView);
+                carritoModificarView.setVisible(true);
+            } else {
+                carritoModificarView.toFront();
+            }
         });
 
+
         menu.getMenuItemCambiarContrasenia().addActionListener(e -> {
-            JOptionPane.showMessageDialog(menu, mensajes.getString("mensaje.noImplementado"));
+            System.out.println("Click detectado");
+            if (usuarioController != null) {
+                usuarioController.mostrarCambiarContrasenia();
+            } else {
+                System.out.println("usuarioController es null");
+            }
         });
+
 
         menu.getMenuItemCerrarSesion().addActionListener(e -> {
             int confirmacion = JOptionPane.showConfirmDialog(
                     menu,
-                    mensajes.getString("menu.salir.cerrar"),
-                    mensajes.getString("menu.salir.salir"),
+                    mensajes.getString("confirmacion.cerrarSesion"),
+                    mensajes.getString("titulo.cerrarSesion"),
                     JOptionPane.YES_NO_OPTION
             );
             if (confirmacion == JOptionPane.YES_OPTION) {
@@ -158,6 +192,5 @@ public class Main {
                 new UsuarioController(new UsuarioDAOMemoria(), nuevoLogin);
             }
         });
-
     }
 }

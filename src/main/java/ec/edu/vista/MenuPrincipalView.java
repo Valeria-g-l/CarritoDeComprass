@@ -34,21 +34,20 @@ public class MenuPrincipalView extends JFrame {
         jDesktopPane = new JDesktopPane();
         menuBar = new JMenuBar();
 
-        menuProducto = new JMenu(mensajes.getString("Producto"));
-        menuCarrito = new JMenu(mensajes.getString("Carrito"));
-        menuSalir = new JMenu(mensajes.getString("Salir"));
+        menuProducto = new JMenu(mensajes.getString("menu.producto"));
+        menuCarrito = new JMenu(mensajes.getString("menu.carrito"));
+        menuSalir = new JMenu(mensajes.getString("menu.salir"));
 
+        menuItemCrearProducto = new JMenuItem(mensajes.getString("menu.producto.crear"));
+        menuItemEliminarProducto = new JMenuItem(mensajes.getString("menu.producto.eliminar"));
+        menuItemActualizarProducto = new JMenuItem(mensajes.getString("menu.producto.actualizar"));
+        menuItemBuscarProducto = new JMenuItem(mensajes.getString("menu.producto.buscar"));
+        menuItemCrearCarrito = new JMenuItem(mensajes.getString("menu.carrito.crear"));
+        menuItemVerMisCarritos = new JMenuItem(mensajes.getString("menu.carrito.ver"));
+        menuItemModificarMiCarrito = new JMenuItem(mensajes.getString("menu.carrito.modificar"));
+        menuItemCambiarContrasenia = new JMenuItem(mensajes.getString("menu.salir.cambiar"));
+        menuItemCerrarSesion = new JMenuItem(mensajes.getString("menu.salir.cerrar"));
 
-        menuItemCrearProducto = new JMenuItem(mensajes.getString("menuitem.crearProducto"));
-        menuItemEliminarProducto = new JMenuItem(mensajes.getString("menuitem.eliminarProducto"));
-        menuItemActualizarProducto = new JMenuItem(mensajes.getString("menuitem.actualizarProducto"));
-        menuItemBuscarProducto = new JMenuItem(mensajes.getString("menuitem.buscarProducto"));
-
-        menuItemCrearCarrito = new JMenuItem(mensajes.getString("menuitem.crearCarrito"));
-        menuItemVerMisCarritos = new JMenuItem(mensajes.getString("menuitem.verMisCarritos"));
-        menuItemModificarMiCarrito = new JMenuItem(mensajes.getString("menuitem.modificarMiCarrito"));
-        menuItemCambiarContrasenia = new JMenuItem(mensajes.getString("menuitem.cambiarContrasenia"));
-        menuItemCerrarSesion = new JMenuItem(mensajes.getString("menuitem.cerrarSesion"));
 
 
         menuBar.add(menuProducto);

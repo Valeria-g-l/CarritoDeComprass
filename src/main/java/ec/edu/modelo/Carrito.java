@@ -8,9 +8,7 @@ import java.util.List;
 public class Carrito {
 
     private int codigo;
-
     private GregorianCalendar fechaCreacion;
-
     private List<ItemCarrito> items;
 
     public Carrito() {
@@ -48,6 +46,10 @@ public class Carrito {
         }
     }
 
+    public List<ItemCarrito> getItems() {
+        return items;
+    }
+
     public void vaciarCarrito() {
         items.clear();
     }
@@ -62,14 +64,13 @@ public class Carrito {
 
     public double calcularIVA() {
         double subtotal = calcularSubtotal();
-        return subtotal * 0.12; // Asumiendo IVA 12%
+        return subtotal * 0.12;
     }
 
     public double calcularTotal() {
         return calcularSubtotal() + calcularIVA();
     }
-    public List<ItemCarrito> obtenerItems() {
-        return items;
-    }
-}
 
+    public List<ItemCarrito> obtenerItems() {
+    return items;}
+}

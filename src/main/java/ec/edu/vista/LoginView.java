@@ -24,10 +24,23 @@ public class LoginView extends JFrame {
         setLocationRelativeTo(null);
         setContentPane(PanelPrincipal);
 
-        CBoxIdioma.addItem("Español");
-        CBoxIdioma.addItem("English");
-        CBoxIdioma.addItem("Français");
+        if (CBoxIdioma.getItemCount() == 0) {
+            CBoxIdioma.addItem("Español");
+            CBoxIdioma.addItem("English");
+            CBoxIdioma.addItem("Français");
+        }
+    }
 
+    public String getIdiomaSeleccionado() {
+        String seleccion = (String) CBoxIdioma.getSelectedItem();
+        switch (seleccion) {
+            case "English":
+                return "en";
+            case "Français":
+                return "fr";
+            default:
+                return "es";
+        }
     }
 
     private void $$$setupUI$$$() {
@@ -94,17 +107,6 @@ public class LoginView extends JFrame {
     }
     public void setBtnRegistrarse(JButton btnRegistrarse) {
         BtnRegistrarse = btnRegistrarse;
-    }
-    public String getIdiomaSeleccionado() {
-        String seleccion = (String) CBoxIdioma.getSelectedItem();
-        if (seleccion.equalsIgnoreCase("Español")) {
-            return "es";
-        } else if (seleccion.equalsIgnoreCase("English")) {
-            return "en";
-        } else if (seleccion.equalsIgnoreCase("Français")) {
-            return "fr";
-        }
-        return "es";
     }
 
 

@@ -16,7 +16,7 @@ public class CambiarContrasenaView extends JInternalFrame {
         setTitle("Productos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
-        setVisible(true);
+
     }
 
     public JPanel getPanelPrincipal() {
