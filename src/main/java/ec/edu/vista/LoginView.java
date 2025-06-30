@@ -1,7 +1,6 @@
 package ec.edu.vista;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class LoginView extends JFrame {
     private JPanel PanelPrincipal;
@@ -14,6 +13,7 @@ public class LoginView extends JFrame {
     private JPasswordField TxtContraseña;
     private JButton BtnIngresar;
     private JButton BtnRegistrarse;
+    private JButton BtnOlvideContrasena;
 
 
     public LoginView() {
@@ -107,6 +107,12 @@ public class LoginView extends JFrame {
     }
     public void setBtnRegistrarse(JButton btnRegistrarse) {
         BtnRegistrarse = btnRegistrarse;
+    }
+    public JButton getBtnOlvideContrasena() {
+        return BtnOlvideContrasena;
+    }
+    public void setBtnOlvideContrasena(JButton btnOlvideContrasena) {
+        BtnOlvideContrasena = btnOlvideContrasena;
     }
 
 

@@ -1,8 +1,9 @@
 package ec.edu.vista;
 
+import ec.edu.controlador.RegistroController;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
-
+import ec.edu.util.FondoUtils;
 import javax.swing.*;
 import java.util.ResourceBundle;
 
@@ -25,7 +26,6 @@ public class MenuPrincipalView extends JFrame {
     private JMenuItem menuItemModificarMiCarrito;
     private JMenuItem menuItemCambiarContrasenia;
     private JMenuItem menuItemCerrarSesion;
-
 
     private JDesktopPane jDesktopPane;
 
@@ -72,6 +72,9 @@ public class MenuPrincipalView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Sistema de Carrito de Compras en Línea");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        FondoUtils.ponerFondo(this, "/Imagenes/img1.gif");
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -150,4 +153,6 @@ public class MenuPrincipalView extends JFrame {
             }
         }
     }
+
+
 }

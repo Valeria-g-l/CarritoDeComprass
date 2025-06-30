@@ -44,7 +44,9 @@ public class RegistrarUsuarioView extends JFrame {
     public void setBtnRegistrarse(JButton BtnRegistrarse) {
         this.BtnRegistrarse = BtnRegistrarse;
     }
+
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }
+
 }

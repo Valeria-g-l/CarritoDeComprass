@@ -1,6 +1,7 @@
 package ec.edu.vista;
 
 import ec.edu.modelo.Producto;
+import ec.edu.util.FondoUtils;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -38,6 +39,9 @@ public class ProductoAnadirView extends  JInternalFrame {
                 txtPrecio.setText("");
             }
         });
+
+
+
     }
     public JLabel getLabelTitulo() {
         return labelTitulo;

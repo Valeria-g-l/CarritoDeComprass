@@ -42,6 +42,7 @@ public class UsuarioController {
     }
 
 
+
     private void configurarEventosEnVistas() {
         loginView.getBtnIngresar().addActionListener(e -> autenticar());
 

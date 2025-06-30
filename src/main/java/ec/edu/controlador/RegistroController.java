@@ -3,6 +3,7 @@ package ec.edu.controlador;
 import ec.edu.dao.UsuarioDAO;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
+import ec.edu.vista.PreguntasSeguridadView;
 import ec.edu.vista.RegistrarUsuarioView;
 
 public class RegistroController {
@@ -28,6 +29,7 @@ public class RegistroController {
         usuarioDAO.guardar(nuevoUsuario);
         registroView.mostrarMensaje("¡Usuario registrado con éxito!");
         registroView.dispose();
+
     }
 }
 
