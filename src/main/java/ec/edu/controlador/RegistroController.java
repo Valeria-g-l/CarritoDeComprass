@@ -9,10 +9,13 @@ import ec.edu.vista.RegistrarUsuarioView;
 public class RegistroController {
     private UsuarioDAO usuarioDAO;
     private RegistrarUsuarioView registroView;
+    private UsuarioController usuarioController;
 
-    public RegistroController(UsuarioDAO usuarioDAO, RegistrarUsuarioView registroView) {
+
+    public RegistroController(UsuarioDAO usuarioDAO, RegistrarUsuarioView registroView, UsuarioController usuarioController) {
         this.usuarioDAO = usuarioDAO;
         this.registroView = registroView;
+        this.usuarioController = usuarioController;
         configurarEventos();
     }
 
@@ -23,13 +26,18 @@ public class RegistroController {
     private void registrarUsuario() {
         String username = registroView.getTxtNombre().getText();
         String contrasena = new String(registroView.getTxtContraseña().getPassword());
-        Rol rol = Rol.USUARIO; // o lo que elijas
 
-        Usuario nuevoUsuario = new Usuario(username, contrasena, rol);
+        Usuario nuevoUsuario = new Usuario(username, contrasena, Rol.USUARIO);
+
+        System.out.println("Registrando usuario: " + nuevoUsuario);
         usuarioDAO.guardar(nuevoUsuario);
-        registroView.mostrarMensaje("¡Usuario registrado con éxito!");
-        registroView.dispose();
 
+        PreguntasSeguridadView preguntasView = new PreguntasSeguridadView(
+                usuarioController.getMensajes(), usuarioController, "registro"
+        );
+        preguntasView.setVisible(true);
+        registroView.dispose();
     }
+
 }
 

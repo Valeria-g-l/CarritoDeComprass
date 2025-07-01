@@ -2,10 +2,7 @@ package ec.edu.controlador;
 
 import ec.edu.dao.UsuarioDAO;
 import ec.edu.modelo.Usuario;
-import ec.edu.vista.CambiarContrasenaView;
-import ec.edu.vista.LoginView;
-import ec.edu.vista.MenuPrincipalView;
-import ec.edu.vista.RegistrarUsuarioView;
+import ec.edu.vista.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,7 +19,19 @@ public class UsuarioController {
     private ResourceBundle mensajes;
     private Usuario usuarioAutenticado;
     private CambiarContrasenaView cambiarContraseniaView;
+    private Usuario usuarioEnProceso;
 
+    public void setUsuarioEnProceso(Usuario usuario) {
+        this.usuarioEnProceso = usuario;
+    }
+    public void setPreguntasSeguridadActual(String r1, String r2, String r3, String p1, String p2, String p3) {
+        usuarioEnProceso.setPregunta1(p1);
+        usuarioEnProceso.setRespuesta1(r1);
+        usuarioEnProceso.setPregunta2(p2);
+        usuarioEnProceso.setRespuesta2(r2);
+        usuarioEnProceso.setPregunta3(p3);
+        usuarioEnProceso.setRespuesta3(r3);
+    }
 
     public UsuarioController(UsuarioDAO usuarioDAO, LoginView loginView) {
         this.usuarioDAO = usuarioDAO;
@@ -47,11 +56,12 @@ public class UsuarioController {
         loginView.getBtnIngresar().addActionListener(e -> autenticar());
 
         loginView.getBtnRegistrarse().addActionListener(e -> {
-            RegistrarUsuarioView registroView = new RegistrarUsuarioView();
-            new RegistroController(usuarioDAO, registroView);
+            RegistrarUsuarioView registroView = new RegistrarUsuarioView(this);
             registroView.setVisible(true);
         });
+        loginView.getBtnOlvideContrasena().addActionListener(ev -> abrirPreguntasRecuperacion());
     }
+
 
 
     private void configurarEventosMenuPrincipal() {
@@ -127,4 +137,52 @@ public class UsuarioController {
         JOptionPane.showMessageDialog(cambiarContraseniaView, "Contraseña cambiada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         cambiarContraseniaView.dispose();
     }
+
+
+    public boolean verificarPreguntas(String p1, String r1, String p2, String r2, String p3, String r3) {
+        return p1.equals(usuarioEnProceso.getPregunta1()) && r1.equalsIgnoreCase(usuarioEnProceso.getRespuesta1()) &&
+                p2.equals(usuarioEnProceso.getPregunta2()) && r2.equalsIgnoreCase(usuarioEnProceso.getRespuesta2()) &&
+                p3.equals(usuarioEnProceso.getPregunta3()) && r3.equalsIgnoreCase(usuarioEnProceso.getRespuesta3());
+    }
+    public UsuarioDAO getUsuarioDAO() {
+        return usuarioDAO;
+    }
+
+    public Usuario getUsuarioEnProceso() {
+        return usuarioEnProceso;
+    }
+    public void abrirPreguntasRecuperacion() {
+        String username = JOptionPane.showInputDialog(null, "Ingresa tu nombre de usuario para recuperar la contraseña:");
+
+        if (username == null || username.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nombre de usuario requerido.");
+            return;
+        }
+
+        Usuario usuario = usuarioDAO.buscarPorUsername(username);
+
+        if (usuario == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró el usuario.");
+            return;
+        }
+
+
+        this.usuarioEnProceso = usuario;
+
+        PreguntasSeguridadView preguntasView = new PreguntasSeguridadView(
+                mensajes, this, "recuperacion"
+        );
+
+        preguntasView.setVisible(true);
+    }
+    public void registrarUsuarioConPreguntas(Usuario usuario) {
+        usuarioDAO.guardar(usuario);
+        setUsuarioEnProceso(usuario);
+        PreguntasSeguridadView preguntasView = new PreguntasSeguridadView(mensajes, this, "registro");
+        preguntasView.setVisible(true);
+    }
+
+
+
+
 }

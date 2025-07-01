@@ -69,7 +69,7 @@ public class Main {
 
                         menuPrincipal.mostrarMensaje(mensajes.getString("mensaje.bienvenida") + ": " + usuarioAutenticado.getUsername());
 
-                        if (usuarioAutenticado.getRol().equals(Rol.USUARIO)) {
+                        if (usuarioAutenticado.getRol() != null && usuarioAutenticado.getRol().equals(Rol.USUARIO)) {
                             menuPrincipal.deshabilitarMenusAdministrador();
                         }
 
@@ -191,6 +191,8 @@ public class Main {
                 nuevoLogin.setVisible(true);
                 new UsuarioController(new UsuarioDAOMemoria(), nuevoLogin);
             }
+
+
         });
     }
 }
