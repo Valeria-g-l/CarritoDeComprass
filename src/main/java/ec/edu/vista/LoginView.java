@@ -1,9 +1,14 @@
 package ec.edu.vista;
 
+import ec.edu.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginView extends JFrame {
+    private MensajeInternacionalizacionHandler mensajeHandler;
     private JPanel PanelPrincipal;
     private JLabel lblTitulo;
     private JLabel lblIdioma;
@@ -17,8 +22,10 @@ public class LoginView extends JFrame {
     private JButton BtnOlvideContrasena;
 
 
-    public LoginView() {
+    public LoginView(MensajeInternacionalizacionHandler handler) {
+        this.mensajeHandler = handler;
         $$$setupUI$$$();
+        actualizarTextos();
         setTitle("Iniciar Sesión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -29,6 +36,7 @@ public class LoginView extends JFrame {
             CBoxIdioma.addItem("Español");
             CBoxIdioma.addItem("English");
             CBoxIdioma.addItem("Français");
+            CBoxIdioma.addItem("Português");
         }
 
         ImageIcon iconIngresar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
@@ -40,19 +48,31 @@ public class LoginView extends JFrame {
         ImageIcon iconOlvide = new ImageIcon(getClass().getResource("/Imagenes/exclamation.png"));
         BtnOlvideContrasena.setIcon(new ImageIcon(iconOlvide.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
+        CBoxIdioma.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String seleccionado = CBoxIdioma.getSelectedItem().toString();
+                switch (seleccionado) {
+                    case "Español":
+                        Main.mensajeHandler.setLenguaje("es", "EC");
+                        break;
+                    case "English":
+                        Main.mensajeHandler.setLenguaje("en", "US");
+                        break;
+                    case "Français":
+                        Main.mensajeHandler.setLenguaje("fr", "FR");
+                        break;
+                    case "Português":
+                        Main.mensajeHandler.setLenguaje("pt", "PT");
+                        break;
+                }
+                actualizarTextos();
+            }
+        });
     }
 
-    public String getIdiomaSeleccionado() {
-        String seleccion = (String) CBoxIdioma.getSelectedItem();
-        switch (seleccion) {
-            case "English":
-                return "en";
-            case "Français":
-                return "fr";
-            default:
-                return "es";
-        }
-    }
+
+
 
     private void $$$setupUI$$$() {
 
@@ -130,6 +150,15 @@ public class LoginView extends JFrame {
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    public void actualizarTextos() {
+        lblUsuario.setText(mensajeHandler.get("login.usuario"));
+        LblContraseña.setText(mensajeHandler.get("login.contrasena"));
+        BtnIngresar.setText(mensajeHandler.get("login.boton"));
+        lblIdioma.setText(mensajeHandler.get("login.idioma"));
+        BtnRegistrarse.setText(mensajeHandler.get("login.registro"));
+        BtnOlvideContrasena.setText(mensajeHandler.get("login.olvide"));
     }
 
 }

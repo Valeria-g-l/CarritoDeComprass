@@ -33,7 +33,7 @@ public class RegistroController {
         usuarioDAO.guardar(nuevoUsuario);
 
         PreguntasSeguridadView preguntasView = new PreguntasSeguridadView(
-                usuarioController.getMensajes(), usuarioController, "registro"
+                usuarioController.getMensajeHandler(), usuarioController, "registro"
         );
         preguntasView.setVisible(true);
         registroView.dispose();

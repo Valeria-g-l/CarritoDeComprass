@@ -1,6 +1,7 @@
 package ec.edu.vista;
 
 import ec.edu.modelo.Producto;
+import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -8,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class ProductoListaView extends JInternalFrame {
     private JTextField txtBuscar;
@@ -20,9 +20,12 @@ public class ProductoListaView extends JInternalFrame {
     private JButton btnCancelar;
     private JPanel lblTitulo;
     private JLabel lblTitule;
+    private MensajeInternacionalizacionHandler mensajeHandler;
 
 
-    public ProductoListaView(ResourceBundle mensajes) {
+    public ProductoListaView(MensajeInternacionalizacionHandler handler) {
+        this.mensajeHandler = handler;
+        actualizarTextos();
         setContentPane(PanelTerciario);
         setTitle("Productos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -90,6 +93,13 @@ public class ProductoListaView extends JInternalFrame {
             };
             modelo.addRow(fila);
         }
+    }
+
+    public void actualizarTextos() {
+        lblTitule.setText(mensajeHandler.get("titulo"));
+        lblBuscar.setText(mensajeHandler.get("buscar"));
+        btnBuscar.setText(mensajeHandler.get("buscar"));
+        btnCancelar.setText(mensajeHandler.get("cancelar"));
     }
 
 

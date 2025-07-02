@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import ec.edu.controlador.UsuarioController;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
+import ec.edu.util.MensajeInternacionalizacionHandler;
 
 public class RegistrarUsuarioView extends JFrame {
     private JPanel PanelPrincipal;
@@ -20,15 +21,18 @@ public class RegistrarUsuarioView extends JFrame {
     private JLabel LblNombreCompleto;
     private JTextField TxtNombreCompleto;
     private JLabel LblNacimiento;
-    private JLabel LblGenero;
-    private JComboBox comboBox1;
+    private JLabel LblTelefono;
     private JLabel LblCorreo;
     private JTextField TxtCorreo;
     private JTextField textField1;
+    private JTextField TxtTelefono;
     private UsuarioController usuarioController;
+    private MensajeInternacionalizacionHandler mensajeHandler;
 
-    public RegistrarUsuarioView(UsuarioController usuarioController) {
+    public RegistrarUsuarioView(UsuarioController usuarioController, MensajeInternacionalizacionHandler handler) {
+        this.mensajeHandler = handler;
         this.usuarioController = usuarioController;
+        actualizarTextos();
         setContentPane(PanelPrincipal);
         setTitle("Agregar Producto");
         setSize(400, 300);
@@ -77,6 +81,13 @@ public class RegistrarUsuarioView extends JFrame {
     public JPasswordField getTxtContraseña(){
         return TxtContraseña;
     }
+    public JTextField getTxtTelefono() {
+        return TxtTelefono;
+    }
+
+    public void setTxtTelefono(JTextField txtTelefono) {
+        TxtTelefono = txtTelefono;
+    }
     public void setTxtContraseña(JPasswordField TxtContraseña){
         this.TxtContraseña= TxtContraseña;
     }
@@ -89,6 +100,18 @@ public class RegistrarUsuarioView extends JFrame {
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    public void actualizarTextos() {
+        LblTitulo.setText(mensajeHandler.get("titulo"));
+        LblNombre.setText(mensajeHandler.get("nombre"));
+        LblContraseña.setText(mensajeHandler.get("contrasena"));
+        LblNombreCompleto.setText(mensajeHandler.get("nombreCompleto"));
+        LblNacimiento.setText(mensajeHandler.get("nacimiento"));
+        LblTelefono.setText(mensajeHandler.get("genero"));
+        LblCorreo.setText(mensajeHandler.get("correo"));
+        LblContraseña.setText(mensajeHandler.get("contrasena"));
+        BtnRegistrarse.setText(mensajeHandler.get("registrar"));
     }
 
 }

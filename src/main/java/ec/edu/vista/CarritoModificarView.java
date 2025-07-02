@@ -3,6 +3,7 @@ package ec.edu.vista;
 import ec.edu.controlador.CarritoController;
 import ec.edu.modelo.ItemCarrito;
 import ec.edu.modelo.Carrito;
+import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import java.awt.*;
 import java.util.List;
@@ -37,11 +38,14 @@ public class CarritoModificarView extends JInternalFrame {
     private JComboBox<Carrito> CBoxCarritos;
     private JLabel LblCarritos;
     private JButton BtnCancelar;
+    private MensajeInternacionalizacionHandler mensajeHandler;
 
     private DefaultTableModel modelo;
     private CarritoController carritoController;
 
-    public CarritoModificarView() {
+    public CarritoModificarView(MensajeInternacionalizacionHandler handler) {
+        this.mensajeHandler = handler;
+        actualizarTextos();
         setTitle("Modificar Carrito");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(700, 500);
@@ -281,6 +285,22 @@ public class CarritoModificarView extends JInternalFrame {
         for (Carrito carrito : carritos) {
             CBoxCarritos.addItem(carrito);
         }
+    }
+
+    public void actualizarTextos() {
+        LblTitulo.setText(mensajeHandler.get("titulo"));
+        LblCarritos.setText(mensajeHandler.get("carritos"));
+        LblAgregar.setText(mensajeHandler.get("agregar"));
+        LblIVA.setText(mensajeHandler.get("iva"));
+        LblTotal.setText(mensajeHandler.get("total"));
+        LblSubtotal.setText(mensajeHandler.get("subtotal"));
+        LblCodigo.setText(mensajeHandler.get("codigo"));
+        LblCantidad.setText(mensajeHandler.get("cantidad"));
+        BtnCancelar.setText(mensajeHandler.get("cancelar"));
+        BtnEliminar.setText(mensajeHandler.get("eliminar"));
+        BtnAgregar.setText(mensajeHandler.get("agregar"));
+        BtnActualizarCantidad.setText(mensajeHandler.get("actualizar"));
+
     }
 
 

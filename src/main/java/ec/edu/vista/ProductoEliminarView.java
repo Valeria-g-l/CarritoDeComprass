@@ -1,10 +1,11 @@
 package ec.edu.vista;
 
+import ec.edu.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ResourceBundle;
 
 public class ProductoEliminarView  extends  JInternalFrame{
     private JTextField txtCodigo;
@@ -16,8 +17,11 @@ public class ProductoEliminarView  extends  JInternalFrame{
     private JPanel PanelSecundario;
     private JButton BtnEliminar;
     private JButton BtnCancelar;
+    private MensajeInternacionalizacionHandler mensajeHandler;
 
-    public ProductoEliminarView(ResourceBundle mensajes) {
+    public ProductoEliminarView(MensajeInternacionalizacionHandler handler) {
+        this.mensajeHandler = handler;
+        actualizarTextos();
         setContentPane(PanelPrincipal);
         setTitle("Edición de Productos");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
@@ -100,6 +104,14 @@ public class ProductoEliminarView  extends  JInternalFrame{
     public void limpiarCampos() {
         txtCodigo.setText("");
 
+    }
+
+    public void actualizarTextos() {
+        lblTitulo.setText(mensajeHandler.get("titulo"));
+        lblCodigo.setText(mensajeHandler.get("codigo"));
+        BtnCancelar.setText(mensajeHandler.get("cancelar"));
+        btnBuscar.setText(mensajeHandler.get("buscar"));
+        BtnEliminar.setText(mensajeHandler.get("eliminar"));
     }
 
 }

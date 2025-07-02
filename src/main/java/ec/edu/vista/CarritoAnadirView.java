@@ -1,13 +1,15 @@
 package ec.edu.vista;
 
+import ec.edu.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ResourceBundle;
 
 public class CarritoAnadirView extends JInternalFrame {
+    private MensajeInternacionalizacionHandler mensajeHandler;
     private JTextField txtCodigo;
     private JTextField txtNombre;
     private JTextField txtPrecio;
@@ -28,9 +30,12 @@ public class CarritoAnadirView extends JInternalFrame {
     private JPanel PanelSecundario;
     private JPanel JPanel;
     private JButton BtnCancelar;
+    private JLabel LblCodigo;
+    private JLabel LblIVA;
+    private JLabel LblTotal;
 
 
-    public CarritoAnadirView(ResourceBundle mensajes) {
+    public CarritoAnadirView(MensajeInternacionalizacionHandler handler) {
         super("Carrito de Compras", true, true, false, true);
         setContentPane(JPanel);
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
@@ -42,6 +47,8 @@ public class CarritoAnadirView extends JInternalFrame {
         tblCarrito.setModel(modelo);
 
         cargarDatos();
+        this.mensajeHandler = handler;
+        actualizarTextos();
 
         BtnLimpiar.addActionListener(new ActionListener() {
             @Override
@@ -222,6 +229,23 @@ public class CarritoAnadirView extends JInternalFrame {
     }
 
     public void limpiarCamposProducto() {
+
+    }
+
+    public void actualizarTextos() {
+        LblCodigo.setText(mensajeHandler.get("login.Codigo"));
+        lblNombre.setText(mensajeHandler.get("login.Nombre"));
+        lblPrecio.setText(mensajeHandler.get("login.Precio"));
+        lblCantidad.setText(mensajeHandler.get("login.Cantidad"));
+        btnBuscar.setText(mensajeHandler.get("login.Buscar"));
+        BtnAñadir.setText(mensajeHandler.get("login.anadir"));
+        BtnGuardar.setText(mensajeHandler.get("login.guardar"));
+        BtnLimpiar.setText(mensajeHandler.get("login.limpiar"));
+        BtnCancelar.setText(mensajeHandler.get("login.cancelar"));
+        lblSubtotal.setText(mensajeHandler.get("login.subtotal"));
+        LblIVA.setText(mensajeHandler.get("login.iva"));
+        LblTotal.setText(mensajeHandler.get("login.total"));
+
 
     }
 }

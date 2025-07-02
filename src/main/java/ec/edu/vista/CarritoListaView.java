@@ -1,5 +1,7 @@
 package ec.edu.vista;
 
+import ec.edu.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -7,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CarritoListaView extends JInternalFrame {
+    private MensajeInternacionalizacionHandler mensajeHandler;
     private JPanel PanelPrincipal;
     private JLabel LblTitulo;
     private JTable TblCarrito;
@@ -15,17 +18,18 @@ public class CarritoListaView extends JInternalFrame {
     private JButton BtnCancelar;
     private DefaultTableModel modelo;
 
-    public CarritoListaView() {
+    public CarritoListaView(MensajeInternacionalizacionHandler handler) {
+        this.mensajeHandler = handler;
+        actualizarTextos();
         setContentPane(PanelPrincipal);
         setTitle("Carritos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(600, 400);
-
-
         modelo = new DefaultTableModel();
         Object[] columnas = {"ID", "Fecha Creación", "Usuario", "Total"};
         modelo.setColumnIdentifiers(columnas);
         TblCarrito.setModel(modelo);
+
         BtnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -34,6 +38,7 @@ public class CarritoListaView extends JInternalFrame {
         });
         ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
         BtnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
     }
     public JButton getBtnCancelar() {
         return BtnCancelar;
@@ -63,5 +68,10 @@ public class CarritoListaView extends JInternalFrame {
             return (int) modelo.getValueAt(fila, 0);
         }
         return -1;
+    }
+
+    public void actualizarTextos() {
+        LblTitulo.setText(mensajeHandler.get("titulo"));
+        BtnCancelar.setText(mensajeHandler.get("cancelar"));
     }
 }

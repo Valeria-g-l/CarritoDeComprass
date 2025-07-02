@@ -20,7 +20,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="82322" class="javax.swing.JLabel">
+          <component id="82322" class="javax.swing.JLabel" binding="LblCodigo">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -149,7 +149,7 @@
               <text value="Subtotal"/>
             </properties>
           </component>
-          <component id="aaaa2" class="javax.swing.JLabel">
+          <component id="aaaa2" class="javax.swing.JLabel" binding="LblIVA">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -180,7 +180,7 @@
           </component>
         </children>
       </grid>
-      <component id="e128e" class="javax.swing.JLabel">
+      <component id="e128e" class="javax.swing.JLabel" binding="LblTotal">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

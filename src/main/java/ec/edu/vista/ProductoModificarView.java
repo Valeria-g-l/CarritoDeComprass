@@ -1,10 +1,11 @@
 package ec.edu.vista;
 
+import ec.edu.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ResourceBundle;
 
 public class ProductoModificarView extends  JInternalFrame{
     private JTextField txtCodigo;
@@ -18,8 +19,11 @@ public class ProductoModificarView extends  JInternalFrame{
     private JLabel lblPrecio;
     private JButton btnLimpiar;
     private JButton btnCancelar;
+    private MensajeInternacionalizacionHandler mensajeHandler;
 
-    public  ProductoModificarView(ResourceBundle mensajes){
+    public  ProductoModificarView(MensajeInternacionalizacionHandler handler){
+        this.mensajeHandler = handler;
+        actualizarTextos();
         setContentPane(PanelPrincipal);
         setTitle("Datos del Producto");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
@@ -147,6 +151,16 @@ public class ProductoModificarView extends  JInternalFrame{
         txtCodigo.setText("");
         txtNombre.setText("");
         txtPrecio.setText("");
+    }
+
+    public void actualizarTextos() {
+        lblTitulo.setText(mensajeHandler.get("titulo"));
+        lblCodigo.setText(mensajeHandler.get("codigo"));
+        lblNombre.setText(mensajeHandler.get("nombre"));
+        lblPrecio.setText(mensajeHandler.get("precio"));
+        btnActualizar.setText(mensajeHandler.get("actualizar"));
+        btnLimpiar.setText(mensajeHandler.get("limpiar"));
+        btnCancelar.setText(mensajeHandler.get("cancelar"));
     }
 
 }

@@ -3,12 +3,12 @@
   <grid id="27dc6" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="506" height="477"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="3beb" binding="PanelPrincipal" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="3beb" binding="PanelPrincipal" layout-manager="GridLayoutManager" row-count="12" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -124,10 +124,105 @@
           </component>
           <component id="88401" class="javax.swing.JButton" binding="BtnAccion">
             <constraints>
-              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Guardar/Validar"/>
+            </properties>
+          </component>
+          <component id="f3d45" class="javax.swing.JLabel" binding="LblPregunta6">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <foreground color="-15465424"/>
+              <text value="¿Cuál es tu color favorito?"/>
+            </properties>
+          </component>
+          <component id="5453a" class="javax.swing.JTextField" binding="TxtPregunta6">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-1907233"/>
+            </properties>
+          </component>
+          <component id="7e7e9" class="javax.swing.JLabel" binding="LblPregunta7">
+            <constraints>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <foreground color="-15465424"/>
+              <text value="¿Cuál es tu película favorita?"/>
+            </properties>
+          </component>
+          <component id="54b30" class="javax.swing.JTextField" binding="TxtPregunta7">
+            <constraints>
+              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-1907233"/>
+            </properties>
+          </component>
+          <component id="9d0a0" class="javax.swing.JLabel" binding="LblPregunta8">
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <foreground color="-15465424"/>
+              <text value="¿Cuál es tu equipo deportivo favorito?"/>
+            </properties>
+          </component>
+          <component id="dd3f7" class="javax.swing.JTextField" binding="TxtPregunta8">
+            <constraints>
+              <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-1907233"/>
+            </properties>
+          </component>
+          <component id="d71c3" class="javax.swing.JLabel" binding="LblPregunta9">
+            <constraints>
+              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <foreground color="-15465424"/>
+              <text value="¿Cuál es tu libro favorito?"/>
+            </properties>
+          </component>
+          <component id="382cc" class="javax.swing.JTextField" binding="TxtPregunta9">
+            <constraints>
+              <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-1907233"/>
+            </properties>
+          </component>
+          <component id="64cde" class="javax.swing.JLabel" binding="LblPregunta10">
+            <constraints>
+              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <foreground color="-15465424"/>
+              <text value="¿Cuál fue el primer lugar que visitaste fuera de tu país?"/>
+            </properties>
+          </component>
+          <component id="a82df" class="javax.swing.JTextField" binding="TxtPregunta10">
+            <constraints>
+              <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-1907233"/>
             </properties>
           </component>
         </children>

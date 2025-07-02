@@ -1,5 +1,7 @@
 package ec.edu.vista;
 
+import ec.edu.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,8 +13,11 @@ public class CambiarContrasenaView extends JInternalFrame {
     private JButton BtnGuardar;
     private JLabel LblContraseña;
     private JLabel LblContraseñaA;
+    private MensajeInternacionalizacionHandler mensajeHandler;
 
-    public CambiarContrasenaView() {
+    public CambiarContrasenaView(MensajeInternacionalizacionHandler handler) {
+        this.mensajeHandler = handler;
+        actualizarTextos();
         setContentPane(PanelPrincipal);
         setTitle("Productos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -47,5 +52,12 @@ public class CambiarContrasenaView extends JInternalFrame {
     }
     public void setTxtContraseña(JTextField TxtContraseña){
         this.TxtContraseña= TxtContraseña;
+    }
+
+    public void actualizarTextos() {
+        LblTitulo.setText(mensajeHandler.get("login.titulo"));
+        LblContraseñaA.setText(mensajeHandler.get("login.ContrasenaA"));
+        LblContraseña.setText(mensajeHandler.get("login.contrasena"));
+        BtnGuardar.setText(mensajeHandler.get("login.boton"));
     }
 }

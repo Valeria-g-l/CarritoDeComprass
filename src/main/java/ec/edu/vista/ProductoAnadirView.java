@@ -1,7 +1,7 @@
 package ec.edu.vista;
 
 import ec.edu.modelo.Producto;
-import ec.edu.util.FondoUtils;
+import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,10 +23,12 @@ public class ProductoAnadirView extends  JInternalFrame {
     private JButton btnGuardar;
     private JButton btnCancelar;
     private JButton BtnLimpiarr;
-    private ResourceBundle mensajes;
+    private MensajeInternacionalizacionHandler mensajeHandler;
 
 
-    public ProductoAnadirView(ResourceBundle mensajes) {
+    public ProductoAnadirView(MensajeInternacionalizacionHandler handler) {
+        this.mensajeHandler = handler;
+        actualizarTextos();
         setContentPane(PanelPrincipal);
         setTitle("Agregar Producto");
         setSize(400, 300);
@@ -174,12 +176,17 @@ public class ProductoAnadirView extends  JInternalFrame {
             }
         });
     }
-    public void setMensajes(ResourceBundle mensajes) {
-        this.mensajes = mensajes;
-
-        setTitle(mensajes.getString("titulo.agregarProducto"));
-
+    public void actualizarTextos() {
+        labelTitulo.setText(mensajeHandler.get("login.Titulo"));
+        LblCodigo.setText(mensajeHandler.get("login.LblCodigo"));
+        LblNombre.setText(mensajeHandler.get("login.LblNombre"));
+        LblPreecio.setText(mensajeHandler.get("login.LblPrecio"));
+        btnGuardar.setText(mensajeHandler.get("login.BtnGuardar"));
+        btnCancelar.setText(mensajeHandler.get("login.BtnCancelar"));
+        BtnLimpiarr.setText(mensajeHandler.get("login.BtnLimpiar"));
     }
+
+
 
 
 }
