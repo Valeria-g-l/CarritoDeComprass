@@ -1,15 +1,17 @@
 package ec.edu.vista;
 
 import ec.edu.controlador.UsuarioController;
+import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 
-public class PreguntasSeguridadView extends JFrame {
+public class PreguntasSeguridadView extends JFrame implements ActualizablePorIdioma {
     private JLabel LblTitulo;
     private JLabel LblPregunta1;
     private JTextField TxtPregunta1;
@@ -40,8 +42,8 @@ public class PreguntasSeguridadView extends JFrame {
     public PreguntasSeguridadView(MensajeInternacionalizacionHandler handler, UsuarioController usuarioController, String modo) {
         this.usuarioController = usuarioController;
         this.modo = modo;
-        this.mensajeHandler = handler;
-        actualizarTextos();
+        this.mensajeHandler = Main.mensajeHandler;
+        actualizarTextos(Main.mensajeHandler.getBundle());
         setTitle("Preguntas De Seguridad");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(700, 500);
@@ -166,7 +168,7 @@ public class PreguntasSeguridadView extends JFrame {
         PanelPrincipal = panelPrincipal;
     }
 
-    public void actualizarTextos() {
+    public void actualizarTextos(ResourceBundle Bundle) {
         LblPregunta1.setText(mensajeHandler.get("pregunta1"));
         LblPregunta2.setText(mensajeHandler.get("pregunta2"));
         LblPregunta3.setText(mensajeHandler.get("pregunta3"));

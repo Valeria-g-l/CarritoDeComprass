@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class MensajeInternacionalizacionHandler {
-
+    private static MensajeInternacionalizacionHandler instance;
     private ResourceBundle bundle;
     private Locale locale;
 
@@ -25,5 +25,9 @@ public class MensajeInternacionalizacionHandler {
     public Locale getLocale() {
         return locale;
     }
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
 }
 

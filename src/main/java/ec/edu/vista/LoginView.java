@@ -1,13 +1,15 @@
 package ec.edu.vista;
 
+import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
-public class LoginView extends JFrame {
+public class LoginView extends JFrame implements ActualizablePorIdioma {
     private MensajeInternacionalizacionHandler mensajeHandler;
     private JPanel PanelPrincipal;
     private JLabel lblTitulo;
@@ -23,9 +25,9 @@ public class LoginView extends JFrame {
 
 
     public LoginView(MensajeInternacionalizacionHandler handler) {
-        this.mensajeHandler = handler;
+        this.mensajeHandler = Main.mensajeHandler;
         $$$setupUI$$$();
-        actualizarTextos();
+        actualizarTextos(Main.mensajeHandler.getBundle());
         setTitle("Iniciar Sesión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -66,7 +68,7 @@ public class LoginView extends JFrame {
                         Main.mensajeHandler.setLenguaje("pt", "PT");
                         break;
                 }
-                actualizarTextos();
+                actualizarTextos(handler.getBundle());
             }
         });
     }
@@ -152,7 +154,7 @@ public class LoginView extends JFrame {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
-    public void actualizarTextos() {
+    public void actualizarTextos(ResourceBundle Bundle) {
         lblUsuario.setText(mensajeHandler.get("login.usuario"));
         LblContraseña.setText(mensajeHandler.get("login.contrasena"));
         BtnIngresar.setText(mensajeHandler.get("login.boton"));

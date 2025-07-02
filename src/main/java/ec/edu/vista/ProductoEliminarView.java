@@ -1,13 +1,15 @@
 package ec.edu.vista;
 
+import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
-public class ProductoEliminarView  extends  JInternalFrame{
+public class ProductoEliminarView  extends  JInternalFrame implements ActualizablePorIdioma {
     private JTextField txtCodigo;
     private JButton btnBuscar;
     private JTable tblEliminar;
@@ -20,8 +22,8 @@ public class ProductoEliminarView  extends  JInternalFrame{
     private MensajeInternacionalizacionHandler mensajeHandler;
 
     public ProductoEliminarView(MensajeInternacionalizacionHandler handler) {
-        this.mensajeHandler = handler;
-        actualizarTextos();
+        this.mensajeHandler = Main.mensajeHandler;
+        actualizarTextos(Main.mensajeHandler.getBundle());
         setContentPane(PanelPrincipal);
         setTitle("Edición de Productos");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
@@ -106,7 +108,7 @@ public class ProductoEliminarView  extends  JInternalFrame{
 
     }
 
-    public void actualizarTextos() {
+    public void actualizarTextos(ResourceBundle Bundle) {
         lblTitulo.setText(mensajeHandler.get("titulo"));
         lblCodigo.setText(mensajeHandler.get("codigo"));
         BtnCancelar.setText(mensajeHandler.get("cancelar"));

@@ -1,14 +1,16 @@
 package ec.edu.vista;
 
+import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
-
+import ec.edu.util.ActualizablePorIdioma;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
-public class CarritoAnadirView extends JInternalFrame {
+public class CarritoAnadirView extends JInternalFrame implements ActualizablePorIdioma {
     private MensajeInternacionalizacionHandler mensajeHandler;
     private JTextField txtCodigo;
     private JTextField txtNombre;
@@ -47,8 +49,8 @@ public class CarritoAnadirView extends JInternalFrame {
         tblCarrito.setModel(modelo);
 
         cargarDatos();
-        this.mensajeHandler = handler;
-        actualizarTextos();
+        this.mensajeHandler = Main.mensajeHandler;
+        actualizarTextos(Main.mensajeHandler.getBundle());
 
         BtnLimpiar.addActionListener(new ActionListener() {
             @Override
@@ -232,7 +234,7 @@ public class CarritoAnadirView extends JInternalFrame {
 
     }
 
-    public void actualizarTextos() {
+    public void actualizarTextos(ResourceBundle bundle) {
         LblCodigo.setText(mensajeHandler.get("login.Codigo"));
         lblNombre.setText(mensajeHandler.get("login.Nombre"));
         lblPrecio.setText(mensajeHandler.get("login.Precio"));

@@ -1,11 +1,13 @@
 package ec.edu.vista;
 
+import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ResourceBundle;
 
-public class CambiarContrasenaView extends JInternalFrame {
+public class CambiarContrasenaView extends JInternalFrame implements ActualizablePorIdioma {
     private JPanel PanelPrincipal;
     private JLabel LblTitulo;
     private JTextField TxtContraseñaA;
@@ -16,8 +18,8 @@ public class CambiarContrasenaView extends JInternalFrame {
     private MensajeInternacionalizacionHandler mensajeHandler;
 
     public CambiarContrasenaView(MensajeInternacionalizacionHandler handler) {
-        this.mensajeHandler = handler;
-        actualizarTextos();
+        this.mensajeHandler = Main.mensajeHandler;
+        actualizarTextos(Main.mensajeHandler.getBundle());
         setContentPane(PanelPrincipal);
         setTitle("Productos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,7 +56,7 @@ public class CambiarContrasenaView extends JInternalFrame {
         this.TxtContraseña= TxtContraseña;
     }
 
-    public void actualizarTextos() {
+    public void actualizarTextos(ResourceBundle bundle) {
         LblTitulo.setText(mensajeHandler.get("login.titulo"));
         LblContraseñaA.setText(mensajeHandler.get("login.ContrasenaA"));
         LblContraseña.setText(mensajeHandler.get("login.contrasena"));

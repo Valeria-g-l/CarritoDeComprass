@@ -3,10 +3,12 @@ package ec.edu.vista;
 import ec.edu.controlador.RegistroController;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
+import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.FondoUtils;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
+import java.util.ResourceBundle;
 
 public class MenuPrincipalView extends JFrame {
     private MensajeInternacionalizacionHandler mensajeHandler;
@@ -101,6 +103,13 @@ public class MenuPrincipalView extends JFrame {
     private void cambiarIdioma(String lang, String country) {
         mensajeHandler.setLenguaje(lang, country);
         actualizarTextos();
+        for (JInternalFrame frame : jDesktopPane.getAllFrames()) {
+            if (frame instanceof ActualizablePorIdioma) {
+                ((ActualizablePorIdioma) frame).actualizarTextos(
+                        ResourceBundle.getBundle("messages", mensajeHandler.getLocale())
+                );
+            }
+        }
     }
 
     private void actualizarTextos() {

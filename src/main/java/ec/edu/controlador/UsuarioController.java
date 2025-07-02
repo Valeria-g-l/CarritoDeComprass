@@ -90,7 +90,7 @@ public class UsuarioController {
         if (menuPrincipalView == null) return;
 
         if (cambiarContraseniaView == null) {
-            cambiarContraseniaView = new CambiarContrasenaView(mensajeHandler);
+            cambiarContraseniaView = new CambiarContrasenaView(Main.mensajeHandler);
             menuPrincipalView.getjDesktopPane().add(cambiarContraseniaView);
             cambiarContraseniaView.setVisible(true);
 

@@ -1,13 +1,15 @@
 package ec.edu.vista;
 
+import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
-public class ProductoModificarView extends  JInternalFrame{
+public class ProductoModificarView extends  JInternalFrame implements ActualizablePorIdioma {
     private JTextField txtCodigo;
     private JTextField txtNombre;
     private JTextField txtPrecio;
@@ -22,8 +24,8 @@ public class ProductoModificarView extends  JInternalFrame{
     private MensajeInternacionalizacionHandler mensajeHandler;
 
     public  ProductoModificarView(MensajeInternacionalizacionHandler handler){
-        this.mensajeHandler = handler;
-        actualizarTextos();
+        this.mensajeHandler = Main.mensajeHandler;
+        actualizarTextos(Main.mensajeHandler.getBundle());
         setContentPane(PanelPrincipal);
         setTitle("Datos del Producto");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
@@ -153,7 +155,7 @@ public class ProductoModificarView extends  JInternalFrame{
         txtPrecio.setText("");
     }
 
-    public void actualizarTextos() {
+    public void actualizarTextos(ResourceBundle Bundle) {
         lblTitulo.setText(mensajeHandler.get("titulo"));
         lblCodigo.setText(mensajeHandler.get("codigo"));
         lblNombre.setText(mensajeHandler.get("nombre"));

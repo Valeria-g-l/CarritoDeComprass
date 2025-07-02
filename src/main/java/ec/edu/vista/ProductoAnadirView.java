@@ -1,6 +1,7 @@
 package ec.edu.vista;
 
 import ec.edu.modelo.Producto;
+import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ProductoAnadirView extends  JInternalFrame {
+public class ProductoAnadirView extends  JInternalFrame implements ActualizablePorIdioma {
     private JLabel labelTitulo;
     private JTextField txtCodigo;
     private JTextField txtNombre;
@@ -27,8 +28,8 @@ public class ProductoAnadirView extends  JInternalFrame {
 
 
     public ProductoAnadirView(MensajeInternacionalizacionHandler handler) {
-        this.mensajeHandler = handler;
-        actualizarTextos();
+        this.mensajeHandler = Main.mensajeHandler;
+        actualizarTextos(Main.mensajeHandler.getBundle());
         setContentPane(PanelPrincipal);
         setTitle("Agregar Producto");
         setSize(400, 300);
@@ -176,7 +177,7 @@ public class ProductoAnadirView extends  JInternalFrame {
             }
         });
     }
-    public void actualizarTextos() {
+    public void actualizarTextos(ResourceBundle Bundle) {
         labelTitulo.setText(mensajeHandler.get("login.Titulo"));
         LblCodigo.setText(mensajeHandler.get("login.LblCodigo"));
         LblNombre.setText(mensajeHandler.get("login.LblNombre"));

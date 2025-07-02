@@ -1,6 +1,7 @@
 package ec.edu.vista;
 
 import ec.edu.modelo.Producto;
+import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
@@ -9,8 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class ProductoListaView extends JInternalFrame {
+public class ProductoListaView extends JInternalFrame implements ActualizablePorIdioma {
     private JTextField txtBuscar;
     private JButton btnBuscar;
     private JTable tblProductos;
@@ -24,8 +26,8 @@ public class ProductoListaView extends JInternalFrame {
 
 
     public ProductoListaView(MensajeInternacionalizacionHandler handler) {
-        this.mensajeHandler = handler;
-        actualizarTextos();
+        this.mensajeHandler = Main.mensajeHandler;
+        actualizarTextos(Main.mensajeHandler.getBundle());
         setContentPane(PanelTerciario);
         setTitle("Productos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -95,7 +97,7 @@ public class ProductoListaView extends JInternalFrame {
         }
     }
 
-    public void actualizarTextos() {
+    public void actualizarTextos(ResourceBundle Bundle) {
         lblTitule.setText(mensajeHandler.get("titulo"));
         lblBuscar.setText(mensajeHandler.get("buscar"));
         btnBuscar.setText(mensajeHandler.get("buscar"));

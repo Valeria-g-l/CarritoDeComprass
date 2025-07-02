@@ -3,6 +3,7 @@ package ec.edu.vista;
 import ec.edu.controlador.CarritoController;
 import ec.edu.modelo.ItemCarrito;
 import ec.edu.modelo.Carrito;
+import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import java.awt.*;
@@ -15,8 +16,9 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
-public class CarritoModificarView extends JInternalFrame {
+public class CarritoModificarView extends JInternalFrame implements ActualizablePorIdioma {
     private JPanel PanelPrincipal;
     private JLabel LblTitulo;
     private JTable TblProductos;
@@ -44,8 +46,8 @@ public class CarritoModificarView extends JInternalFrame {
     private CarritoController carritoController;
 
     public CarritoModificarView(MensajeInternacionalizacionHandler handler) {
-        this.mensajeHandler = handler;
-        actualizarTextos();
+        this.mensajeHandler = Main.mensajeHandler;
+        actualizarTextos(Main.mensajeHandler.getBundle());
         setTitle("Modificar Carrito");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(700, 500);
@@ -287,7 +289,7 @@ public class CarritoModificarView extends JInternalFrame {
         }
     }
 
-    public void actualizarTextos() {
+    public void actualizarTextos(ResourceBundle Bundle) {
         LblTitulo.setText(mensajeHandler.get("titulo"));
         LblCarritos.setText(mensajeHandler.get("carritos"));
         LblAgregar.setText(mensajeHandler.get("agregar"));

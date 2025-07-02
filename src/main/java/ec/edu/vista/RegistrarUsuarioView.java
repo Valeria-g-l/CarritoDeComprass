@@ -4,13 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import ec.edu.controlador.UsuarioController;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
+import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
-public class RegistrarUsuarioView extends JFrame {
+public class RegistrarUsuarioView extends JFrame  implements ActualizablePorIdioma {
     private JPanel PanelPrincipal;
     private JLabel LblTitulo;
     private JLabel LblNombre;
@@ -30,9 +32,9 @@ public class RegistrarUsuarioView extends JFrame {
     private MensajeInternacionalizacionHandler mensajeHandler;
 
     public RegistrarUsuarioView(UsuarioController usuarioController, MensajeInternacionalizacionHandler handler) {
-        this.mensajeHandler = handler;
+        this.mensajeHandler = Main.mensajeHandler;
         this.usuarioController = usuarioController;
-        actualizarTextos();
+        actualizarTextos(Main.mensajeHandler.getBundle());
         setContentPane(PanelPrincipal);
         setTitle("Agregar Producto");
         setSize(400, 300);
@@ -102,7 +104,7 @@ public class RegistrarUsuarioView extends JFrame {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
-    public void actualizarTextos() {
+    public void actualizarTextos(ResourceBundle Bundle) {
         LblTitulo.setText(mensajeHandler.get("titulo"));
         LblNombre.setText(mensajeHandler.get("nombre"));
         LblContraseña.setText(mensajeHandler.get("contrasena"));
