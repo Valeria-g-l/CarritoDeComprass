@@ -4,6 +4,7 @@ import ec.edu.modelo.Producto;
 import ec.edu.util.FondoUtils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -39,6 +40,16 @@ public class ProductoAnadirView extends  JInternalFrame {
                 txtPrecio.setText("");
             }
         });
+
+        ImageIcon iconGuardar = new ImageIcon(getClass().getResource("/imagenes/shield-check.png"));
+        btnGuardar.setIcon(new ImageIcon(iconGuardar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        btnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+        ImageIcon iconLimpiar = new ImageIcon(getClass().getResource("/imagenes/broom.png"));
+        BtnLimpiarr.setIcon(new ImageIcon(iconLimpiar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
 
 
 
@@ -159,7 +170,7 @@ public class ProductoAnadirView extends  JInternalFrame {
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                ProductoAnadirView.this.dispose();
             }
         });
     }

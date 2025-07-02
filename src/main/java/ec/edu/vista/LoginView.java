@@ -1,6 +1,7 @@
 package ec.edu.vista;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class LoginView extends JFrame {
     private JPanel PanelPrincipal;
@@ -29,6 +30,16 @@ public class LoginView extends JFrame {
             CBoxIdioma.addItem("English");
             CBoxIdioma.addItem("Français");
         }
+
+        ImageIcon iconIngresar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
+        BtnIngresar.setIcon(new ImageIcon(iconIngresar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+        ImageIcon iconRegistrarse = new ImageIcon(getClass().getResource("/Imagenes/user-add.png"));
+        BtnRegistrarse.setIcon(new ImageIcon(iconRegistrarse.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+        ImageIcon iconOlvide = new ImageIcon(getClass().getResource("/Imagenes/exclamation.png"));
+        BtnOlvideContrasena.setIcon(new ImageIcon(iconOlvide.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
     }
 
     public String getIdiomaSeleccionado() {

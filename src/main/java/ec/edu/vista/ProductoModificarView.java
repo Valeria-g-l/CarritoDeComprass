@@ -1,6 +1,7 @@
 package ec.edu.vista;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
@@ -23,6 +24,17 @@ public class ProductoModificarView extends  JInternalFrame{
         setTitle("Datos del Producto");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
+
+
+        ImageIcon iconActualizar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
+        btnActualizar.setIcon(new ImageIcon(iconActualizar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+        ImageIcon iconLimpiar = new ImageIcon(getClass().getResource("/imagenes/broom.png"));
+        btnLimpiar.setIcon(new ImageIcon(iconLimpiar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        btnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
         setResizable(true);
 
         btnActualizar.addActionListener(new ActionListener() {

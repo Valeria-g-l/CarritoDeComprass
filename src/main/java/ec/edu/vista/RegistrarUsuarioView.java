@@ -1,9 +1,10 @@
 package ec.edu.vista;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ResourceBundle;
+
 import ec.edu.controlador.UsuarioController;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
@@ -16,6 +17,14 @@ public class RegistrarUsuarioView extends JFrame {
     private JLabel LblContraseña;
     private JPasswordField TxtContraseña;
     private JButton BtnRegistrarse;
+    private JLabel LblNombreCompleto;
+    private JTextField TxtNombreCompleto;
+    private JLabel LblNacimiento;
+    private JLabel LblGenero;
+    private JComboBox comboBox1;
+    private JLabel LblCorreo;
+    private JTextField TxtCorreo;
+    private JTextField textField1;
     private UsuarioController usuarioController;
 
     public RegistrarUsuarioView(UsuarioController usuarioController) {
@@ -25,6 +34,10 @@ public class RegistrarUsuarioView extends JFrame {
         setSize(400, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+
+        ImageIcon iconRegistrarse = new ImageIcon(getClass().getResource("/imagenes/user-add.png"));
+        BtnRegistrarse.setIcon(new ImageIcon(iconRegistrarse.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
         BtnRegistrarse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

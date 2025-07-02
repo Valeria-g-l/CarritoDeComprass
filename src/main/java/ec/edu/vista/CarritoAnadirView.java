@@ -2,6 +2,7 @@ package ec.edu.vista;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
@@ -26,7 +27,8 @@ public class CarritoAnadirView extends JInternalFrame {
     private JLabel lblSubtotal;
     private JPanel PanelSecundario;
     private JPanel JPanel;
-    private JButton btnCancelar;
+    private JButton BtnCancelar;
+
 
     public CarritoAnadirView(ResourceBundle mensajes) {
         super("Carrito de Compras", true, true, false, true);
@@ -45,6 +47,27 @@ public class CarritoAnadirView extends JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 limpiarCampos();
+            }
+        });
+
+        ImageIcon iconBuscar = new ImageIcon(getClass().getResource("/imagenes/search.png"));
+        btnBuscar.setIcon(new ImageIcon(iconBuscar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+        ImageIcon iconAnadir = new ImageIcon(getClass().getResource("/imagenes/plus.png"));
+        BtnAñadir.setIcon(new ImageIcon(iconAnadir.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+        ImageIcon iconGuardar = new ImageIcon(getClass().getResource("/imagenes/shield-check.png"));
+        BtnGuardar.setIcon(new ImageIcon(iconGuardar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+        ImageIcon iconLimpiar = new ImageIcon(getClass().getResource("/imagenes/broom.png"));
+        BtnLimpiar.setIcon(new ImageIcon(iconLimpiar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        BtnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        BtnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
             }
         });
     }
@@ -178,6 +201,14 @@ public class CarritoAnadirView extends JInternalFrame {
 
     public void setBtnLimpiar(JButton btnLimpiar) {
         this.BtnLimpiar = btnLimpiar;
+    }
+
+    public JButton getBtnCancelar() {
+        return BtnCancelar;
+    }
+
+    public void setBtnCancelar(JButton btnCancelar) {
+        BtnCancelar = btnCancelar;
     }
 
     public void limpiarCampos() {

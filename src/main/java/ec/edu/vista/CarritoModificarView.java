@@ -3,6 +3,8 @@ package ec.edu.vista;
 import ec.edu.controlador.CarritoController;
 import ec.edu.modelo.ItemCarrito;
 import ec.edu.modelo.Carrito;
+
+import java.awt.*;
 import java.util.List;
 
 
@@ -34,6 +36,7 @@ public class CarritoModificarView extends JInternalFrame {
     private JLabel LblCodigo;
     private JComboBox<Carrito> CBoxCarritos;
     private JLabel LblCarritos;
+    private JButton BtnCancelar;
 
     private DefaultTableModel modelo;
     private CarritoController carritoController;
@@ -44,12 +47,28 @@ public class CarritoModificarView extends JInternalFrame {
         setSize(700, 500);
         setContentPane(PanelPrincipal);
 
-        // Configurar tabla
+
         modelo = new DefaultTableModel();
         Object[] columnas = {"Código", "Nombre", "Precio", "Cantidad", "Subtotal"};
         modelo.setColumnIdentifiers(columnas);
         TblProductos.setModel(modelo);
         TblProductos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+
+        ImageIcon iconActualizar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
+        BtnActualizarCantidad.setIcon(new ImageIcon(iconActualizar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+
+        ImageIcon iconEliminar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        BtnEliminar.setIcon(new ImageIcon(iconEliminar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+
+        ImageIcon iconAgregar = new ImageIcon(getClass().getResource("/imagenes/plus.png"));
+        BtnAgregar.setIcon(new ImageIcon(iconAgregar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+
+        BtnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
 
 
         for (int i = 1; i <= 20; i++) {
@@ -156,7 +175,13 @@ public class CarritoModificarView extends JInternalFrame {
                     }
                 });
 
+        BtnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
             }
+        });
+    }
 
 
 
@@ -210,6 +235,13 @@ public class CarritoModificarView extends JInternalFrame {
 
     public JComboBox<Carrito> getCBoxCarritos() {
         return CBoxCarritos;
+    }
+    public JButton getBtnCancelar() {
+        return BtnCancelar;
+    }
+
+    public void setBtnCancelar(JButton btnCancelar) {
+        BtnCancelar = btnCancelar;
     }
 
     public void limpiarTabla() {

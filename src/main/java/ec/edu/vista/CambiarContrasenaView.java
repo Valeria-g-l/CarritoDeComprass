@@ -1,6 +1,7 @@
 package ec.edu.vista;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class CambiarContrasenaView extends JInternalFrame {
     private JPanel PanelPrincipal;
@@ -16,6 +17,10 @@ public class CambiarContrasenaView extends JInternalFrame {
         setTitle("Productos");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
+
+        ImageIcon iconoGuardar = new ImageIcon(getClass().getResource("/imagenes/shield-check.png"));
+        Image imagenEscalada = iconoGuardar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        BtnGuardar.setIcon(new ImageIcon(imagenEscalada));
 
     }
 

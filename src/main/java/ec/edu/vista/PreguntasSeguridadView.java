@@ -4,6 +4,7 @@ import ec.edu.controlador.UsuarioController;
 import ec.edu.modelo.Usuario;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
@@ -38,6 +39,10 @@ public class PreguntasSeguridadView extends JFrame {
                 procesarRespuestas();
             }
         });
+
+        ImageIcon iconoGuardar = new ImageIcon(getClass().getResource("/imagenes/shield-check.png"));
+        Image imagenEscalada = iconoGuardar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        BtnAccion.setIcon(new ImageIcon(imagenEscalada));
     }
     private void procesarRespuestas() {
         String p1 = LblPregunta1.getText();
