@@ -28,6 +28,10 @@ public class MensajeInternacionalizacionHandler {
     public ResourceBundle getBundle() {
         return bundle;
     }
+    public void setLocale(Locale newLocale, String baseName) {
+        this.locale = newLocale;
+        this.bundle = ResourceBundle.getBundle(baseName, newLocale);
+    }
 
 }
 

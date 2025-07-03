@@ -5,6 +5,8 @@ import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 public class CambiarContrasenaView extends JInternalFrame implements ActualizablePorIdioma {
@@ -16,6 +18,7 @@ public class CambiarContrasenaView extends JInternalFrame implements Actualizabl
     private JLabel LblContraseña;
     private JLabel LblContraseñaA;
     private MensajeInternacionalizacionHandler mensajeHandler;
+    private JButton BtnCancelar;
 
     public CambiarContrasenaView(MensajeInternacionalizacionHandler handler) {
         this.mensajeHandler = Main.mensajeHandler;
@@ -29,6 +32,12 @@ public class CambiarContrasenaView extends JInternalFrame implements Actualizabl
         Image imagenEscalada = iconoGuardar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         BtnGuardar.setIcon(new ImageIcon(imagenEscalada));
 
+        BtnCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
 
     public JPanel getPanelPrincipal() {
@@ -54,6 +63,12 @@ public class CambiarContrasenaView extends JInternalFrame implements Actualizabl
     }
     public void setTxtContraseña(JTextField TxtContraseña){
         this.TxtContraseña= TxtContraseña;
+    }
+    public JButton getBtnCancelar() {
+        return BtnCancelar;
+    }
+    public void setBtnCancelar(JButton BtnCancelar) {
+        this.BtnCancelar = BtnCancelar;
     }
 
     public void actualizarTextos(ResourceBundle bundle) {

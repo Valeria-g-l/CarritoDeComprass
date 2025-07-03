@@ -172,14 +172,14 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
         CBoxCarritos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                        Carrito carritoSeleccionado = (Carrito) CBoxCarritos.getSelectedItem();
-                        if (carritoSeleccionado != null && carritoController != null) {
-                            carritoController.setCarrito(carritoSeleccionado);
-                            cargarProductosEnTabla();
-                            actualizarTotales();
-                        }
-                    }
-                });
+                Carrito carritoSeleccionado = (Carrito) CBoxCarritos.getSelectedItem();
+                if (carritoSeleccionado != null && carritoController != null) {
+                    carritoController.setCarrito(carritoSeleccionado);
+                    cargarProductosEnTabla();
+                    actualizarTotales();
+                }
+            }
+        });
 
         BtnCancelar.addActionListener(new ActionListener() {
             @Override

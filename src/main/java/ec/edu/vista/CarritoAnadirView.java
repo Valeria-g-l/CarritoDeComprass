@@ -50,7 +50,7 @@ public class CarritoAnadirView extends JInternalFrame implements ActualizablePor
 
         cargarDatos();
         this.mensajeHandler = Main.mensajeHandler;
-        actualizarTextos(Main.mensajeHandler.getBundle());
+        actualizarTextos(handler.getBundle());
 
         BtnLimpiar.addActionListener(new ActionListener() {
             @Override

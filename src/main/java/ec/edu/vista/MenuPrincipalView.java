@@ -193,14 +193,20 @@ public class MenuPrincipalView extends JFrame {
     }
 
     public void agregarVentanaInterna(JInternalFrame ventana) {
-        if (!ventana.isVisible()) {
-            jDesktopPane.add(ventana);
-            ventana.setVisible(true);
-            try {
-                ventana.setSelected(true);
-            } catch (java.beans.PropertyVetoException e) {
-                e.printStackTrace();
+        for (JInternalFrame abierta : jDesktopPane.getAllFrames()) {
+            if (abierta.getClass().equals(ventana.getClass())) {
+                abierta.dispose();
             }
         }
+        jDesktopPane.add(ventana);
+        ventana.setVisible(true);
+        try {
+            ventana.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            e.printStackTrace();
+        }
     }
+
+
+
 }

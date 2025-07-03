@@ -2,15 +2,15 @@ package ec.edu.controlador;
 
 import ec.edu.dao.ProductoDAO;
 import ec.edu.modelo.Producto;
-import ec.edu.vista.ProductoAnadirView;
-import ec.edu.vista.ProductoModificarView;
-import ec.edu.vista.ProductoEliminarView;
-import ec.edu.vista.ProductoListaView;
+import ec.edu.util.MensajeInternacionalizacionHandler;
+import ec.edu.vista.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
+
 
 
 public class ProductoController {
@@ -19,20 +19,46 @@ public class ProductoController {
     private ProductoDAO productoDAO;
     private ProductoModificarView productoModificarView;
     private ProductoEliminarView productoEliminarView;
+    private MenuPrincipalView menuPrincipalView;
+    private  MensajeInternacionalizacionHandler mensajeHandler;
 
 
     public ProductoController(ProductoDAO productoDAO,
                               ProductoAnadirView productoAnadirView,
                               ProductoListaView productoListaView,
                               ProductoModificarView productoModificarView,
-                              ProductoEliminarView productoEliminarView) {
+                              ProductoEliminarView productoEliminarView,
+                              MenuPrincipalView menuPrincipalView,
+                              MensajeInternacionalizacionHandler mensajeHandler) {
         this.productoDAO = productoDAO;
         this.productoAnadirView = productoAnadirView;
         this.productoListaView = productoListaView;
         this.productoModificarView = productoModificarView;
         this.productoEliminarView = productoEliminarView;
-        configurarEventos();
-        System.out.println("Vista modificar es null? " + (productoModificarView == null));
+        this.menuPrincipalView = menuPrincipalView;
+        this.mensajeHandler = mensajeHandler;
+        configurarEventosMenu();
+    }
+    private void configurarEventosMenu() {
+        menuPrincipalView.getMenuItemCrearProducto().addActionListener(e -> {
+            ProductoAnadirView vista = new ProductoAnadirView(mensajeHandler);
+            menuPrincipalView.agregarVentanaInterna(vista);
+        });
+
+        menuPrincipalView.getMenuItemEliminarProducto().addActionListener(e -> {
+            ProductoEliminarView vista = new ProductoEliminarView(mensajeHandler);
+            menuPrincipalView.agregarVentanaInterna(vista);
+        });
+
+        menuPrincipalView.getMenuItemActualizarProducto().addActionListener(e -> {
+            ProductoModificarView vista = new ProductoModificarView(mensajeHandler);
+            menuPrincipalView.agregarVentanaInterna(vista);
+        });
+
+        menuPrincipalView.getMenuItemBuscarProducto().addActionListener(e -> {
+            ProductoListaView vista = new ProductoListaView(mensajeHandler);
+            menuPrincipalView.agregarVentanaInterna(vista);
+        });
     }
 
     public ProductoModificarView getProductoModificarView() {
@@ -212,20 +238,20 @@ public class ProductoController {
     }
 
     private void buscarProductoEliminar() {
-            String txtCod = productoEliminarView.getTxtCodigo().getText();
-            if (!txtCod.isEmpty()) {
-                int codigo = Integer.parseInt(txtCod);
-                Producto producto = productoDAO.buscarPorCodigo(codigo);
-                if (producto != null) {
-                    productoEliminarView.mostrarMensaje("Producto encontrado: " + producto.getNombre());
-                } else {
-                    productoEliminarView.mostrarMensaje("Producto no encontrado");
-                    productoEliminarView.limpiarCampos();
-                }
+        String txtCod = productoEliminarView.getTxtCodigo().getText();
+        if (!txtCod.isEmpty()) {
+            int codigo = Integer.parseInt(txtCod);
+            Producto producto = productoDAO.buscarPorCodigo(codigo);
+            if (producto != null) {
+                productoEliminarView.mostrarMensaje("Producto encontrado: " + producto.getNombre());
             } else {
-                productoEliminarView.mostrarMensaje("Ingresa un código para buscar");
+                productoEliminarView.mostrarMensaje("Producto no encontrado");
+                productoEliminarView.limpiarCampos();
             }
+        } else {
+            productoEliminarView.mostrarMensaje("Ingresa un código para buscar");
         }
+    }
     private void buscarProductoPorCodigo() {
         String textoBusqueda = productoListaView.getTxtBuscar().getText().trim();
 
@@ -267,5 +293,4 @@ public class ProductoController {
         this.productoAnadirView = productoAnadirView;
     }
 }
-
 

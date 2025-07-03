@@ -5,21 +5,26 @@ import ec.edu.dao.ProductoDAO;
 import ec.edu.modelo.Carrito;
 import ec.edu.modelo.ItemCarrito;
 import ec.edu.modelo.Producto;
+import ec.edu.util.MensajeInternacionalizacionHandler;
 import ec.edu.vista.CarritoAnadirView;
 import ec.edu.vista.CarritoListaView;
 import ec.edu.vista.CarritoModificarView;
+import ec.edu.vista.MenuPrincipalView;
 
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 
+
 public class CarritoController {
     private final CarritoDAO carritoDAO;
     private final ProductoDAO productoDAO;
     private final CarritoAnadirView carritoAnadirView;
-    private final CarritoListaView carritoListaView;
-    private final CarritoModificarView carritoModificarView;
+    private   CarritoListaView carritoListaView;
+    private CarritoModificarView carritoModificarView;
+    private final MensajeInternacionalizacionHandler mensajeHandler;
+    private final MenuPrincipalView menuPrincipalView;
 
     private Carrito carritoActual;
 
@@ -29,13 +34,18 @@ public class CarritoController {
                              ProductoDAO productoDAO,
                              CarritoAnadirView carritoAnadirView,
                              CarritoListaView carritoListaView,
-                             CarritoModificarView carritoModificarView) {
+                             CarritoModificarView carritoModificarView,
+                             MensajeInternacionalizacionHandler mensajeHandler,
+                             MenuPrincipalView menuPrincipalView) {
         this.carritoDAO = carritoDAO;
         this.productoDAO = productoDAO;
         this.carritoAnadirView = carritoAnadirView;
         this.carritoListaView = carritoListaView;
         this.carritoModificarView = carritoModificarView;
         this.carritoModificarView.setCarritoController(this);
+        this.mensajeHandler = mensajeHandler;
+        this.menuPrincipalView = menuPrincipalView;
+        configurarEventosMenu();
 
 
         carritoActual = new Carrito();
@@ -44,6 +54,20 @@ public class CarritoController {
         cargarCarritosEnComboModificar();
         cargarCarritoEnTabla();
         configurarEventos();
+    }
+    private void configurarEventosMenu() {
+        menuPrincipalView.getMenuItemCrearCarrito().addActionListener(e -> {
+            CarritoAnadirView vista = new CarritoAnadirView(mensajeHandler);
+            menuPrincipalView.agregarVentanaInterna(vista);
+        });
+
+        menuPrincipalView.getMenuItemModificarMiCarrito().addActionListener(e -> {
+            CarritoModificarView vista = new CarritoModificarView(mensajeHandler);
+            menuPrincipalView.agregarVentanaInterna(vista);
+        });
+        menuPrincipalView.getMenuItemVerMisCarritos().addActionListener(e -> {
+            CarritoListaView vista = new CarritoListaView(mensajeHandler);
+        });
     }
 
     private void configurarEventos() {
@@ -220,5 +244,14 @@ public class CarritoController {
     public void setCarrito(Carrito carrito) {
         this.carritoActual = carrito;
     }
+    public void setCarritoListaView(CarritoListaView carritoListaView) {
+        this.carritoListaView = carritoListaView;
+    }
+
+    public void setCarritoModificarView(CarritoModificarView carritoModificarView) {
+        this.carritoModificarView = carritoModificarView;
+        this.carritoModificarView.setCarritoController(this);
+    }
+
 
 }
