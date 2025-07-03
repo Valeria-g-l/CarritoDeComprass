@@ -76,6 +76,15 @@ public class Main {
                                 carritoAnadirView, carritoListaView,
                                 carritoModificarView, mensajeHandler,menuPrincipal
                         );
+                        productoAnadirView.setProductoController(productoController[0]);
+                        productoListaView.setProductoController(productoController[0]);
+                        productoModificarView.setProductoController(productoController[0]);
+                        productoEliminarView.setProductoController(productoController[0]);
+
+                        carritoModificarView.setCarritoController(carritoController[0]);
+                        carritoListaView.setCarritoController(carritoController[0]);
+                        carritoAnadirView.setCarritoController(carritoController[0]);
+
 
                         menuPrincipal.mostrarMensaje(Main.mensajeHandler.get("mensaje.bienvenida") + ": " + usuarioAutenticado.getUsername());
 
@@ -103,10 +112,10 @@ public class Main {
     }
 
     private static void configurarEventosMenu(MenuPrincipalView menu,
-                                              ProductoAnadirView anadirView,
-                                              ProductoListaView listaView,
-                                              ProductoModificarView modificarView,
-                                              ProductoEliminarView eliminarView,
+                                              ProductoAnadirView productoAnadirView,
+                                              ProductoListaView productoListaView,
+                                              ProductoModificarView productoModificarView,
+                                              ProductoEliminarView productoEliminarView,
                                               CarritoAnadirView carritoAnadirView,
                                               CarritoListaView carritoListaView,
                                               CarritoModificarView carritoModificarView,
@@ -116,33 +125,28 @@ public class Main {
 
         menu.getMenuItemCrearProducto().addActionListener(e -> {
             cerrarVentanaExistente(ProductoAnadirView.class, menu.getjDesktopPane());
-            ProductoAnadirView ProductoAnadirView = new ProductoAnadirView(mensajeHandler);
-            menu.agregarVentanaInterna(anadirView);
+            menu.agregarVentanaInterna(productoAnadirView);
         });
 
 
         menu.getMenuItemBuscarProducto().addActionListener(e -> {
             cerrarVentanaExistente(ProductoListaView.class, menu.getjDesktopPane());
-            ProductoListaView ProductolistaView = new ProductoListaView(mensajeHandler);
-            menu.agregarVentanaInterna(listaView);
+            menu.agregarVentanaInterna(productoListaView);
         });
 
         menu.getMenuItemActualizarProducto().addActionListener(e -> {
             cerrarVentanaExistente(ProductoModificarView.class, menu.getjDesktopPane());
-            ProductoModificarView ProductoModificarView = new ProductoModificarView(mensajeHandler);
-            menu.agregarVentanaInterna(modificarView);
+            menu.agregarVentanaInterna(productoModificarView);
         });
 
         menu.getMenuItemEliminarProducto().addActionListener(e -> {
             cerrarVentanaExistente(ProductoEliminarView.class, menu.getjDesktopPane());
-            ProductoEliminarView ProductoEliminarView = new ProductoEliminarView(mensajeHandler);
-            menu.agregarVentanaInterna(eliminarView);
+            menu.agregarVentanaInterna(productoEliminarView);
         });
 
         menu.getMenuItemCrearCarrito().addActionListener(e -> {
             cerrarVentanaExistente(CarritoAnadirView.class, menu.getjDesktopPane());
-            CarritoAnadirView vista = new CarritoAnadirView(mensajeHandler);
-            menu.agregarVentanaInterna(vista);
+            menu.agregarVentanaInterna(carritoAnadirView);
         });
 
         menu.getMenuItemVerMisCarritos().addActionListener(e -> {

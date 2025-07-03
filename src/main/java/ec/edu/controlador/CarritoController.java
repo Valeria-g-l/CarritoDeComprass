@@ -41,13 +41,15 @@ public class CarritoController {
                              MenuPrincipalView menuPrincipalView) {
         this.carritoDAO = carritoDAO;
         this.productoDAO = productoDAO;
+        this.mensajeHandler = mensajeHandler;
+        this.menuPrincipalView = menuPrincipalView;
         this.carritoAnadirView = carritoAnadirView;
         this.carritoListaView = carritoListaView;
         this.carritoModificarView = carritoModificarView;
+
+        this.carritoAnadirView.setCarritoController(this);
+        this.carritoListaView.setCarritoController(this);
         this.carritoModificarView.setCarritoController(this);
-        this.mensajeHandler = mensajeHandler;
-        this.menuPrincipalView = menuPrincipalView;
-        configurarEventosMenu();
 
 
         carritoActual = new Carrito();
@@ -55,20 +57,27 @@ public class CarritoController {
         cargarCarritosEnTabla();
         cargarCarritosEnComboModificar();
         cargarCarritosEnTabla();
+        configurarEventosMenu();
         configurarEventos();
     }
     private void configurarEventosMenu() {
         menuPrincipalView.getMenuItemCrearCarrito().addActionListener(e -> {
             CarritoAnadirView vista = new CarritoAnadirView(mensajeHandler);
+            vista.setCarritoController(this);
             menuPrincipalView.agregarVentanaInterna(vista);
         });
 
         menuPrincipalView.getMenuItemModificarMiCarrito().addActionListener(e -> {
             CarritoModificarView vista = new CarritoModificarView(mensajeHandler);
+            vista.setCarritoController(this);
             menuPrincipalView.agregarVentanaInterna(vista);
         });
+
         menuPrincipalView.getMenuItemVerMisCarritos().addActionListener(e -> {
             CarritoListaView vista = new CarritoListaView(mensajeHandler);
+            vista.setCarritoController(this);
+            menuPrincipalView.agregarVentanaInterna(vista);
+            cargarCarritosEnTabla();
         });
     }
 
@@ -116,7 +125,6 @@ public class CarritoController {
 
         int cantidad = (int) carritoAnadirView.getCBoxCantidad().getSelectedItem();
 
-        // Agregar producto al carrito actual (agrega o suma si ya existe)
         boolean encontrado = false;
         for (ItemCarrito item : carritoActual.obtenerItems()) {
             if (item.getProducto().getCodigo() == codigo) {
@@ -160,7 +168,6 @@ public class CarritoController {
     private void guardarCarrito() {
         carritoDAO.actualizar(carritoActual);
         carritoAnadirView.mostrarMensaje("Carrito guardado correctamente!");
-        // Si quieres limpiar para uno nuevo:
         carritoActual = new Carrito();
         carritoDAO.crear(carritoActual);
         actualizarTablaYTotales();

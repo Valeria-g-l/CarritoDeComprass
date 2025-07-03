@@ -61,7 +61,21 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
         Object[] columnas = {"Código", "Nombre", "Precio", "Cantidad", "Subtotal"};
         modelo.setColumnIdentifiers(columnas);
         TblProductos.setModel(modelo);
+        CBoxCantidad.removeAllItems();
+        for (int i = 1; i <= 20; i++) {
+            CBoxCantidad.addItem(i);
+        }
         TblProductos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TblProductos.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int fila = TblProductos.getSelectedRow();
+                if (fila >= 0) {
+                    CBoxCantidad.setSelectedItem(
+                            Integer.parseInt(TblProductos.getValueAt(fila, 3).toString())
+                    );
+                }
+            }
+        });
 
 
         ImageIcon iconActualizar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
@@ -78,11 +92,6 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
 
         BtnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-
-
-        for (int i = 1; i <= 20; i++) {
-            CBoxCantidad.addItem(i);
-        }
 
 
         TblProductos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {

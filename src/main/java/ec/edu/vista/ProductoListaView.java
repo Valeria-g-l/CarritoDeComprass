@@ -1,5 +1,6 @@
 package ec.edu.vista;
 
+import ec.edu.controlador.ProductoController;
 import ec.edu.modelo.Producto;
 import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
@@ -23,6 +24,13 @@ public class ProductoListaView extends JInternalFrame implements ActualizablePor
     private JPanel lblTitulo;
     private JLabel lblTitule;
     private MensajeInternacionalizacionHandler mensajeHandler;
+    private ProductoController productoController;
+
+
+    public void setProductoController(ProductoController productoController) {
+        this.productoController = productoController;
+    }
+
 
 
     public ProductoListaView(MensajeInternacionalizacionHandler handler) {

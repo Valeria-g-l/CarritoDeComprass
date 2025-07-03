@@ -1,5 +1,6 @@
 package ec.edu.vista;
 
+import ec.edu.controlador.CarritoController;
 import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
@@ -10,11 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
+
 public class CarritoListaView extends JInternalFrame implements ActualizablePorIdioma {
     private MensajeInternacionalizacionHandler mensajeHandler;
     private JPanel PanelPrincipal;
     private JLabel LblTitulo;
     private JTable TblCarrito;
+    private CarritoController carritoController;
 
 
     private JButton BtnCancelar;
@@ -75,5 +78,9 @@ public class CarritoListaView extends JInternalFrame implements ActualizablePorI
     public void actualizarTextos(ResourceBundle Bundle) {
         LblTitulo.setText(mensajeHandler.get("titulo"));
         BtnCancelar.setText(mensajeHandler.get("cancelar"));
+    }
+
+    public void setCarritoController(CarritoController carritoController) {
+        this.carritoController = carritoController;
     }
 }

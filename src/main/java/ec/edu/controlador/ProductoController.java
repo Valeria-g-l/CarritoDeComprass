@@ -38,26 +38,23 @@ public class ProductoController {
         this.menuPrincipalView = menuPrincipalView;
         this.mensajeHandler = mensajeHandler;
         configurarEventosMenu();
+        configurarEventos();
     }
     private void configurarEventosMenu() {
         menuPrincipalView.getMenuItemCrearProducto().addActionListener(e -> {
-            ProductoAnadirView vista = new ProductoAnadirView(mensajeHandler);
-            menuPrincipalView.agregarVentanaInterna(vista);
+            menuPrincipalView.agregarVentanaInterna(productoAnadirView);
         });
 
         menuPrincipalView.getMenuItemEliminarProducto().addActionListener(e -> {
-            ProductoEliminarView vista = new ProductoEliminarView(mensajeHandler);
-            menuPrincipalView.agregarVentanaInterna(vista);
+            menuPrincipalView.agregarVentanaInterna(productoEliminarView);
         });
 
         menuPrincipalView.getMenuItemActualizarProducto().addActionListener(e -> {
-            ProductoModificarView vista = new ProductoModificarView(mensajeHandler);
-            menuPrincipalView.agregarVentanaInterna(vista);
+            menuPrincipalView.agregarVentanaInterna(productoModificarView);
         });
 
         menuPrincipalView.getMenuItemBuscarProducto().addActionListener(e -> {
-            ProductoListaView vista = new ProductoListaView(mensajeHandler);
-            menuPrincipalView.agregarVentanaInterna(vista);
+            menuPrincipalView.agregarVentanaInterna(productoListaView);
         });
     }
 
@@ -84,19 +81,9 @@ public class ProductoController {
         });
 
 
-        productoModificarView.getBtnActualizar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                buscarProductoEdicion();
-            }
-        });
+        productoModificarView.getBtnBuscar().addActionListener(e -> buscarProductoEdicion());
 
-        productoModificarView.getBtnActualizar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actualizarProducto();
-            }
-        });
+        productoModificarView.getBtnActualizar().addActionListener(e -> actualizarProducto());
 
         productoEliminarView.getBtnEliminar().addActionListener(new ActionListener() {
 
@@ -114,7 +101,7 @@ public class ProductoController {
         });
     }
 
-    private void guardarProducto() {
+    public void guardarProducto() {
         String txtCod = productoAnadirView.getTxtCodigo().getText().trim();
         String nombre = productoAnadirView.getTxtNombre().getText().trim();
         String txtPrecio = productoAnadirView.getTxtPrecio().getText().trim();

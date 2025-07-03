@@ -1,5 +1,6 @@
 package ec.edu.vista;
 
+import ec.edu.controlador.ProductoController;
 import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
@@ -20,6 +21,11 @@ public class ProductoEliminarView  extends  JInternalFrame implements Actualizab
     private JButton BtnEliminar;
     private JButton BtnCancelar;
     private MensajeInternacionalizacionHandler mensajeHandler;
+    private ProductoController productoController;
+
+    public void setProductoController(ProductoController productoController) {
+        this.productoController = productoController;
+    }
 
     public ProductoEliminarView(MensajeInternacionalizacionHandler handler) {
         this.mensajeHandler = Main.mensajeHandler;
@@ -42,6 +48,12 @@ public class ProductoEliminarView  extends  JInternalFrame implements Actualizab
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+            }
+        });
+        BtnEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }

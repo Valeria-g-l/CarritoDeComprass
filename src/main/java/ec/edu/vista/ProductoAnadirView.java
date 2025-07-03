@@ -1,5 +1,6 @@
 package ec.edu.vista;
 
+import ec.edu.controlador.ProductoController;
 import ec.edu.modelo.Producto;
 import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
@@ -25,6 +26,11 @@ public class ProductoAnadirView extends  JInternalFrame implements ActualizableP
     private JButton btnCancelar;
     private JButton BtnLimpiarr;
     private MensajeInternacionalizacionHandler mensajeHandler;
+    private ProductoController productoController;
+
+    public void setProductoController(ProductoController productoController) {
+        this.productoController = productoController;
+    }
 
 
     public ProductoAnadirView(MensajeInternacionalizacionHandler handler) {
@@ -164,12 +170,8 @@ public class ProductoAnadirView extends  JInternalFrame implements ActualizableP
 
 
     {
-        btnGuardar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
+
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

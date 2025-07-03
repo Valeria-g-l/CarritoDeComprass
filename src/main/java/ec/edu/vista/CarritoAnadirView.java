@@ -1,5 +1,6 @@
 package ec.edu.vista;
 
+import ec.edu.controlador.CarritoController;
 import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.FormateadorUtils;
 import ec.edu.util.MensajeInternacionalizacionHandler;
@@ -37,6 +38,11 @@ public class CarritoAnadirView extends JInternalFrame implements ActualizablePor
     private JLabel LblCodigo;
     private JLabel LblIVA;
     private JLabel LblTotal;
+    private CarritoController carritoController;
+
+    public void setCarritoController(CarritoController carritoController) {
+        this.carritoController = carritoController;
+    }
 
 
     public CarritoAnadirView(MensajeInternacionalizacionHandler handler) {
