@@ -5,6 +5,7 @@ import ec.edu.dao.ProductoDAO;
 import ec.edu.modelo.Carrito;
 import ec.edu.modelo.ItemCarrito;
 import ec.edu.modelo.Producto;
+import ec.edu.util.FormateadorUtils;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 import ec.edu.vista.CarritoAnadirView;
 import ec.edu.vista.CarritoListaView;
@@ -15,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 
 public class CarritoController {
@@ -52,7 +54,7 @@ public class CarritoController {
         carritoDAO.crear(carritoActual);
         cargarCarritosEnTabla();
         cargarCarritosEnComboModificar();
-        cargarCarritoEnTabla();
+        cargarCarritosEnTabla();
         configurarEventos();
     }
     private void configurarEventosMenu() {
@@ -134,20 +136,25 @@ public class CarritoController {
     private void actualizarTablaYTotales() {
         DefaultTableModel modelo = carritoAnadirView.getModelo();
         modelo.setRowCount(0);
+        Locale locale = mensajeHandler.getLocale();
 
         for (ItemCarrito item : carritoActual.obtenerItems()) {
             modelo.addRow(new Object[]{
                     item.getProducto().getCodigo(),
                     item.getProducto().getNombre(),
-                    item.getProducto().getPrecio(),
+                    FormateadorUtils.formatearMoneda(item.getProducto().getPrecio(), locale),
                     item.getCantidad(),
-                    item.getSubtotal()
+                    FormateadorUtils.formatearMoneda(item.getSubtotal(), locale)
             });
+
         }
 
-        carritoAnadirView.getTxtSubtotal().setText(String.format("%.2f", carritoActual.calcularSubtotal()));
-        carritoAnadirView.getTxtIVA().setText(String.format("%.2f", carritoActual.calcularIVA()));
-        carritoAnadirView.getTxtTotal().setText(String.format("%.2f", carritoActual.calcularTotal()));
+        carritoAnadirView.actualizarTotalesFormateados(
+                carritoActual.calcularSubtotal(),
+                carritoActual.calcularIVA(),
+                carritoActual.calcularTotal()
+        );
+
     }
 
     private void guardarCarrito() {
@@ -157,25 +164,6 @@ public class CarritoController {
         carritoActual = new Carrito();
         carritoDAO.crear(carritoActual);
         actualizarTablaYTotales();
-    }
-
-    private void cargarCarritoEnTabla() {
-        DefaultTableModel modelo = carritoAnadirView.getModelo();
-        modelo.setRowCount(0);
-        List<ItemCarrito> items = carritoActual.obtenerItems();
-        for (ItemCarrito item : items) {
-            modelo.addRow(new Object[]{
-                    item.getProducto().getCodigo(),
-                    item.getProducto().getNombre(),
-                    item.getProducto().getPrecio(),
-                    item.getCantidad(),
-                    item.getSubtotal()
-            });
-
-        }
-        carritoAnadirView.getTxtSubtotal().setText(String.format("%.2f", carritoActual.calcularSubtotal()));
-        carritoAnadirView.getTxtIVA().setText(String.format("%.2f", carritoActual.calcularIVA()));
-        carritoAnadirView.getTxtTotal().setText(String.format("%.2f", carritoActual.calcularTotal()));
     }
 
     public void cargarCarritosEnTabla() {
@@ -195,7 +183,7 @@ public class CarritoController {
 
     public void cargarCarritosEnComboModificar() {
         List<Carrito> carritos = carritoDAO.listarTodos();
-        carritoModificarView.cargarCarritosEnCombo(carritos);
+
         if (!carritos.isEmpty()) {
             establecerCarritoActual(carritos.get(0).getCodigo());
             cargarProductosCarritoEnModificar();
@@ -252,6 +240,7 @@ public class CarritoController {
         this.carritoModificarView = carritoModificarView;
         this.carritoModificarView.setCarritoController(this);
     }
+
 
 
 }

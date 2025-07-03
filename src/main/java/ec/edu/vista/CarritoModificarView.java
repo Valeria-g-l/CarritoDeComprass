@@ -5,6 +5,8 @@ import ec.edu.modelo.ItemCarrito;
 import ec.edu.modelo.Carrito;
 import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
+import ec.edu.util.FormateadorUtils;
+import java.util.Locale;
 
 import java.awt.*;
 import java.util.List;
@@ -41,6 +43,7 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
     private JLabel LblCarritos;
     private JButton BtnCancelar;
     private MensajeInternacionalizacionHandler mensajeHandler;
+
 
     private DefaultTableModel modelo;
     private CarritoController carritoController;
@@ -256,17 +259,20 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
 
     public void cargarProductosEnTabla() {
         modelo.setRowCount(0);
+        Locale locale = mensajeHandler.getLocale();
+
         for (ItemCarrito item : carritoController.getCarrito().getItems()) {
             Object[] fila = {
                     item.getProducto().getCodigo(),
                     item.getProducto().getNombre(),
-                    item.getProducto().getPrecio(),
+                    FormateadorUtils.formatearMoneda(item.getProducto().getPrecio(), locale),
                     item.getCantidad(),
-                    item.getCantidad() * item.getProducto().getPrecio()
+                    FormateadorUtils.formatearMoneda(item.getCantidad() * item.getProducto().getPrecio(), locale)
             };
             modelo.addRow(fila);
         }
     }
+
 
     public void actualizarTotales() {
         double subtotal = 0.0;
@@ -278,16 +284,12 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
         double iva = subtotal * 0.12;
         double total = subtotal + iva;
 
-        TxtSubtotal.setText(String.format("%.2f", subtotal));
-        TxtIVA.setText(String.format("%.2f", iva));
-        TxtTotal.setText(String.format("%.2f", total));
+        Locale locale = mensajeHandler.getLocale();
+        TxtSubtotal.setText(FormateadorUtils.formatearMoneda(subtotal, locale));
+        TxtIVA.setText(FormateadorUtils.formatearMoneda(iva, locale));
+        TxtTotal.setText(FormateadorUtils.formatearMoneda(total, locale));
     }
-    public void cargarCarritosEnCombo(List<Carrito> carritos) {
-        CBoxCarritos.removeAllItems();
-        for (Carrito carrito : carritos) {
-            CBoxCarritos.addItem(carrito);
-        }
-    }
+
 
     public void actualizarTextos(ResourceBundle Bundle) {
         LblTitulo.setText(mensajeHandler.get("titulo"));
@@ -304,6 +306,7 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
         BtnActualizarCantidad.setText(mensajeHandler.get("actualizar"));
 
     }
+
 
 
 

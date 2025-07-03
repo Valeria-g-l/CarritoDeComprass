@@ -1,6 +1,7 @@
 package ec.edu.vista;
 
 import ec.edu.util.ActualizablePorIdioma;
+import ec.edu.util.FormateadorUtils;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 import ec.edu.util.ActualizablePorIdioma;
 import javax.swing.*;
@@ -8,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class CarritoAnadirView extends JInternalFrame implements ActualizablePorIdioma {
@@ -250,4 +252,11 @@ public class CarritoAnadirView extends JInternalFrame implements ActualizablePor
 
 
     }
+    public void actualizarTotalesFormateados(double subtotal, double iva, double total) {
+        Locale locale = mensajeHandler.getLocale();
+        TxtSubtotal.setText(FormateadorUtils.formatearMoneda(subtotal, locale));
+        TxtIVA.setText(FormateadorUtils.formatearMoneda(iva, locale));
+        TxtTotal.setText(FormateadorUtils.formatearMoneda(total, locale));
+    }
+
 }
