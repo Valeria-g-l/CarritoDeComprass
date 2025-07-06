@@ -13,6 +13,7 @@ import ec.edu.vista.CarritoListaView;
 import ec.edu.vista.CarritoModificarView;
 import ec.edu.vista.MenuPrincipalView;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
@@ -251,6 +252,34 @@ public class CarritoController {
         }
         return false;
     }
+    public boolean agregarProductoACarrito(String codigoProducto, int cantidad) {
+        try {
+            int codigo = Integer.parseInt(codigoProducto);
+            Producto producto = productoDAO.buscarPorCodigo(codigo);
+
+            if (producto == null) {
+                JOptionPane.showMessageDialog(null, "Producto no encontrado.");
+                return false;
+            }
+            for (ItemCarrito item : carritoActual.getItems()) {
+                if (item.getProducto().getCodigo() == codigo) {
+                    item.setCantidad(item.getCantidad() + cantidad);
+                    carritoDAO.actualizar(carritoActual);
+                    carritoModificarView.actualizarTotales();
+                    return true;
+                }
+            }
+            carritoActual.getItems().add(new ItemCarrito(producto, cantidad));
+            carritoDAO.actualizar(carritoActual);
+            carritoModificarView.actualizarTotales();
+            return true;
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Código inválido.");
+            return false;
+        }
+    }
+
 
     public Carrito getCarrito() {
         return carritoActual;

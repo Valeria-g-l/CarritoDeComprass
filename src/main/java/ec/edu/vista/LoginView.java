@@ -7,14 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LoginView extends JFrame implements ActualizablePorIdioma {
+
     private MensajeInternacionalizacionHandler mensajeHandler;
     private JPanel PanelPrincipal;
     private JLabel lblTitulo;
-    private JLabel lblIdioma;
-    private JComboBox<String> CBoxIdioma;
     private JLabel lblUsuario;
     private JTextField TxtUsuario;
     private JLabel LblContraseña;
@@ -22,9 +22,15 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
     private JButton BtnIngresar;
     private JButton BtnRegistrarse;
     private JButton BtnOlvideContrasena;
+    private JMenuBar MenuBar;
+
+
 
 
     public LoginView(MensajeInternacionalizacionHandler handler) {
+
+        JMenuBar menuBar = new JMenuBar();
+
         this.mensajeHandler = Main.mensajeHandler;
         $$$setupUI$$$();
         actualizarTextos(Main.mensajeHandler.getBundle());
@@ -32,14 +38,43 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
         setLocationRelativeTo(null);
-        setContentPane(PanelPrincipal);
+        setLayout(new BorderLayout());
+        add(PanelPrincipal, BorderLayout.CENTER);
+        setJMenuBar(menuBar);
 
-        if (CBoxIdioma.getItemCount() == 0) {
-            CBoxIdioma.addItem("Español");
-            CBoxIdioma.addItem("English");
-            CBoxIdioma.addItem("Français");
-            CBoxIdioma.addItem("Português");
-        }
+        JMenu menuIdioma = new JMenu("Idioma");
+
+
+        JMenuItem itemEspanol = new JMenuItem("Español");
+        JMenuItem itemIngles = new JMenuItem("English");
+        JMenuItem itemFrench = new JMenuItem("French");
+        JMenuItem itemPortuguese = new JMenuItem("Portuguese");
+
+        menuIdioma.add(itemEspanol);
+        menuIdioma.add(itemIngles);
+        menuIdioma.add(itemFrench);
+        menuIdioma.add(itemPortuguese);
+        menuBar.add(menuIdioma);
+
+
+        itemEspanol.addActionListener(e -> {
+            mensajeHandler.setLocale(new Locale("es", "EC"), "messages");
+            actualizarTextos(mensajeHandler.getBundle());
+        });
+
+        itemIngles.addActionListener(e -> {
+            mensajeHandler.setLocale(new Locale("en", "US"), "messages");
+            actualizarTextos(mensajeHandler.getBundle());
+        });
+        itemFrench.addActionListener(e -> {
+            mensajeHandler.setLocale(new Locale("fr", "FR"), "messages");
+            actualizarTextos(mensajeHandler.getBundle());
+        });
+        itemPortuguese.addActionListener(e -> {
+            mensajeHandler.setLocale(new Locale("pt", "PT"), "messages");
+            actualizarTextos(mensajeHandler.getBundle());
+        });
+
 
         ImageIcon iconIngresar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
         BtnIngresar.setIcon(new ImageIcon(iconIngresar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
@@ -49,29 +84,8 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
 
         ImageIcon iconOlvide = new ImageIcon(getClass().getResource("/Imagenes/exclamation.png"));
         BtnOlvideContrasena.setIcon(new ImageIcon(iconOlvide.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-
-        CBoxIdioma.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String seleccionado = CBoxIdioma.getSelectedItem().toString();
-                switch (seleccionado) {
-                    case "Español":
-                        Main.mensajeHandler.setLenguaje("es", "EC");
-                        break;
-                    case "English":
-                        Main.mensajeHandler.setLenguaje("en", "US");
-                        break;
-                    case "Français":
-                        Main.mensajeHandler.setLenguaje("fr", "FR");
-                        break;
-                    case "Português":
-                        Main.mensajeHandler.setLenguaje("pt", "PT");
-                        break;
-                }
-                actualizarTextos(handler.getBundle());
-            }
-        });
     }
+
 
 
 
@@ -94,18 +108,7 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
     public void setLblTitulo(JLabel lblTitulo) {
         this.lblTitulo = lblTitulo;
     }
-    public JLabel getLblIdioma() {
-        return lblIdioma;
-    }
-    public void setLblIdioma(JLabel lblIdioma) {
-        this.lblIdioma = lblIdioma;
-    }
-    public JComboBox getCBoxIdioma() {
-        return CBoxIdioma;
-    }
-    public void setCBoxIdioma(JComboBox cBoxIdioma) {
-        CBoxIdioma = cBoxIdioma;
-    }
+
     public JLabel getLblUsuario() {
 
         return lblUsuario;
@@ -158,7 +161,6 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
         lblUsuario.setText(mensajeHandler.get("login.usuario"));
         LblContraseña.setText(mensajeHandler.get("login.contrasena"));
         BtnIngresar.setText(mensajeHandler.get("login.boton"));
-        lblIdioma.setText(mensajeHandler.get("login.idioma"));
         BtnRegistrarse.setText(mensajeHandler.get("login.registro"));
         BtnOlvideContrasena.setText(mensajeHandler.get("login.olvide"));
     }

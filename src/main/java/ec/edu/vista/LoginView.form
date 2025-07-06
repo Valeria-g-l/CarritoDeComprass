@@ -30,20 +30,6 @@
               <text value="Inicio de Sesion"/>
             </properties>
           </component>
-          <component id="88b46" class="javax.swing.JComboBox" binding="CBoxIdioma">
-            <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-1907233"/>
-              <model>
-                <item value="Español"/>
-                <item value="Ingles"/>
-                <item value="Frances"/>
-                <item value="Portugues"/>
-              </model>
-            </properties>
-          </component>
           <component id="ae4d6" class="javax.swing.JTextField" binding="TxtUsuario">
             <constraints>
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -86,15 +72,6 @@
             </constraints>
             <properties>
               <text value="Olvide mi contraseña"/>
-            </properties>
-          </component>
-          <component id="4f381" class="javax.swing.JLabel" binding="lblIdioma">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <foreground color="-15465424"/>
-              <text value="Idioma"/>
             </properties>
           </component>
           <component id="4aa90" class="javax.swing.JLabel" binding="LblContraseña">

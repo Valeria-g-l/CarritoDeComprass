@@ -199,6 +199,18 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
                 dispose();
             }
         });
+        BtnAgregar.addActionListener(e -> {
+            String codigo = TxtCodigo.getText().trim();
+            int cantidad = Integer.parseInt(CBoxCodigo.getSelectedItem().toString());
+
+            boolean agregado = carritoController.agregarProductoACarrito(codigo, cantidad);
+            if (agregado) {
+                JOptionPane.showMessageDialog(this, "Producto agregado al carrito.");
+                carritoController.cargarProductosCarritoEnModificar();
+
+            }
+        });
+
     }
 
 

@@ -10,6 +10,7 @@ import ec.edu.util.ActualizablePorIdioma;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ResourceBundle;
 
 import static ec.edu.vista.Main.cerrarVentanaExistente;
@@ -210,34 +211,32 @@ public class MenuPrincipalView extends JFrame {
     }
 
     public void agregarVentanaInterna(JInternalFrame ventana) {
-        try {
 
-            cerrarVentanaExistente(ventana.getClass(), jDesktopPane);
-
-            ventana.setSize(800, 600);
-            ventana.setLocation(
-                    (jDesktopPane.getWidth() - ventana.getWidth()) / 2,
-                    (jDesktopPane.getHeight() - ventana.getHeight()) / 2
-            );
+        cerrarVentanaExistente(ventana.getClass(), jDesktopPane);
 
 
-            jDesktopPane.add(ventana, JLayeredPane.DEFAULT_LAYER);
+        ventana.setSize(800, 600);
+        ventana.setLocation(
+                (jDesktopPane.getWidth() - ventana.getWidth()) / 2,
+                (jDesktopPane.getHeight() - ventana.getHeight()) / 2
+        );
 
-            ventana.setVisible(true);
-            ventana.toFront();
-            if (ventana instanceof ActualizablePorIdioma) {
-                ((ActualizablePorIdioma)ventana).actualizarTextos(mensajeHandler.getBundle());
-            }
+        if (ventana.getParent() != null) {
+            Container parent = ventana.getParent();
+            parent.remove(ventana);
+        }
 
-        } catch (Exception e) {
-            System.err.println("Error al agregar ventana: " + e.getMessage());
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this,
-                    "Error al abrir la ventana",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+        jDesktopPane.add(ventana, JLayeredPane.DEFAULT_LAYER);
+
+        ventana.setVisible(true);
+        ventana.toFront();
+
+
+        if (ventana instanceof ActualizablePorIdioma) {
+            ((ActualizablePorIdioma) ventana).actualizarTextos(mensajeHandler.getBundle());
         }
     }
+
 
 
 
