@@ -15,12 +15,100 @@ import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class Main {
     public static MensajeInternacionalizacionHandler mensajeHandler = new MensajeInternacionalizacionHandler("es", "EC");
-    private static UsuarioController usuarioController;
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
+            ProductoDAO productoDAO = new ProductoDAOMemoria();
+            CarritoDAO carritoDAO = new CarritoDAOMemoria();
+
+            iniciarSesion(usuarioDAO, productoDAO, carritoDAO);
+        });
+    }
+
+    private static void iniciarSesion(UsuarioDAO usuarioDAO, ProductoDAO productoDAO, CarritoDAO carritoDAO) {
+        LoginView loginView = new LoginView(mensajeHandler);
+        UsuarioController loginController = new UsuarioController(usuarioDAO, loginView, mensajeHandler);
+        loginView.setVisible(true);
+
+        loginView.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                Usuario usuarioAutenticado = loginController.getUsuarioAutenticado();
+
+                if (usuarioAutenticado != null) {
+                    ProductoAnadirView productoAnadirView = new ProductoAnadirView(mensajeHandler);
+                    ProductoListaView productoListaView = new ProductoListaView(mensajeHandler);
+                    ProductoEliminarView productoEliminarView = new ProductoEliminarView(mensajeHandler);
+                    ProductoModificarView productoModificarView = new ProductoModificarView(mensajeHandler);
+
+                    CarritoAnadirView carritoAnadirView = new CarritoAnadirView(mensajeHandler);
+                    CarritoListaView carritoListaView = new CarritoListaView(mensajeHandler);
+                    CarritoModificarView carritoModificarView = new CarritoModificarView(mensajeHandler);
+
+                    MenuPrincipalView menuPrincipal = new MenuPrincipalView(mensajeHandler, null, null, null);
+                    UsuarioController usuarioControllerMenu = new UsuarioController(usuarioDAO, menuPrincipal, usuarioAutenticado, mensajeHandler);
+
+                    ProductoController productoController = new ProductoController(
+                            productoDAO, productoAnadirView, productoListaView,
+                            productoModificarView, productoEliminarView, menuPrincipal, mensajeHandler
+                    );
+                    CarritoController carritoController = new CarritoController(
+                            carritoDAO, productoDAO, carritoAnadirView, carritoListaView,
+                            carritoModificarView, mensajeHandler, menuPrincipal
+                    );
+
+                    productoAnadirView.setProductoController(productoController);
+                    productoListaView.setProductoController(productoController);
+                    productoModificarView.setProductoController(productoController);
+                    productoEliminarView.setProductoController(productoController);
+
+                    carritoAnadirView.setCarritoController(carritoController);
+                    carritoListaView.setCarritoController(carritoController);
+                    carritoModificarView.setCarritoController(carritoController);
+
+                    menuPrincipal.setProductoController(productoController);
+
+                    if (usuarioAutenticado.getRol() == Rol.USUARIO) {
+                        menuPrincipal.deshabilitarMenusAdministrador();
+                    }
+
+                    menuPrincipal.configurarMenusPorRol(usuarioAutenticado);
+
+                    configurarEventosMenu(menuPrincipal,
+                            productoAnadirView, productoListaView,
+                            productoModificarView, productoEliminarView,
+                            carritoAnadirView, carritoListaView,
+                            carritoModificarView, mensajeHandler,
+                            productoController, carritoController, usuarioControllerMenu);
+
+                    menuPrincipal.setVisible(true);
+
+                    // Manejar logout
+                    menuPrincipal.getMenuItemCerrarSesion().addActionListener(evt -> {
+                        int confirmacion = JOptionPane.showConfirmDialog(
+                                menuPrincipal,
+                                mensajeHandler.get("confirmacion.cerrarSesion"),
+                                mensajeHandler.get("titulo.cerrarSesion"),
+                                JOptionPane.YES_NO_OPTION
+                        );
+                        if (confirmacion == JOptionPane.YES_OPTION) {
+                            menuPrincipal.dispose();
+                            iniciarSesion(usuarioDAO, productoDAO, carritoDAO); // 👈 vuelve a iniciar sesión
+                        }
+                    });
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se inició sesión. Saliendo...");
+                    System.exit(0);
+                }
+            }
+        });
+    }
+
     public static void cerrarVentanaExistente(Class<? extends JInternalFrame> clase, JDesktopPane desktopPane) {
         for (JInternalFrame ventana : desktopPane.getAllFrames()) {
             if (clase.isInstance(ventana)) {
@@ -29,99 +117,6 @@ public class Main {
             }
         }
     }
-
-
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
-            LoginView loginView = new LoginView(mensajeHandler);
-            usuarioController = new UsuarioController(usuarioDAO, loginView, mensajeHandler);
-            loginView.setVisible(true);
-
-            final ProductoController[] productoController = new ProductoController[1];
-            final CarritoController[] carritoController = new CarritoController[1];
-            final UsuarioController[] usuarioControllerMenu = new UsuarioController[1];
-            MenuPrincipalView menuPrincipal = new MenuPrincipalView(Main.mensajeHandler,
-                    productoController[0],
-                    carritoController[0],
-                    usuarioControllerMenu[0]);
-
-            loginView.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    Usuario usuarioAutenticado = usuarioController.getUsuarioAutenticado();
-
-                    if (usuarioAutenticado != null) {
-
-                        usuarioControllerMenu[0] = new UsuarioController(usuarioDAO, menuPrincipal, usuarioAutenticado,mensajeHandler);
-
-                        ProductoDAO productoDAO = new ProductoDAOMemoria();
-                        CarritoDAO carritoDAO = new CarritoDAOMemoria();
-
-                        ProductoAnadirView productoAnadirView = new ProductoAnadirView(Main.mensajeHandler);
-                        productoAnadirView.setPreferredSize(new Dimension(800, 600));
-                        ProductoListaView productoListaView = new ProductoListaView(Main.mensajeHandler);
-                        ProductoEliminarView productoEliminarView = new ProductoEliminarView(Main.mensajeHandler);
-                        ProductoModificarView productoModificarView = new ProductoModificarView(Main.mensajeHandler);
-
-                        CarritoAnadirView carritoAnadirView = new CarritoAnadirView(Main.mensajeHandler);
-                        CarritoListaView carritoListaView = new CarritoListaView(mensajeHandler);
-                        CarritoModificarView carritoModificarView = new CarritoModificarView(mensajeHandler);
-
-                        productoController[0] = new ProductoController(
-                                productoDAO, productoAnadirView,
-                                productoListaView, productoModificarView,
-                                productoEliminarView, menuPrincipal, mensajeHandler
-                        );
-                        menuPrincipal.setProductoController(productoController[0]);
-
-
-                        carritoController[0] = new CarritoController(
-                                carritoDAO, productoDAO,
-                                carritoAnadirView, carritoListaView,
-                                carritoModificarView, mensajeHandler,menuPrincipal
-                        );
-
-                        productoAnadirView.setProductoController(productoController[0]);
-                        productoListaView.setProductoController(productoController[0]);
-                        productoModificarView.setProductoController(productoController[0]);
-                        productoEliminarView.setProductoController(productoController[0]);
-
-                        carritoModificarView.setCarritoController(carritoController[0]);
-                        carritoListaView.setCarritoController(carritoController[0]);
-                        carritoAnadirView.setCarritoController(carritoController[0]);
-
-
-
-                        menuPrincipal.mostrarMensaje(Main.mensajeHandler.get("mensaje.bienvenida") + ": " + usuarioAutenticado.getUsername());
-
-                        if (usuarioAutenticado.getRol() != null && usuarioAutenticado.getRol().equals(Rol.USUARIO)) {
-                            menuPrincipal.deshabilitarMenusAdministrador();
-                        }
-
-                        menuPrincipal.configurarMenusPorRol(usuarioAutenticado);
-
-                        configurarEventosMenu(menuPrincipal,
-                                productoAnadirView, productoListaView,
-                                productoModificarView, productoEliminarView,
-                                carritoAnadirView, carritoListaView,
-                                carritoModificarView, Main.mensajeHandler,productoController[0],
-                                carritoController[0], usuarioControllerMenu[0]);
-
-
-
-                        menuPrincipal.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se inició sesión. Saliendo...");
-                        System.exit(0);
-                    }
-                }
-            });
-        });
-    }
-
-
 
     private static void configurarEventosMenu(MenuPrincipalView menu,
                                               ProductoAnadirView productoAnadirView,
@@ -137,15 +132,9 @@ public class Main {
                                               UsuarioController usuarioController) {
 
         menu.getMenuItemCrearProducto().addActionListener(e -> {
-            ProductoAnadirView nuevaVista = new ProductoAnadirView(mensajes);
-            nuevaVista.setSize(600, 400);
-            nuevaVista.setProductoController(productoController);
-            menu.agregarVentanaInterna(nuevaVista);
+            cerrarVentanaExistente(ProductoAnadirView.class, menu.getjDesktopPane());
+            menu.agregarVentanaInterna(productoAnadirView);
         });
-
-
-
-
 
         menu.getMenuItemBuscarProducto().addActionListener(e -> {
             cerrarVentanaExistente(ProductoListaView.class, menu.getjDesktopPane());
@@ -162,33 +151,10 @@ public class Main {
             menu.agregarVentanaInterna(productoEliminarView);
         });
 
-
-
-
         menu.getMenuItemCambiarContrasenia().addActionListener(e -> {
             if (usuarioController != null) {
                 usuarioController.mostrarCambiarContrasenia();
             }
         });
-
-        menu.getMenuItemCerrarSesion().addActionListener(e -> {
-            int confirmacion = JOptionPane.showConfirmDialog(
-                    menu,
-                    mensajes.get("confirmacion.cerrarSesion"),
-                    mensajes.get("titulo.cerrarSesion"),
-                    JOptionPane.YES_NO_OPTION
-            );
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                menu.dispose();
-                LoginView nuevoLogin = new LoginView(mensajeHandler);
-                nuevoLogin.setVisible(true);
-                new UsuarioController(new UsuarioDAOMemoria(), nuevoLogin, mensajeHandler);
-            }
-        });
-
     }
-
-
-
-
 }

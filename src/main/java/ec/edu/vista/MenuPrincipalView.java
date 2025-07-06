@@ -7,7 +7,6 @@ import ec.edu.controlador.UsuarioController;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
 import ec.edu.util.ActualizablePorIdioma;
-import ec.edu.util.FondoUtils;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
@@ -34,7 +33,8 @@ public class MenuPrincipalView extends JFrame {
     private JMenuItem menuItemCambiarContrasenia;
     private JMenuItem menuItemCerrarSesion;
 
-    private JDesktopPane jDesktopPane;
+    private MiJDesktopPane jDesktopPane;
+
 
     private  ProductoController productoController;
     private final CarritoController carritoController;
@@ -53,7 +53,8 @@ public class MenuPrincipalView extends JFrame {
         this.carritoController = carritoController;
         this.usuarioController = usuarioController;
 
-        jDesktopPane = new JDesktopPane();
+        jDesktopPane = new MiJDesktopPane();
+        setContentPane(jDesktopPane);
         menuBar = new JMenuBar();
 
         menuProducto = new JMenu();
@@ -91,8 +92,6 @@ public class MenuPrincipalView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        FondoUtils.ponerFondo(this, "/Imagenes/img1.gif");
-        this.setLocationRelativeTo(null);
 
         configurarMenuIdiomas();
         actualizarTextos();
