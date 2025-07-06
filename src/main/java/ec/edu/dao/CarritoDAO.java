@@ -1,6 +1,7 @@
 package ec.edu.dao;
 
 import ec.edu.modelo.Carrito;
+import ec.edu.modelo.Usuario;
 
 import java.util.List;
 
@@ -15,5 +16,7 @@ public interface CarritoDAO {
     void eliminar(int codigo);
 
     List<Carrito> listarTodos();
+
+    List<Carrito> listarPorUsuario(Usuario usuario);
 
 }

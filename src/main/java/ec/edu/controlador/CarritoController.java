@@ -5,6 +5,7 @@ import ec.edu.dao.ProductoDAO;
 import ec.edu.modelo.Carrito;
 import ec.edu.modelo.ItemCarrito;
 import ec.edu.modelo.Producto;
+import ec.edu.modelo.Usuario;
 import ec.edu.util.FormateadorUtils;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 import ec.edu.vista.CarritoAnadirView;
@@ -27,6 +28,8 @@ public class CarritoController {
     private CarritoModificarView carritoModificarView;
     private final MensajeInternacionalizacionHandler mensajeHandler;
     private final MenuPrincipalView menuPrincipalView;
+    private final Usuario usuarioAutenticado;
+
 
     private Carrito carritoActual;
 
@@ -38,7 +41,8 @@ public class CarritoController {
                              CarritoListaView carritoListaView,
                              CarritoModificarView carritoModificarView,
                              MensajeInternacionalizacionHandler mensajeHandler,
-                             MenuPrincipalView menuPrincipalView) {
+                             MenuPrincipalView menuPrincipalView,
+                             Usuario usuarioAutenticado) {
         this.carritoDAO = carritoDAO;
         this.productoDAO = productoDAO;
         this.mensajeHandler = mensajeHandler;
@@ -46,6 +50,7 @@ public class CarritoController {
         this.carritoAnadirView = carritoAnadirView;
         this.carritoListaView = carritoListaView;
         this.carritoModificarView = carritoModificarView;
+        this.usuarioAutenticado = usuarioAutenticado;
 
         this.carritoAnadirView.setCarritoController(this);
         this.carritoListaView.setCarritoController(this);
@@ -53,6 +58,7 @@ public class CarritoController {
 
 
         carritoActual = new Carrito();
+        carritoActual.setPropietario(usuarioAutenticado);
         carritoDAO.crear(carritoActual);
         cargarCarritosEnTabla();
         cargarCarritosEnComboModificar();
@@ -168,6 +174,7 @@ public class CarritoController {
         carritoDAO.actualizar(carritoActual);
         carritoAnadirView.mostrarMensaje("Carrito guardado correctamente!");
         carritoActual = new Carrito();
+        carritoActual.setPropietario(usuarioAutenticado);
         carritoDAO.crear(carritoActual);
         actualizarTablaYTotales();
         carritoModificarView.getCBoxCarritos().addItem(carritoActual);
@@ -177,20 +184,22 @@ public class CarritoController {
     public void cargarCarritosEnTabla() {
         DefaultTableModel modelo = carritoListaView.getModelo();
         modelo.setRowCount(0);
-        List<Carrito> carritos = carritoDAO.listarTodos();
+
+        List<Carrito> carritos = carritoDAO.listarPorUsuario(usuarioAutenticado);
 
         for (Carrito c : carritos) {
             modelo.addRow(new Object[]{
                     c.getCodigo(),
                     new SimpleDateFormat("dd/MM/yyyy").format(c.getFechaCreacion().getTime()),
-                    "UsuarioX",
+                    c.getPropietario().getUsername(),
                     c.calcularTotal()
             });
         }
     }
 
+
     public void cargarCarritosEnComboModificar() {
-        List<Carrito> carritos = carritoDAO.listarTodos();
+        List<Carrito> carritos = carritoDAO.listarPorUsuario(usuarioAutenticado);
 
         carritoModificarView.getCBoxCarritos().removeAllItems();
 

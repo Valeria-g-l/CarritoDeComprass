@@ -10,6 +10,15 @@ public class Carrito {
     private int codigo;
     private GregorianCalendar fechaCreacion;
     private List<ItemCarrito> items;
+    private Usuario propietario;
+
+    public Usuario getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(Usuario propietario) {
+        this.propietario = propietario;
+    }
 
     public Carrito() {
         items = new ArrayList<>();

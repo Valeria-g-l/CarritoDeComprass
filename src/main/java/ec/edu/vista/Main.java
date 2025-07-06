@@ -40,6 +40,11 @@ public class Main {
                 Usuario usuarioAutenticado = loginController.getUsuarioAutenticado();
 
                 if (usuarioAutenticado != null) {
+                    MenuPrincipalView menuPrincipal = new MenuPrincipalView(mensajeHandler, null, null, null);
+
+                    UsuarioController usuarioControllerMenu = new UsuarioController(
+                            usuarioDAO, menuPrincipal, usuarioAutenticado, mensajeHandler);
+
                     ProductoAnadirView productoAnadirView = new ProductoAnadirView(mensajeHandler);
                     ProductoListaView productoListaView = new ProductoListaView(mensajeHandler);
                     ProductoEliminarView productoEliminarView = new ProductoEliminarView(mensajeHandler);
@@ -49,16 +54,16 @@ public class Main {
                     CarritoListaView carritoListaView = new CarritoListaView(mensajeHandler);
                     CarritoModificarView carritoModificarView = new CarritoModificarView(mensajeHandler);
 
-                    MenuPrincipalView menuPrincipal = new MenuPrincipalView(mensajeHandler, null, null, null);
-                    UsuarioController usuarioControllerMenu = new UsuarioController(usuarioDAO, menuPrincipal, usuarioAutenticado, mensajeHandler);
-
                     ProductoController productoController = new ProductoController(
                             productoDAO, productoAnadirView, productoListaView,
                             productoModificarView, productoEliminarView, menuPrincipal, mensajeHandler
                     );
+
                     CarritoController carritoController = new CarritoController(
-                            carritoDAO, productoDAO, carritoAnadirView, carritoListaView,
-                            carritoModificarView, mensajeHandler, menuPrincipal
+                            carritoDAO, productoDAO,
+                            carritoAnadirView, carritoListaView,
+                            carritoModificarView, mensajeHandler,
+                            menuPrincipal, usuarioAutenticado
                     );
 
                     productoAnadirView.setProductoController(productoController);
@@ -87,7 +92,6 @@ public class Main {
 
                     menuPrincipal.setVisible(true);
 
-                    // Manejar logout
                     menuPrincipal.getMenuItemCerrarSesion().addActionListener(evt -> {
                         int confirmacion = JOptionPane.showConfirmDialog(
                                 menuPrincipal,
@@ -97,7 +101,7 @@ public class Main {
                         );
                         if (confirmacion == JOptionPane.YES_OPTION) {
                             menuPrincipal.dispose();
-                            iniciarSesion(usuarioDAO, productoDAO, carritoDAO); // 👈 vuelve a iniciar sesión
+                            iniciarSesion(usuarioDAO, productoDAO, carritoDAO);
                         }
                     });
 
@@ -107,6 +111,8 @@ public class Main {
                 }
             }
         });
+
+
     }
 
     public static void cerrarVentanaExistente(Class<? extends JInternalFrame> clase, JDesktopPane desktopPane) {
