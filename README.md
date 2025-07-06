@@ -1,5 +1,10 @@
 # 🛒 Sistema de Gestión de Carrito de Compras
 
+Nombre: Kelly Valeria Guaman Leon
+Carrera: Computacion- Grupo 1
+Docente: Ing. Gabriel Leon
+
+## Introduccion
 Este proyecto fue desarrollado como parte del **período 66** de la asignatura **Programación Orientada a Objetos** en la Universidad Politécnica Salesiana.  
 Su objetivo principal es construir una aplicación de escritorio en **Java** con interfaz gráfica utilizando **Swing**, aplicando principios de diseño orientado a objetos y arquitectura modular.
 
@@ -68,5 +73,4 @@ Cada vista implementa el método `actualizarTextos()` para reflejar los cambios 
 
 ---
 
-## 📂 Estructura del proyecto
 
