@@ -73,4 +73,11 @@ public class Carrito {
 
     public List<ItemCarrito> obtenerItems() {
     return items;}
+
+    @Override
+    public String toString() {
+        return "Carrito #" + codigo + " - Total: $" + String.format("%.2f", calcularTotal());
+    }
+
 }
+

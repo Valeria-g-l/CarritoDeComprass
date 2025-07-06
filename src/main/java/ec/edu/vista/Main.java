@@ -82,6 +82,7 @@ public class Main {
                                 carritoAnadirView, carritoListaView,
                                 carritoModificarView, mensajeHandler,menuPrincipal
                         );
+
                         productoAnadirView.setProductoController(productoController[0]);
                         productoListaView.setProductoController(productoController[0]);
                         productoModificarView.setProductoController(productoController[0]);
@@ -137,7 +138,7 @@ public class Main {
 
         menu.getMenuItemCrearProducto().addActionListener(e -> {
             ProductoAnadirView nuevaVista = new ProductoAnadirView(mensajes);
-            nuevaVista.setSize(600, 400); // Establece tamaño antes de mostrar
+            nuevaVista.setSize(600, 400);
             nuevaVista.setProductoController(productoController);
             menu.agregarVentanaInterna(nuevaVista);
         });
@@ -161,28 +162,6 @@ public class Main {
             menu.agregarVentanaInterna(productoEliminarView);
         });
 
-        menu.getMenuItemCrearCarrito().addActionListener(e -> {
-            cerrarVentanaExistente(CarritoAnadirView.class, menu.getjDesktopPane());
-            menu.agregarVentanaInterna(carritoAnadirView);
-        });
-
-        menu.getMenuItemVerMisCarritos().addActionListener(e -> {
-            cerrarVentanaExistente(CarritoListaView.class, menu.getjDesktopPane());
-            carritoController.setCarritoListaView(carritoListaView);
-            carritoController.cargarCarritosEnTabla();
-            menu.agregarVentanaInterna(carritoListaView);
-        });
-
-
-        menu.getMenuItemModificarMiCarrito().addActionListener(e -> {
-            cerrarVentanaExistente(CarritoModificarView.class, menu.getjDesktopPane());
-            carritoModificarView.setCarritoController(carritoController);
-            carritoController.setCarritoModificarView(carritoModificarView);
-            carritoController.cargarCarritosEnComboModificar();
-            carritoModificarView.cargarProductosEnTabla();
-            carritoModificarView.actualizarTotales();
-            menu.agregarVentanaInterna(carritoModificarView);
-        });
 
 
 

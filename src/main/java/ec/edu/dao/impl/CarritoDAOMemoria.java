@@ -10,6 +10,7 @@ import java.util.List;
 public class CarritoDAOMemoria implements CarritoDAO {
 
     private List<Carrito> carritos;
+    private int secuenciaCodigo = 1;
 
     public CarritoDAOMemoria() {
         this.carritos = new ArrayList<Carrito>();
@@ -17,7 +18,9 @@ public class CarritoDAOMemoria implements CarritoDAO {
 
     @Override
     public void crear(Carrito carrito) {
+        carrito.setCodigo(secuenciaCodigo++);
         carritos.add(carrito);
+        System.out.println("Carrito creado: " + carrito.getCodigo());
     }
 
     @Override
@@ -53,6 +56,7 @@ public class CarritoDAOMemoria implements CarritoDAO {
 
     @Override
     public List<Carrito> listarTodos() {
+        System.out.println("Total carritos en memoria: " + carritos.size());
         return carritos;
     }
 }

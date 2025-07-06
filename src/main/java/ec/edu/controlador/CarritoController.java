@@ -61,25 +61,23 @@ public class CarritoController {
         configurarEventos();
     }
     private void configurarEventosMenu() {
-        menuPrincipalView.getMenuItemCrearCarrito().addActionListener(e -> {
-            CarritoAnadirView vista = new CarritoAnadirView(mensajeHandler);
-            vista.setCarritoController(this);
-            menuPrincipalView.agregarVentanaInterna(vista);
-        });
 
-        menuPrincipalView.getMenuItemModificarMiCarrito().addActionListener(e -> {
-            CarritoModificarView vista = new CarritoModificarView(mensajeHandler);
-            vista.setCarritoController(this);
-            menuPrincipalView.agregarVentanaInterna(vista);
-        });
+            menuPrincipalView.getMenuItemCrearCarrito().addActionListener(e -> {
+                menuPrincipalView.agregarVentanaInterna(carritoAnadirView);
+            });
 
-        menuPrincipalView.getMenuItemVerMisCarritos().addActionListener(e -> {
-            CarritoListaView vista = new CarritoListaView(mensajeHandler);
-            vista.setCarritoController(this);
-            menuPrincipalView.agregarVentanaInterna(vista);
-            cargarCarritosEnTabla();
-        });
+            menuPrincipalView.getMenuItemModificarMiCarrito().addActionListener(e -> {
+                menuPrincipalView.agregarVentanaInterna(carritoModificarView);
+                cargarProductosCarritoEnModificar();
+            });
+
+            menuPrincipalView.getMenuItemVerMisCarritos().addActionListener(e -> {
+                menuPrincipalView.agregarVentanaInterna(carritoListaView);
+                cargarCarritosEnTabla();
+            });
     }
+
+
 
     private void configurarEventos() {
         carritoAnadirView.getBtnBuscar().addActionListener(e -> buscarProducto());
@@ -172,6 +170,8 @@ public class CarritoController {
         carritoActual = new Carrito();
         carritoDAO.crear(carritoActual);
         actualizarTablaYTotales();
+        carritoModificarView.getCBoxCarritos().addItem(carritoActual);
+
     }
 
     public void cargarCarritosEnTabla() {
@@ -192,11 +192,19 @@ public class CarritoController {
     public void cargarCarritosEnComboModificar() {
         List<Carrito> carritos = carritoDAO.listarTodos();
 
+        carritoModificarView.getCBoxCarritos().removeAllItems();
+
+        for (Carrito c : carritos) {
+            carritoModificarView.getCBoxCarritos().addItem(c);
+        }
+
         if (!carritos.isEmpty()) {
             establecerCarritoActual(carritos.get(0).getCodigo());
-            cargarProductosCarritoEnModificar();
+            carritoModificarView.cargarProductosEnTabla();
+            carritoModificarView.actualizarTotales();
         }
     }
+
 
     public void establecerCarritoActual(int codigoCarrito) {
         Carrito c = carritoDAO.buscarPorCodigo(codigoCarrito);
@@ -214,6 +222,7 @@ public class CarritoController {
             if (item.getProducto().getCodigo() == Integer.parseInt(codigoProducto)) {
                 item.setCantidad(nuevaCantidad);
                 carritoDAO.actualizar(carritoActual);
+                carritoModificarView.actualizarTotales();
                 return true;
             }
         }
