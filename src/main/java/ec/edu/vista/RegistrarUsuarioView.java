@@ -110,7 +110,7 @@ public class RegistrarUsuarioView extends JFrame  implements ActualizablePorIdio
         LblContraseña.setText(mensajeHandler.get("contrasena"));
         LblNombreCompleto.setText(mensajeHandler.get("nombreCompleto"));
         LblNacimiento.setText(mensajeHandler.get("nacimiento"));
-        LblTelefono.setText(mensajeHandler.get("genero"));
+        LblTelefono.setText(mensajeHandler.get("telefono"));
         LblCorreo.setText(mensajeHandler.get("correo"));
         LblContraseña.setText(mensajeHandler.get("contrasena"));
         BtnRegistrarse.setText(mensajeHandler.get("registrar"));

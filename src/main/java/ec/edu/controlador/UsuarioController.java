@@ -6,6 +6,7 @@ import ec.edu.util.MensajeInternacionalizacionHandler;
 import ec.edu.vista.*;
 
 import javax.swing.*;
+import java.util.List;
 import java.util.Locale;
 
 public class UsuarioController {
@@ -51,6 +52,8 @@ public class UsuarioController {
         this.mensajeHandler = handler;
         configurarEventosMenuPrincipal();
     }
+
+
 
     private void configurarEventosEnVistas() {
         loginView.getBtnIngresar().addActionListener(e -> autenticar());
@@ -164,6 +167,35 @@ public class UsuarioController {
         PreguntasSeguridadView preguntasView = new PreguntasSeguridadView(mensajeHandler, this, "registro");
         preguntasView.setVisible(true);
     }
+    public boolean crearUsuario(Usuario nuevoUsuario) {
+        if (usuarioDAO.buscarPorUsername(nuevoUsuario.getUsername()) != null) {
+            return false; // Ya existe
+        }
+        usuarioDAO.guardar(nuevoUsuario);
+        return true;
+    }
+    public boolean editarUsuario(Usuario usuarioModificado) {
+        Usuario existente = usuarioDAO.buscarPorUsername(usuarioModificado.getUsername());
+        if (existente == null) return false;
+
+        usuarioDAO.actualizar(usuarioModificado);
+        return true;
+    }
+    public boolean eliminarUsuario(String username) {
+        Usuario usuario = usuarioDAO.buscarPorUsername(username);
+        if (usuario == null) return false;
+
+        usuarioDAO.eliminar(usuario);
+        return true;
+    }
+    public List<Usuario> listarUsuarios() {
+        return usuarioDAO.obtenerTodos();
+    }
+    public Usuario buscarUsuarioPorUsername(String username) {
+        return usuarioDAO.buscarPorUsername(username);
+    }
+
+
 
     public MensajeInternacionalizacionHandler getMensajeHandler() {
         return Main.mensajeHandler;

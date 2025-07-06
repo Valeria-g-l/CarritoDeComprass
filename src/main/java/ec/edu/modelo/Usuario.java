@@ -4,6 +4,8 @@ public class Usuario {
     private String username;
     private String contrasenia;
     private Rol rol;
+    private String nombre;
+    private String correo;
     private String pregunta1;
     private String respuesta1;
     private String pregunta2;
@@ -13,11 +15,20 @@ public class Usuario {
 
 
 
-    public Usuario(String nombreDeUsuario, String contrasenia, Rol rol) {
-        this.username = nombreDeUsuario;
+    public Usuario() {}
+    public Usuario(String username, String contrasenia, String nombre, String correo, Rol rol) {
+        this.username = username;
         this.contrasenia = contrasenia;
         this.rol = rol;
+        this.nombre = nombre;
+        this.correo = correo;
     }
+    public Usuario(String username, String contrasena, Rol rol) {
+        this.username = username;
+        this.contrasenia = contrasena;
+        this.rol = rol;
+    }
+
 
     public String getUsername() {
         return username;
@@ -33,6 +44,18 @@ public class Usuario {
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getCorreo() {
+        return correo;
+    }
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public Rol getRol() {
@@ -82,6 +105,8 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
+                "nombre=" + nombre +
+                "correo=" + correo +
                 "nombreDeUsuario='" + username + '\'' +
                 ", contrasenia='" + contrasenia + '\'' +
                 ", rol=" + rol +

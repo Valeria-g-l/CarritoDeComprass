@@ -17,9 +17,12 @@ public interface UsuarioDAO {
 
     void actualizar(Usuario usuario);
 
-    List<Usuario> listarTodos();
+    List<Usuario> obtenerTodos();
 
     List<Usuario> listarPorRol(Rol rol);
 
     void guardar(Usuario nuevoUsuario);
+    void eliminar(Usuario usuario);
+
+
 }

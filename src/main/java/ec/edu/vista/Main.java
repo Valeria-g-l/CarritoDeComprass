@@ -14,7 +14,6 @@ import ec.edu.modelo.Usuario;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Main {
     public static MensajeInternacionalizacionHandler mensajeHandler = new MensajeInternacionalizacionHandler("es", "EC");
@@ -40,10 +39,23 @@ public class Main {
                 Usuario usuarioAutenticado = loginController.getUsuarioAutenticado();
 
                 if (usuarioAutenticado != null) {
-                    MenuPrincipalView menuPrincipal = new MenuPrincipalView(mensajeHandler, null, null, null);
 
-                    UsuarioController usuarioControllerMenu = new UsuarioController(
-                            usuarioDAO, menuPrincipal, usuarioAutenticado, mensajeHandler);
+                    MenuPrincipalView menuPrincipal = new MenuPrincipalView(
+                            mensajeHandler,
+                            null,
+                            null,
+                            null,
+                            usuarioAutenticado,
+                            usuarioDAO
+                    );
+
+
+                    UsuarioController usuarioController = new UsuarioController(
+                            usuarioDAO,
+                            menuPrincipal,
+                            usuarioAutenticado,
+                            mensajeHandler
+                    );
 
                     ProductoAnadirView productoAnadirView = new ProductoAnadirView(mensajeHandler);
                     ProductoListaView productoListaView = new ProductoListaView(mensajeHandler);
@@ -88,7 +100,7 @@ public class Main {
                             productoModificarView, productoEliminarView,
                             carritoAnadirView, carritoListaView,
                             carritoModificarView, mensajeHandler,
-                            productoController, carritoController, usuarioControllerMenu);
+                            productoController, carritoController, usuarioController);
 
                     menuPrincipal.setVisible(true);
 
@@ -111,8 +123,6 @@ public class Main {
                 }
             }
         });
-
-
     }
 
     public static void cerrarVentanaExistente(Class<? extends JInternalFrame> clase, JDesktopPane desktopPane) {

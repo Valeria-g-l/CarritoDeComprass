@@ -1,9 +1,8 @@
 package ec.edu.vista;
 
-import ec.edu.controlador.CarritoController;
-import ec.edu.controlador.ProductoController;
-import ec.edu.controlador.RegistroController;
-import ec.edu.controlador.UsuarioController;
+import ec.edu.controlador.*;
+import ec.edu.dao.UsuarioDAO;
+import ec.edu.dao.impl.UsuarioDAOMemoria;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
 import ec.edu.util.ActualizablePorIdioma;
@@ -22,6 +21,11 @@ public class MenuPrincipalView extends JFrame {
     private JMenu menuProducto;
     private JMenu menuCarrito;
     private JMenu menuSalir;
+    private JMenu menuRegistro;
+    private JMenu menuAdmin;
+
+
+    private JMenuItem menuItemGestionUsuarios;
 
     private JMenuItem menuItemCrearProducto;
     private JMenuItem menuItemEliminarProducto;
@@ -33,6 +37,10 @@ public class MenuPrincipalView extends JFrame {
     private JMenuItem menuItemModificarMiCarrito;
     private JMenuItem menuItemCambiarContrasenia;
     private JMenuItem menuItemCerrarSesion;
+    private Usuario usuarioAutenticado;
+    private final UsuarioDAO usuarioDAO;
+
+
 
     private MiJDesktopPane jDesktopPane;
 
@@ -48,11 +56,16 @@ public class MenuPrincipalView extends JFrame {
     public MenuPrincipalView(MensajeInternacionalizacionHandler handler,
                              ProductoController productoController,
                              CarritoController carritoController,
-                             UsuarioController usuarioController) {
+                             UsuarioController usuarioController,
+                             Usuario usuarioAutenticado,
+                             UsuarioDAO usuarioDAO) {
         this.mensajeHandler = handler;
         this.productoController = productoController;
         this.carritoController = carritoController;
         this.usuarioController = usuarioController;
+        this.usuarioAutenticado = usuarioAutenticado;
+        this.usuarioDAO = usuarioDAO;
+
 
         jDesktopPane = new MiJDesktopPane();
         setContentPane(jDesktopPane);
@@ -96,6 +109,8 @@ public class MenuPrincipalView extends JFrame {
 
         configurarMenuIdiomas();
         actualizarTextos();
+        configurarMenuPorRol();
+
     }
 
     private void configurarMenuIdiomas() {
@@ -148,6 +163,11 @@ public class MenuPrincipalView extends JFrame {
 
         menuItemCambiarContrasenia.setText(mensajeHandler.get("menu.salir.cambiarContrasenia"));
         menuItemCerrarSesion.setText(mensajeHandler.get("menu.salir.cerrarSesion"));
+
+        if (menuAdmin != null) {
+            menuAdmin.setText(mensajeHandler.get("menu.admin"));
+        }
+
     }
 
     public JMenuItem getMenuItemCrearProducto() {
@@ -236,6 +256,22 @@ public class MenuPrincipalView extends JFrame {
             ((ActualizablePorIdioma) ventana).actualizarTextos(mensajeHandler.getBundle());
         }
     }
+    private void configurarMenuPorRol() {
+        if (usuarioAutenticado.getRol() == Rol.ADMINISTRADOR) {
+            menuAdmin = new JMenu(mensajeHandler.get("menu.admin"));
+            JMenuItem itemGestionUsuarios = new JMenuItem("Gestión de Usuarios");
+
+            itemGestionUsuarios.addActionListener(e -> {
+                UsuarioGestionView vistaUsuarios = new UsuarioGestionView();
+                UsuarioGestionController controlador = new UsuarioGestionController(usuarioDAO, vistaUsuarios);
+                agregarVentanaInterna(vistaUsuarios);
+            });
+
+            menuAdmin.add(itemGestionUsuarios);
+            getJMenuBar().add(menuAdmin);
+        }
+    }
+
 
 
 
