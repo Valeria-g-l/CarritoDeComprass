@@ -8,8 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ProductoDAOMemoria implements ProductoDAO {
+    private static List<Producto> productos = new ArrayList<>();
 
-    private List<Producto> productos;
 
     public ProductoDAOMemoria() {
         productos = new ArrayList<Producto>();

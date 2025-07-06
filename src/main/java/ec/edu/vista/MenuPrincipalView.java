@@ -1,6 +1,9 @@
 package ec.edu.vista;
 
+import ec.edu.controlador.CarritoController;
+import ec.edu.controlador.ProductoController;
 import ec.edu.controlador.RegistroController;
+import ec.edu.controlador.UsuarioController;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
 import ec.edu.util.ActualizablePorIdioma;
@@ -9,6 +12,8 @@ import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import java.util.ResourceBundle;
+
+import static ec.edu.vista.Main.cerrarVentanaExistente;
 
 public class MenuPrincipalView extends JFrame {
     private MensajeInternacionalizacionHandler mensajeHandler;
@@ -31,8 +36,22 @@ public class MenuPrincipalView extends JFrame {
 
     private JDesktopPane jDesktopPane;
 
-    public MenuPrincipalView(MensajeInternacionalizacionHandler handler) {
+    private  ProductoController productoController;
+    private final CarritoController carritoController;
+    private final UsuarioController usuarioController;
+
+    public void setProductoController(ProductoController productoController) {
+        this.productoController = productoController;
+    }
+
+    public MenuPrincipalView(MensajeInternacionalizacionHandler handler,
+                             ProductoController productoController,
+                             CarritoController carritoController,
+                             UsuarioController usuarioController) {
         this.mensajeHandler = handler;
+        this.productoController = productoController;
+        this.carritoController = carritoController;
+        this.usuarioController = usuarioController;
 
         jDesktopPane = new JDesktopPane();
         menuBar = new JMenuBar();
@@ -103,11 +122,10 @@ public class MenuPrincipalView extends JFrame {
     private void cambiarIdioma(String lang, String country) {
         mensajeHandler.setLenguaje(lang, country);
         actualizarTextos();
+
         for (JInternalFrame frame : jDesktopPane.getAllFrames()) {
             if (frame instanceof ActualizablePorIdioma) {
-                ((ActualizablePorIdioma) frame).actualizarTextos(
-                        ResourceBundle.getBundle("messages", mensajeHandler.getLocale())
-                );
+                ((ActualizablePorIdioma) frame).actualizarTextos(mensajeHandler.getBundle());
             }
         }
     }
@@ -193,19 +211,39 @@ public class MenuPrincipalView extends JFrame {
     }
 
     public void agregarVentanaInterna(JInternalFrame ventana) {
-        for (JInternalFrame abierta : jDesktopPane.getAllFrames()) {
-            if (abierta.getClass().equals(ventana.getClass())) {
-                abierta.dispose();
-            }
-        }
-        jDesktopPane.add(ventana);
-        ventana.setVisible(true);
         try {
-            ventana.setSelected(true);
-        } catch (java.beans.PropertyVetoException e) {
+            // Cerrar ventana existente del mismo tipo
+            cerrarVentanaExistente(ventana.getClass(), jDesktopPane);
+
+            // Configurar propiedades básicas
+            ventana.setSize(800, 600); // Tamaño adecuado
+            ventana.setLocation(
+                    (jDesktopPane.getWidth() - ventana.getWidth()) / 2,
+                    (jDesktopPane.getHeight() - ventana.getHeight()) / 2
+            );
+
+            // Agregar la ventana de manera segura
+            jDesktopPane.add(ventana, JLayeredPane.DEFAULT_LAYER);
+
+            // Hacer visible y traer al frente
+            ventana.setVisible(true);
+            ventana.toFront();
+
+            // Actualizar idioma si es necesario
+            if (ventana instanceof ActualizablePorIdioma) {
+                ((ActualizablePorIdioma)ventana).actualizarTextos(mensajeHandler.getBundle());
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error al agregar ventana: " + e.getMessage());
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                    "Error al abrir la ventana",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
 
 

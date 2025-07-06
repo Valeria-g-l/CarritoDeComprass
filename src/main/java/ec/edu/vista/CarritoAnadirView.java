@@ -258,11 +258,13 @@ public class CarritoAnadirView extends JInternalFrame implements ActualizablePor
 
 
     }
+    // Ejemplo en CarritoAnadirView
     public void actualizarTotalesFormateados(double subtotal, double iva, double total) {
-        Locale locale = mensajeHandler.getLocale();
+        Locale locale = mensajeHandler != null ? mensajeHandler.getLocale() : Locale.getDefault();
         TxtSubtotal.setText(FormateadorUtils.formatearMoneda(subtotal, locale));
         TxtIVA.setText(FormateadorUtils.formatearMoneda(iva, locale));
         TxtTotal.setText(FormateadorUtils.formatearMoneda(total, locale));
     }
+
 
 }

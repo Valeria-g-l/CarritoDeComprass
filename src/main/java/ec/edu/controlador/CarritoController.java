@@ -89,6 +89,7 @@ public class CarritoController {
         carritoAnadirView.getBtnGuardar().addActionListener(e -> guardarCarrito());
 
         carritoAnadirView.getBtnLimpiar().addActionListener(e -> carritoAnadirView.limpiarCampos());
+
     }
 
     private void buscarProducto() {

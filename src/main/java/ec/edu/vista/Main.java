@@ -14,6 +14,7 @@ import ec.edu.modelo.Usuario;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -36,12 +37,15 @@ public class Main {
             UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
             LoginView loginView = new LoginView(mensajeHandler);
             usuarioController = new UsuarioController(usuarioDAO, loginView, mensajeHandler);
-            MenuPrincipalView menuView = new MenuPrincipalView(mensajeHandler);
             loginView.setVisible(true);
 
             final ProductoController[] productoController = new ProductoController[1];
             final CarritoController[] carritoController = new CarritoController[1];
             final UsuarioController[] usuarioControllerMenu = new UsuarioController[1];
+            MenuPrincipalView menuPrincipal = new MenuPrincipalView(Main.mensajeHandler,
+                    productoController[0],
+                    carritoController[0],
+                    usuarioControllerMenu[0]);
 
             loginView.addWindowListener(new WindowAdapter() {
                 @Override
@@ -49,7 +53,6 @@ public class Main {
                     Usuario usuarioAutenticado = usuarioController.getUsuarioAutenticado();
 
                     if (usuarioAutenticado != null) {
-                        MenuPrincipalView menuPrincipal = new MenuPrincipalView(Main.mensajeHandler);
 
                         usuarioControllerMenu[0] = new UsuarioController(usuarioDAO, menuPrincipal, usuarioAutenticado,mensajeHandler);
 
@@ -57,6 +60,7 @@ public class Main {
                         CarritoDAO carritoDAO = new CarritoDAOMemoria();
 
                         ProductoAnadirView productoAnadirView = new ProductoAnadirView(Main.mensajeHandler);
+                        productoAnadirView.setPreferredSize(new Dimension(800, 600));
                         ProductoListaView productoListaView = new ProductoListaView(Main.mensajeHandler);
                         ProductoEliminarView productoEliminarView = new ProductoEliminarView(Main.mensajeHandler);
                         ProductoModificarView productoModificarView = new ProductoModificarView(Main.mensajeHandler);
@@ -70,6 +74,8 @@ public class Main {
                                 productoListaView, productoModificarView,
                                 productoEliminarView, menuPrincipal, mensajeHandler
                         );
+                        menuPrincipal.setProductoController(productoController[0]);
+
 
                         carritoController[0] = new CarritoController(
                                 carritoDAO, productoDAO,
@@ -86,6 +92,7 @@ public class Main {
                         carritoAnadirView.setCarritoController(carritoController[0]);
 
 
+
                         menuPrincipal.mostrarMensaje(Main.mensajeHandler.get("mensaje.bienvenida") + ": " + usuarioAutenticado.getUsername());
 
                         if (usuarioAutenticado.getRol() != null && usuarioAutenticado.getRol().equals(Rol.USUARIO)) {
@@ -98,8 +105,10 @@ public class Main {
                                 productoAnadirView, productoListaView,
                                 productoModificarView, productoEliminarView,
                                 carritoAnadirView, carritoListaView,
-                                carritoModificarView, Main.mensajeHandler,
+                                carritoModificarView, Main.mensajeHandler,productoController[0],
                                 carritoController[0], usuarioControllerMenu[0]);
+
+
 
                         menuPrincipal.setVisible(true);
                     } else {
@@ -111,6 +120,8 @@ public class Main {
         });
     }
 
+
+
     private static void configurarEventosMenu(MenuPrincipalView menu,
                                               ProductoAnadirView productoAnadirView,
                                               ProductoListaView productoListaView,
@@ -120,13 +131,19 @@ public class Main {
                                               CarritoListaView carritoListaView,
                                               CarritoModificarView carritoModificarView,
                                               MensajeInternacionalizacionHandler mensajes,
+                                              ProductoController productoController,
                                               CarritoController carritoController,
                                               UsuarioController usuarioController) {
 
         menu.getMenuItemCrearProducto().addActionListener(e -> {
-            cerrarVentanaExistente(ProductoAnadirView.class, menu.getjDesktopPane());
-            menu.agregarVentanaInterna(productoAnadirView);
+            ProductoAnadirView nuevaVista = new ProductoAnadirView(mensajes);
+            nuevaVista.setSize(600, 400); // Establece tamaño antes de mostrar
+            nuevaVista.setProductoController(productoController);
+            menu.agregarVentanaInterna(nuevaVista);
         });
+
+
+
 
 
         menu.getMenuItemBuscarProducto().addActionListener(e -> {

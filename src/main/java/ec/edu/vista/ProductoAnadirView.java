@@ -39,6 +39,10 @@ public class ProductoAnadirView extends  JInternalFrame implements ActualizableP
         setContentPane(PanelPrincipal);
         setTitle("Agregar Producto");
         setSize(400, 300);
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(false);
+        setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         BtnLimpiarr.addActionListener(new ActionListener() {
@@ -59,7 +63,7 @@ public class ProductoAnadirView extends  JInternalFrame implements ActualizableP
         ImageIcon iconLimpiar = new ImageIcon(getClass().getResource("/imagenes/broom.png"));
         BtnLimpiarr.setIcon(new ImageIcon(iconLimpiar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-
+    pack();
 
 
     }
@@ -137,6 +141,7 @@ public class ProductoAnadirView extends  JInternalFrame implements ActualizableP
 
     public JButton getBtnGuardar() {
         return btnGuardar;
+
     }
 
     public void setBtnGuardar(JButton btnGuardar) {
@@ -167,11 +172,7 @@ public class ProductoAnadirView extends  JInternalFrame implements ActualizableP
 
     }
 
-
-
     {
-
-
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -180,20 +181,19 @@ public class ProductoAnadirView extends  JInternalFrame implements ActualizableP
         });
     }
     public void actualizarTextos(ResourceBundle Bundle) {
-        labelTitulo.setText(mensajeHandler.get("login.Titulo"));
-        LblCodigo.setText(mensajeHandler.get("login.LblCodigo"));
-        LblNombre.setText(mensajeHandler.get("login.LblNombre"));
-        LblPreecio.setText(mensajeHandler.get("login.LblPrecio"));
-        btnGuardar.setText(mensajeHandler.get("login.BtnGuardar"));
-        btnCancelar.setText(mensajeHandler.get("login.BtnCancelar"));
-        BtnLimpiarr.setText(mensajeHandler.get("login.BtnLimpiar"));
+        labelTitulo.setText(Bundle.getString("login.Titulo"));
+        LblCodigo.setText(Bundle.getString("login.LblCodigo"));
+        LblNombre.setText(Bundle.getString("login.LblNombre"));
+        LblPreecio.setText(Bundle.getString("login.LblPrecio"));
+        btnGuardar.setText(Bundle.getString("login.BtnGuardar"));
+        btnCancelar.setText(Bundle.getString("login.BtnCancelar"));
+        BtnLimpiarr.setText(Bundle.getString("login.BtnLimpiar"));
     }
 
 
 
 
 }
-
 
 
 

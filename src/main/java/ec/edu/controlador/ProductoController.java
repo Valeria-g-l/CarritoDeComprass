@@ -38,6 +38,8 @@ public class ProductoController {
         this.menuPrincipalView = menuPrincipalView;
         this.mensajeHandler = mensajeHandler;
         configurarEventosMenu();
+        System.out.println("[DEBUG] Vista recibida en ProductoController: " + productoAnadirView);
+        System.out.println("[DEBUG] Botón guardar en vista: " + productoAnadirView.getBtnGuardar());
         configurarEventos();
     }
     private void configurarEventosMenu() {
@@ -66,11 +68,8 @@ public class ProductoController {
     }
 
     private void configurarEventos() {
-        productoAnadirView.getBtnGuardar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                guardarProducto();
-            }
+        productoAnadirView.getBtnGuardar().addActionListener(e -> {
+            guardarProducto();
         });
 
         productoListaView.getBtnBuscar().addActionListener(new ActionListener() {
@@ -102,6 +101,7 @@ public class ProductoController {
     }
 
     public void guardarProducto() {
+        System.out.println("[DEBUG] guardarProducto() ejecutándose");
         String txtCod = productoAnadirView.getTxtCodigo().getText().trim();
         String nombre = productoAnadirView.getTxtNombre().getText().trim();
         String txtPrecio = productoAnadirView.getTxtPrecio().getText().trim();
@@ -278,6 +278,11 @@ public class ProductoController {
 
     public void setProductoAnadirView(ProductoAnadirView productoAnadirView) {
         this.productoAnadirView = productoAnadirView;
+        productoAnadirView.getBtnGuardar().addActionListener(e -> {
+            System.out.println("[DEBUG] Evento de guardar activado");
+            this.guardarProducto();
+        });
     }
+
 }
 

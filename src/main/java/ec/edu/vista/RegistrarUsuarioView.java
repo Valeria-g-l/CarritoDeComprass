@@ -38,7 +38,7 @@ public class RegistrarUsuarioView extends JFrame  implements ActualizablePorIdio
         setContentPane(PanelPrincipal);
         setTitle("Agregar Producto");
         setSize(400, 300);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        dispose();
         setVisible(true);
 
         ImageIcon iconRegistrarse = new ImageIcon(getClass().getResource("/imagenes/user-add.png"));

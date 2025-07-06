@@ -23,7 +23,7 @@ public class MensajeInternacionalizacionHandler {
     }
 
     public Locale getLocale() {
-        return locale;
+        return this.locale;
     }
     public ResourceBundle getBundle() {
         return bundle;
