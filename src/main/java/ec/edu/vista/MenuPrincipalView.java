@@ -212,24 +212,20 @@ public class MenuPrincipalView extends JFrame {
 
     public void agregarVentanaInterna(JInternalFrame ventana) {
         try {
-            // Cerrar ventana existente del mismo tipo
+
             cerrarVentanaExistente(ventana.getClass(), jDesktopPane);
 
-            // Configurar propiedades básicas
-            ventana.setSize(800, 600); // Tamaño adecuado
+            ventana.setSize(800, 600);
             ventana.setLocation(
                     (jDesktopPane.getWidth() - ventana.getWidth()) / 2,
                     (jDesktopPane.getHeight() - ventana.getHeight()) / 2
             );
 
-            // Agregar la ventana de manera segura
+
             jDesktopPane.add(ventana, JLayeredPane.DEFAULT_LAYER);
 
-            // Hacer visible y traer al frente
             ventana.setVisible(true);
             ventana.toFront();
-
-            // Actualizar idioma si es necesario
             if (ventana instanceof ActualizablePorIdioma) {
                 ((ActualizablePorIdioma)ventana).actualizarTextos(mensajeHandler.getBundle());
             }

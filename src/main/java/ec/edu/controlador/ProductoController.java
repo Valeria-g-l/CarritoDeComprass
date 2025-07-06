@@ -258,7 +258,7 @@ public class ProductoController {
         if (producto != null) {
             productoListaView.cargarDatos(List.of(producto));
         } else {
-            productoListaView.cargarDatos(List.of()); // tabla vacía
+            productoListaView.cargarDatos(List.of());
             JOptionPane.showMessageDialog(null, "Producto no encontrado");
         }
     }
