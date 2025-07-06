@@ -1,48 +1,72 @@
-# 🛒 Proyecto de Ejemplo - Carrito de Compras
+# 🛒 Sistema de Gestión de Carrito de Compras
 
 Este proyecto fue desarrollado como parte del **período 66** de la asignatura **Programación Orientada a Objetos** en la Universidad Politécnica Salesiana.  
-Su objetivo principal es demostrar el uso de **patrones de diseño** aplicados a una aplicación Java con interfaz gráfica construida con **Swing**.
+Su objetivo principal es construir una aplicación de escritorio en **Java** con interfaz gráfica utilizando **Swing**, aplicando principios de diseño orientado a objetos y arquitectura modular.
 
 ---
 
 ## 🎯 Objetivo del proyecto
 
-Implementar un sistema educativo que simula un **carrito de compras**, utilizando buenas prácticas de diseño y una arquitectura desacoplada basada en **MVC** (Modelo-Vista-Controlador), **DAO** (Data Access Object) y principios de **POO** y **SOLID**.
+Desarrollar un sistema de escritorio que permita gestionar usuarios, productos y carritos de compras, con control de acceso por roles e internacionalización.  
+El sistema está diseñado para demostrar el uso de buenas prácticas de programación, aplicando los patrones **MVC** y **DAO**, y principios de diseño como **SRP** y **DIP**.
 
 ---
 
 ## 🛠️ Tecnologías utilizadas
 
-- 💻 **Java 21**
-- 🧰 **IntelliJ IDEA** (recomendado con el plugin de diseñador gráfico de interfaces Swing)
+- 💻 **Java **
+- 🧰 **IntelliJ IDEA** (con soporte para formularios `.form`)
 - ☕ **Swing** para la interfaz gráfica
-- 📦 Estructura modular basada en paquetes: `ec.edu.modelo`, `dao`, `controlador`, `vista`, y `servicio`
+- 🌐 **ResourceBundle** para internacionalización (i18n)
+- 📦 Estructura modular basada en paquetes:
+  - `ec.edu.modelo`
+  - `ec.edu.dao` y `ec.edu.dao.impl`
+  - `ec.edu.controlador`
+  - `ec.edu.vista`
+  - `ec.edu.util`
 
 ---
 
 ## 🧱 Patrones de Diseño aplicados
 
 - **MVC (Modelo - Vista - Controlador)**  
-  Para separar la lógica de negocio de la interfaz gráfica.
+  Separa la lógica de negocio, la interfaz gráfica y el flujo de control para mejorar la mantenibilidad.
 
 - **DAO (Data Access Object)**  
-  Para desacoplar el acceso a los datos, facilitando la migración a diferentes fuentes (archivos, base de datos, etc.).
+  Permite desacoplar el acceso a los datos, facilitando la migración futura a una base de datos real.
 
-- **SRP y DIP** de los principios **SOLID**  
-  Para asegurar una arquitectura mantenible, extensible y fácil de testear.
+- **Principios SOLID**
+  - **SRP (Responsabilidad Única)**: Cada clase tiene una única responsabilidad clara.
+  - **DIP (Inversión de Dependencias)**: Los controladores dependen de interfaces, no de implementaciones concretas.
 
 ---
 
+## 🔐 Funcionalidades principales
+
+- Inicio de sesión con autenticación y control de acceso por rol (`ADMINISTRADOR` / `USUARIO`)
+- Registro de nuevos usuarios con validación
+- Gestión de usuarios (solo para administradores)
+- Gestión de productos (crear, listar, modificar, eliminar)
+- Carrito de compras para usuarios
+- Cambio dinámico de idioma (Español, Inglés, Francés, Portugués)
+
+---
+
+## 🌍 Internacionalización
+
+El sistema soporta múltiples idiomas mediante archivos `.properties` y la clase `MensajeInternacionalizacionHandler`.  
+Cada vista implementa el método `actualizarTextos()` para reflejar los cambios de idioma en tiempo real, sin necesidad de reiniciar la aplicación.
+
+---
 
 ## 📚 Recomendaciones
 
 - Ejecutar el proyecto desde `Main.java`
-- Usar IntelliJ IDEA para aprovechar el editor visual de formularios `.form`
-- Probar con diferentes implementaciones del DAO para observar la flexibilidad del patrón
+- Usar IntelliJ IDEA para editar formularios `.form` visualmente
+- Probar el sistema con diferentes roles para observar el comportamiento dinámico del menú
+- Cambiar el idioma desde el menú superior para ver la internacionalización en acción
 
 ---
 
-## © Créditos
-
-Desarrollado como parte de la práctica académica en **Programación Orientada a Objetos – Periodo 66**.
+## 📂 Estructura del proyecto
 
