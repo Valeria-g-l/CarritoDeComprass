@@ -36,14 +36,6 @@
               <text value="Contraseña Actual"/>
             </properties>
           </component>
-          <component id="a4cbb" class="javax.swing.JTextField" binding="TxtContraseñaA">
-            <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
-          </component>
           <component id="e1dc1" class="javax.swing.JLabel" binding="LblContraseña">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -52,14 +44,6 @@
               <foreground color="-15465424"/>
               <text value="Nueva contraseña"/>
             </properties>
-          </component>
-          <component id="8b5ee" class="javax.swing.JTextField" binding="TxtContraseña">
-            <constraints>
-              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties/>
           </component>
           <component id="875ae" class="javax.swing.JButton" binding="BtnGuardar">
             <constraints>
@@ -93,6 +77,26 @@
             </constraints>
             <properties>
               <text value="Cancelar"/>
+            </properties>
+          </component>
+          <component id="7dcbc" class="javax.swing.JPasswordField" binding="TxtContraseñaA">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-1907233"/>
+            </properties>
+          </component>
+          <component id="b2834" class="javax.swing.JPasswordField" binding="TxtContraseña">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-1907233"/>
             </properties>
           </component>
         </children>
