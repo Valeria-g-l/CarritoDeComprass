@@ -4,6 +4,9 @@ Nombre: Kelly Valeria Guaman Leon
 Carrera: Computacion- Grupo 1
 Docente: Ing. Gabriel Leon
 
+## Link de video
+https://www.youtube.com/watch?v=sMeZEbeFhnQ
+
 ## Introduccion
 Este proyecto fue desarrollado como parte del **período 66** de la asignatura **Programación Orientada a Objetos** en la Universidad Politécnica Salesiana.  
 Su objetivo principal es construir una aplicación de escritorio en **Java** con interfaz gráfica utilizando **Swing**, aplicando principios de diseño orientado a objetos y arquitectura modular.
