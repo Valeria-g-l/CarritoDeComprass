@@ -44,12 +44,7 @@ public class RegistrarUsuarioView extends JFrame  implements ActualizablePorIdio
         ImageIcon iconRegistrarse = new ImageIcon(getClass().getResource("/imagenes/user-add.png"));
         BtnRegistrarse.setIcon(new ImageIcon(iconRegistrarse.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        BtnRegistrarse.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                registrarUsuario();
-            }
-        });
+
 
     }
     private void registrarUsuario() {
@@ -86,6 +81,10 @@ public class RegistrarUsuarioView extends JFrame  implements ActualizablePorIdio
     public JTextField getTxtTelefono() {
         return TxtTelefono;
     }
+    public JTextField getTxtCorreo() {
+        return TxtCorreo;
+    }
+
 
     public void setTxtTelefono(JTextField txtTelefono) {
         TxtTelefono = txtTelefono;

@@ -60,6 +60,7 @@ public class UsuarioController {
 
         loginView.getBtnRegistrarse().addActionListener(e -> {
             RegistrarUsuarioView registroView = new RegistrarUsuarioView(this, mensajeHandler);
+            new RegistroController(usuarioDAO, registroView, this, mensajeHandler);
             registroView.setVisible(true);
         });
 
@@ -105,8 +106,8 @@ public class UsuarioController {
     }
 
     private void cambiarContrasenia() {
-        String contraseniaActual = cambiarContraseniaView.getTxtContraseñaA().getText();
-        String contraseniaNueva = cambiarContraseniaView.getTxtContraseña().getText();
+        String contraseniaActual = cambiarContraseniaView.getTxtContraseñaA().getText().trim();
+        String contraseniaNueva = cambiarContraseniaView.getTxtContraseña().getText().trim();
 
         if (usuarioAutenticado == null) {
             JOptionPane.showMessageDialog(cambiarContraseniaView, "Error: Usuario no autenticado.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -118,12 +119,21 @@ public class UsuarioController {
             return;
         }
 
+        if (!Usuario.esContrasenaValida(contraseniaNueva)) {
+            JOptionPane.showMessageDialog(cambiarContraseniaView,
+                    "La nueva contraseña es débil.\nDebe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.",
+                    "Contraseña inválida",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         usuarioAutenticado.setContrasenia(contraseniaNueva);
         usuarioDAO.actualizar(usuarioAutenticado);
 
         JOptionPane.showMessageDialog(cambiarContraseniaView, "Contraseña cambiada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         cambiarContraseniaView.dispose();
     }
+
 
     public boolean verificarPreguntas(String p1, String r1, String p2, String r2, String p3, String r3) {
         return p1.equals(usuarioEnProceso.getPregunta1()) && r1.equalsIgnoreCase(usuarioEnProceso.getRespuesta1()) &&
@@ -169,7 +179,7 @@ public class UsuarioController {
     }
     public boolean crearUsuario(Usuario nuevoUsuario) {
         if (usuarioDAO.buscarPorUsername(nuevoUsuario.getUsername()) != null) {
-            return false; // Ya existe
+            return false;
         }
         usuarioDAO.guardar(nuevoUsuario);
         return true;

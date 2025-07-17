@@ -1,6 +1,9 @@
 package ec.edu.modelo;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String username;
     private String contrasenia;
     private Rol rol;
@@ -101,6 +104,38 @@ public class Usuario {
     public void setRespuesta3(String respuesta3) {
         this.respuesta3 = respuesta3;
     }
+
+    public static boolean esCedulaValida(String cedula) {
+        System.out.println("Validando cédula: " + cedula);
+        if (cedula == null || !cedula.matches("\\d{10}")) return false;
+
+        int provincia = Integer.parseInt(cedula.substring(0, 2));
+        int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
+        if (provincia < 1 || provincia > 24 || tercerDigito >= 6) return false;
+
+        int suma = 0;
+        for (int i = 0; i < 9; i++) {
+            int digito = Integer.parseInt(cedula.charAt(i) + "");
+            if (i % 2 == 0) {
+                digito *= 2;
+                if (digito > 9) digito -= 9;
+            }
+            suma += digito;
+        }
+
+        int verificador = Integer.parseInt(cedula.charAt(9) + "");
+        return (suma + verificador) % 10 == 0;
+    }
+
+    public static boolean esContrasenaValida(String contrasena) {
+        return contrasena != null &&
+                contrasena.length() >= 6 &&
+                contrasena.matches(".*[A-Z].*") &&
+                contrasena.matches(".*\\d.*") &&
+                contrasena.matches(".*[!@#$%^&*()].*");
+    }
+
+
 
     @Override
     public String toString() {

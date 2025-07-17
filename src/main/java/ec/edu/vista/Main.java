@@ -6,9 +6,7 @@ import ec.edu.controlador.UsuarioController;
 import ec.edu.dao.CarritoDAO;
 import ec.edu.dao.ProductoDAO;
 import ec.edu.dao.UsuarioDAO;
-import ec.edu.dao.impl.CarritoDAOMemoria;
-import ec.edu.dao.impl.ProductoDAOMemoria;
-import ec.edu.dao.impl.UsuarioDAOMemoria;
+import ec.edu.dao.impl.*;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
 import ec.edu.util.MensajeInternacionalizacionHandler;
@@ -20,14 +18,64 @@ public class Main {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
-            //UsuarioDAO usuarioDAO= new UsuarioDAOArchivoTexto();   Eso hay que hacer
-            ProductoDAO productoDAO = new ProductoDAOMemoria();
-            CarritoDAO carritoDAO = new CarritoDAOMemoria();
+            String[] opciones = {"Memoria", "Texto", "Binario"};
+            String seleccion = (String) JOptionPane.showInputDialog(
+                    null,
+                    "¿Cómo deseas manejar los datos?",
+                    "Tipo de persistencia",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    opciones,
+                    opciones[0]
+            );
+
+            if (seleccion == null) {
+                JOptionPane.showMessageDialog(null, "Cancelado.");
+                System.exit(0);
+            }
+
+            String ruta = null;
+            if (seleccion.equals("Texto") || seleccion.equals("Binario")) {
+                JFileChooser chooser = new JFileChooser();
+                chooser.setDialogTitle("Selecciona una carpeta para guardar los datos");
+                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int resultado = chooser.showOpenDialog(null);
+
+                if (resultado == JFileChooser.APPROVE_OPTION) {
+                    ruta = chooser.getSelectedFile().getAbsolutePath();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No seleccionaste ninguna carpeta.");
+                    System.exit(0);
+                }
+            }
+
+
+            UsuarioDAO usuarioDAO;
+            ProductoDAO productoDAO;
+            CarritoDAO carritoDAO;
+
+            switch (seleccion) {
+                case "Texto":
+                    usuarioDAO = new UsuarioDAOArchivoTexto(ruta + "/usuarios.txt");
+                    productoDAO = new ProductoDAOArchivoTexto(ruta + "/productos.txt");
+                    carritoDAO  = new CarritoDAOArchivoTexto(ruta + "/carritos.txt");
+                    break;
+                case "Binario":
+                    usuarioDAO = new UsuarioDAOArchivoBinario(ruta + "/usuarios.dat");
+                    productoDAO = new ProductoDAOArchivoBinario(ruta + "/productos.dat");
+                    carritoDAO  = new CarritoDAOArchivoBinario(ruta + "/carritos.dat");
+                    break;
+                default:
+                    usuarioDAO = new UsuarioDAOMemoria();
+                    productoDAO = new ProductoDAOMemoria();
+                    carritoDAO  = new CarritoDAOMemoria();
+                    break;
+            }
 
             iniciarSesion(usuarioDAO, productoDAO, carritoDAO);
         });
     }
+
 
     private static void iniciarSesion(UsuarioDAO usuarioDAO, ProductoDAO productoDAO, CarritoDAO carritoDAO) {
         LoginView loginView = new LoginView(mensajeHandler);
