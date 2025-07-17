@@ -21,6 +21,7 @@ public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
+            //UsuarioDAO usuarioDAO= new UsuarioDAOArchivoTexto();   Eso hay que hacer
             ProductoDAO productoDAO = new ProductoDAOMemoria();
             CarritoDAO carritoDAO = new CarritoDAOMemoria();
 
