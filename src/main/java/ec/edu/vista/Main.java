@@ -58,7 +58,10 @@ public class Main {
                 case "Texto":
                     usuarioDAO = new UsuarioDAOArchivoTexto(ruta + "/usuarios.txt");
                     productoDAO = new ProductoDAOArchivoTexto(ruta + "/productos.txt");
-                    carritoDAO  = new CarritoDAOArchivoTexto(ruta + "/carritos.txt");
+                    carritoDAO = new CarritoDAOArchivoTexto(ruta + "/carritos.txt");
+                    ((CarritoDAOArchivoTexto) carritoDAO).cargarProductosDesdeArchivo(ruta + "/productos.txt");
+
+
                     break;
                 case "Binario":
                     usuarioDAO = new UsuarioDAOArchivoBinario(ruta + "/usuarios.dat");

@@ -296,6 +296,12 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
 
 
     public void actualizarTotales() {
+        Carrito carrito = carritoController.getCarrito();
+        if (carrito == null) {
+            System.out.println("[ERROR] No hay carrito seleccionado.");
+            return;
+        }
+
         double subtotal = 0.0;
 
         for (ItemCarrito item : carritoController.getCarrito().getItems()) {

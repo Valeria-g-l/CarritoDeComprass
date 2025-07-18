@@ -35,8 +35,24 @@ public class UsuarioGestionController {
                 return;
             }
 
+            if (!Usuario.esCedulaValida(username)) {
+                JOptionPane.showMessageDialog(vista, "El username ingresado no es válida.");
+                return;
+            }
+
+            if (!Usuario.esContrasenaValida(contrasena)) {
+                JOptionPane.showMessageDialog(vista,
+                        "La contraseña debe tener mínimo 6 caracteres, una mayúscula, un número y un carácter especial.");
+                return;
+            }
+
+            if (!correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+                JOptionPane.showMessageDialog(vista, "El correo electrónico no tiene formato válido.");
+                return;
+            }
+
             if (usuarioDAO.buscarPorUsername(username) != null) {
-                JOptionPane.showMessageDialog(vista, "El nombre de usuario ya existe.");
+                JOptionPane.showMessageDialog(vista, "Ya existe un usuario con esa cédula.");
                 return;
             }
 
@@ -52,6 +68,7 @@ public class UsuarioGestionController {
             limpiarCamposCrear();
             cargarUsuariosEnTabla();
         });
+
 
 
         vista.getBtnBuscar().addActionListener(e -> {

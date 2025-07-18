@@ -1,6 +1,7 @@
 package ec.edu.dao.impl;
 
 import ec.edu.dao.UsuarioDAO;
+import ec.edu.modelo.Producto;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class UsuarioDAOArchivoTexto implements UsuarioDAO{
     private final File archivo;
+
 
     public UsuarioDAOArchivoTexto(String rutaArchivo) {
         archivo = new File(rutaArchivo);
@@ -26,6 +28,7 @@ public class UsuarioDAOArchivoTexto implements UsuarioDAO{
             }
         }
     }
+
 
     @Override
     public Usuario autenticar(String username, String contrasenia) {
@@ -157,6 +160,5 @@ public class UsuarioDAOArchivoTexto implements UsuarioDAO{
 
 
 }
-
 
 

@@ -58,9 +58,7 @@ public class CarritoController {
         this.carritoModificarView.setCarritoController(this);
 
 
-        carritoActual = new Carrito();
-        carritoActual.setPropietario(usuarioAutenticado);
-        carritoDAO.crear(carritoActual);
+
         cargarCarritosEnTabla();
         cargarCarritosEnComboModificar();
         cargarCarritosEnTabla();
@@ -132,6 +130,11 @@ public class CarritoController {
         int cantidad = (int) carritoAnadirView.getCBoxCantidad().getSelectedItem();
 
         boolean encontrado = false;
+        if (carritoActual == null) {
+            carritoActual = new Carrito();
+            carritoActual.setPropietario(usuarioAutenticado);
+        }
+
         for (ItemCarrito item : carritoActual.obtenerItems()) {
             if (item.getProducto().getCodigo() == codigo) {
                 item.setCantidad(item.getCantidad() + cantidad);
@@ -172,15 +175,28 @@ public class CarritoController {
     }
 
     private void guardarCarrito() {
-        carritoDAO.actualizar(carritoActual);
-        carritoAnadirView.mostrarMensaje("Carrito guardado correctamente!");
-        carritoActual = new Carrito();
-        carritoActual.setPropietario(usuarioAutenticado);
-        carritoDAO.crear(carritoActual);
-        actualizarTablaYTotales();
-        carritoModificarView.getCBoxCarritos().addItem(carritoActual);
+        if (carritoActual == null || carritoActual.obtenerItems().isEmpty()) {
+            carritoAnadirView.mostrarMensaje("No puedes guardar un carrito vacío.");
+            return;
+        }
 
+        if (carritoActual.getCodigo() == 0) {
+            carritoActual.setPropietario(usuarioAutenticado);
+            carritoDAO.crear(carritoActual);
+        } else {
+            carritoDAO.actualizar(carritoActual);
+        }
+
+        carritoAnadirView.mostrarMensaje("Carrito guardado correctamente!");
+
+        actualizarTablaYTotales();
+        cargarCarritosEnTabla();
+        cargarCarritosEnComboModificar();
+
+        carritoActual = null;
     }
+
+
 
     public void cargarCarritosEnTabla() {
         DefaultTableModel modelo = carritoListaView.getModelo();
