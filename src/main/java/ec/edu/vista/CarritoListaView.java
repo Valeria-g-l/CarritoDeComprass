@@ -22,7 +22,16 @@ public class CarritoListaView extends JInternalFrame implements ActualizablePorI
 
     private JButton BtnCancelar;
     private DefaultTableModel modelo;
-
+    /**
+     * Constructor para la ventana de lista de carritos.
+     * <p>
+     * Inicializa la interfaz con el manejador de internacionalización, actualiza textos,
+     * configura el panel principal, título, tamaño, comportamiento de cierre y
+     * modelo de tabla con columnas específicas.
+     * </p>
+     *
+     * @param handler Manejador para la internacionalización de mensajes.
+     */
     public CarritoListaView(MensajeInternacionalizacionHandler handler) {
         this.mensajeHandler = Main.mensajeHandler;
         actualizarTextos(Main.mensajeHandler.getBundle());

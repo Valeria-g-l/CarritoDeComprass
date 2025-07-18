@@ -15,7 +15,16 @@ import javax.swing.*;
 
 public class Main {
     public static MensajeInternacionalizacionHandler mensajeHandler = new MensajeInternacionalizacionHandler("es", "EC");
-
+    /**
+     * Método principal que inicia la aplicación.
+     * <p>
+     * Muestra un cuadro de diálogo para que el usuario seleccione el tipo de
+     * persistencia de datos que desea utilizar: memoria, archivo de texto o archivo binario.
+     * Luego, se inicializa la interfaz gráfica en el hilo de despacho de eventos de Swing.
+     * </p>
+     *
+     * @param args Argumentos de línea de comandos (no utilizados).
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             String[] opciones = {"Memoria", "Texto", "Binario"};

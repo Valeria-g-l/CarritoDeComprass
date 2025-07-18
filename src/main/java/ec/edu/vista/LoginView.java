@@ -26,7 +26,15 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
 
 
 
-
+    /**
+     * Constructor para la ventana de inicio de sesión (LoginView).
+     * <p>
+     * Inicializa la interfaz gráfica, asigna el manejador de internacionalización,
+     * y configura los componentes de la interfaz, incluyendo el menú.
+     * </p>
+     *
+     * @param handler Manejador para la internacionalización de mensajes.
+     */
     public LoginView(MensajeInternacionalizacionHandler handler) {
         this.mensajeHandler = Main.mensajeHandler;
         $$$setupUI$$$();

@@ -14,6 +14,11 @@ public class Carrito implements Serializable {
     private List<ItemCarrito> items;
     private Usuario propietario;
 
+    /**
+     * Obtiene el usuario propietario del carrito.
+     *
+     * @return El usuario que posee este carrito.
+     */
     public Usuario getPropietario() {
         return propietario;
     }

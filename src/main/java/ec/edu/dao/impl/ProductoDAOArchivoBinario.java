@@ -10,6 +10,12 @@ import java.util.List;
 
 public class ProductoDAOArchivoBinario implements ProductoDAO {
     private final File archivo;
+    /**
+     * Constructor que inicializa el DAO de productos utilizando un archivo binario.
+     * Si el archivo no existe, se crea uno nuevo en la ruta especificada.
+     *
+     * @param rutaArchivo Ruta del archivo binario donde se almacenan los productos.
+     */
 
     public ProductoDAOArchivoBinario(String rutaArchivo) {
         this.archivo = new File(rutaArchivo);

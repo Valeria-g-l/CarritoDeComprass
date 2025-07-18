@@ -16,7 +16,12 @@ public class CarritoDAOArchivoTexto implements CarritoDAO {
     private int secuenciaCodigo = 1;
     private List<Producto> productosDisponibles = new ArrayList<>();
 
-
+    /**
+     * Constructor que inicializa el archivo donde se guardarán los carritos.
+     * Si el archivo no existe, se crea uno nuevo.
+     *
+     * @param rutaArchivo Ruta completa al archivo de texto para almacenar carritos.
+     */
     public CarritoDAOArchivoTexto(String rutaArchivo) {
         archivo = new File(rutaArchivo);
         try {

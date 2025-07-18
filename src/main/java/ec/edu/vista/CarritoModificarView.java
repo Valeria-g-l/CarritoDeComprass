@@ -47,7 +47,15 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
 
     private DefaultTableModel modelo;
     private CarritoController carritoController;
-
+    /**
+     * Constructor para la ventana de modificación de carritos.
+     * <p>
+     * Inicializa la interfaz con el manejador de internacionalización, actualiza los textos,
+     * configura el título, tamaño, comportamiento al cerrar y establece el panel principal.
+     * </p>
+     *
+     * @param handler Manejador para la internacionalización de mensajes.
+     */
     public CarritoModificarView(MensajeInternacionalizacionHandler handler) {
         this.mensajeHandler = Main.mensajeHandler;
         actualizarTextos(Main.mensajeHandler.getBundle());

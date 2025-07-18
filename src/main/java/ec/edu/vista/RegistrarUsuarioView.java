@@ -30,7 +30,17 @@ public class RegistrarUsuarioView extends JFrame  implements ActualizablePorIdio
     private JTextField TxtTelefono;
     private UsuarioController usuarioController;
     private MensajeInternacionalizacionHandler mensajeHandler;
-
+    /**
+     * Constructor para la vista de registro de usuario.
+     * <p>
+     * Inicializa la interfaz con el controlador de usuario y el manejador de internacionalización,
+     * actualiza los textos, configura el panel principal, título, tamaño y visibilidad.
+     * Además, establece el ícono para el botón de registro.
+     * </p>
+     *
+     * @param usuarioController Controlador que maneja la lógica de usuario.
+     * @param handler           Manejador para la internacionalización de mensajes.
+     */
     public RegistrarUsuarioView(UsuarioController usuarioController, MensajeInternacionalizacionHandler handler) {
         this.mensajeHandler = Main.mensajeHandler;
         this.usuarioController = usuarioController;

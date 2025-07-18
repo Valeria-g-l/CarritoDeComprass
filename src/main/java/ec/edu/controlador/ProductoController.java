@@ -22,7 +22,11 @@ public class ProductoController {
     private MenuPrincipalView menuPrincipalView;
     private  MensajeInternacionalizacionHandler mensajeHandler;
 
-
+    /**
+     * Constructor alternativo utilizado cuando solo se requiere el DAO.
+     *
+     * @param productoDAO DAO de productos.
+     */
     public ProductoController(ProductoDAO productoDAO,
                               ProductoAnadirView productoAnadirView,
                               ProductoListaView productoListaView,
@@ -42,6 +46,9 @@ public class ProductoController {
         System.out.println("[DEBUG] Botón guardar en vista: " + productoAnadirView.getBtnGuardar());
         configurarEventos();
     }
+    /**
+     * Configura los eventos del menú principal relacionados con productos.
+     */
     private void configurarEventosMenu() {
         menuPrincipalView.getMenuItemCrearProducto().addActionListener(e -> {
             menuPrincipalView.agregarVentanaInterna(productoAnadirView);
@@ -59,7 +66,7 @@ public class ProductoController {
             menuPrincipalView.agregarVentanaInterna(productoListaView);
         });
     }
-
+    /** Getter para obtener la vista de modificación de productos*/
     public ProductoModificarView getProductoModificarView() {
         return productoModificarView;
     }
@@ -67,6 +74,7 @@ public class ProductoController {
         this.productoDAO = productoDAO;
     }
 
+    /** Configura los listeners de los botones en todas las vistas de producto*/
     private void configurarEventos() {
         productoAnadirView.getBtnGuardar().addActionListener(e -> {
             guardarProducto();
@@ -99,7 +107,7 @@ public class ProductoController {
             }
         });
     }
-
+    /**Guarda un nuevo producto utilizando los datos ingresados en la vista de añadir*/
     public void guardarProducto() {
         System.out.println("[DEBUG] guardarProducto() ejecutándose");
         String txtCod = productoAnadirView.getTxtCodigo().getText().trim();
@@ -133,19 +141,19 @@ public class ProductoController {
         productoListaView.cargarDatos(productoDAO.listarTodos());
     }
 
-
+    /** Busca productos por nombre desde la vista de listado*/
     private void buscarProducto() {
         String nombre = productoListaView.getTxtBuscar().getText();
 
         List<Producto> productosEncontrados = productoDAO.buscarPorNombre(nombre);
         productoListaView.cargarDatos(productosEncontrados);
     }
-
+    /**Lista todos los productos disponibles en el sistema*/
     private void listarProductos() {
         List<Producto> productos = productoDAO.listarTodos();
         productoListaView.cargarDatos(productos);
     }
-
+    /** Busca un producto por código en la vista de modificación y lo carga si existe*/
     private void buscarProductoEdicion() {
         String txtCod = productoModificarView.getTxtCodigo().getText();
         if (!txtCod.isEmpty()) {

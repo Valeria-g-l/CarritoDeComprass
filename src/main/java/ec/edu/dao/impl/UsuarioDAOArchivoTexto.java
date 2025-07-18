@@ -12,7 +12,15 @@ import java.util.List;
 public class UsuarioDAOArchivoTexto implements UsuarioDAO{
     private final File archivo;
 
-
+    /**
+     * Constructor que inicializa el DAO de usuarios utilizando un archivo de texto.
+     * <p>
+     * Si el archivo no existe, lo crea y añade dos usuarios por defecto:
+     * un administrador y un usuario normal para facilitar la administración inicial.
+     * </p>
+     *
+     * @param rutaArchivo Ruta del archivo de texto donde se almacenan los usuarios.
+     */
     public UsuarioDAOArchivoTexto(String rutaArchivo) {
         archivo = new File(rutaArchivo);
         if (!archivo.exists()) {

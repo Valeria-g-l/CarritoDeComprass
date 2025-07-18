@@ -19,6 +19,15 @@ public class Usuario implements Serializable{
 
 
     public Usuario() {}
+    /**
+     * Constructor que inicializa un usuario con datos básicos y su rol.
+     *
+     * @param username Nombre de usuario o cédula que identifica al usuario.
+     * @param contrasenia Contraseña del usuario para autenticación.
+     * @param nombre Nombre completo del usuario.
+     * @param correo Correo electrónico del usuario.
+     * @param rol Rol asignado al usuario (por ejemplo, administrador o usuario normal).
+     */
     public Usuario(String username, String contrasenia, String nombre, String correo, Rol rol) {
         this.username = username;
         this.contrasenia = contrasenia;

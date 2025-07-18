@@ -75,7 +75,7 @@ public class CarritoDAOArchivoBinario implements CarritoDAO {//implementamos Car
             return new ArrayList<>();
         }
     }
-//Se lista todos los carritos existentes
+/**Se lista todos los carritos existentes*/
     @Override
     public List<Carrito> listarPorUsuario(Usuario usuario) {
         List<Carrito> carritos = listarTodos();

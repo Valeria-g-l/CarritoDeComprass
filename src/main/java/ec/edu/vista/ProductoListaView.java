@@ -26,7 +26,11 @@ public class ProductoListaView extends JInternalFrame implements ActualizablePor
     private MensajeInternacionalizacionHandler mensajeHandler;
     private ProductoController productoController;
 
-
+    /**
+     * Asigna el controlador de producto a esta vista.
+     *
+     * @param productoController Controlador que manejará la lógica de producto.
+     */
     public void setProductoController(ProductoController productoController) {
         this.productoController = productoController;
     }

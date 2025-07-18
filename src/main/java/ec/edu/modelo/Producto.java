@@ -10,7 +10,13 @@ public class Producto implements Serializable {
 
     public Producto() {
     }
-
+    /**
+     * Constructor que inicializa un producto con código, nombre y precio.
+     *
+     * @param codigo Código único que identifica al producto.
+     * @param nombre Nombre descriptivo del producto.
+     * @param precio Precio unitario del producto.
+     */
     public Producto(int codigo, String nombre, double precio) {
         this.codigo = codigo;
         this.nombre = nombre;

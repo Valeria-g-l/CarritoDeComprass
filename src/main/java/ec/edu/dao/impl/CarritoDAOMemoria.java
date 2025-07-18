@@ -13,7 +13,12 @@ public class CarritoDAOMemoria implements CarritoDAO {
     private List<Carrito> carritos;
     private int secuenciaCodigo = 1;
     private List<Carrito> carritos1 = new ArrayList<>();
-
+    /**
+     * Lista todos los carritos pertenecientes a un usuario específico.
+     *
+     * @param usuario Usuario del cual se quieren obtener los carritos.
+     * @return Lista de carritos que pertenecen al usuario indicado.
+     */
     @Override
     public List<Carrito> listarPorUsuario(Usuario usuario) {
         List<Carrito> resultado = new ArrayList<>();

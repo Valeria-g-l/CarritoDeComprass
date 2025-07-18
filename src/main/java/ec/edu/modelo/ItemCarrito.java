@@ -9,7 +9,12 @@ public class ItemCarrito implements Serializable {
 
     public ItemCarrito() {
     }
-
+    /**
+     * Constructor que inicializa un ItemCarrito con un producto y su cantidad.
+     *
+     * @param producto Producto asociado al item.
+     * @param cantidad Cantidad del producto en el carrito.
+     */
     public ItemCarrito(Producto producto, int cantidad) {
         this.producto = producto;
         this.cantidad = cantidad;

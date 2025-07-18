@@ -29,7 +29,11 @@ public class ProductoModificarView extends  JInternalFrame implements Actualizab
     public JButton getBtnBuscar() {
         return btnBuscar;
     }
-
+    /**
+     * Obtiene el botón de buscar.
+     *
+     * @return El botón utilizado para realizar búsquedas.
+     */
     public void setProductoController(ProductoController productoController) {
         this.productoController = productoController;
     }

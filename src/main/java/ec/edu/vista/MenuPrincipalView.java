@@ -48,7 +48,11 @@ public class MenuPrincipalView extends JFrame {
     private  ProductoController productoController;
     private final CarritoController carritoController;
     private final UsuarioController usuarioController;
-
+    /**
+     * Asigna el controlador de productos a la vista principal del menú.
+     *
+     * @param productoController Controlador de productos a asignar.
+     */
     public void setProductoController(ProductoController productoController) {
         this.productoController = productoController;
     }

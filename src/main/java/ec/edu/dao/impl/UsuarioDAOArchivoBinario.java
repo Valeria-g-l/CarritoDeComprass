@@ -11,7 +11,15 @@ import java.util.List;
 
 public class UsuarioDAOArchivoBinario implements UsuarioDAO {
     private final File archivo;
-
+    /**
+     * Constructor que inicializa el DAO de usuarios utilizando un archivo binario.
+     * <p>
+     * Si el archivo no existe o está vacío, crea un usuario administrador y un usuario normal
+     * por defecto para facilitar la administración inicial del sistema.
+     * </p>
+     *
+     * @param rutaArchivo Ruta del archivo binario donde se almacenan los usuarios.
+     */
     public UsuarioDAOArchivoBinario(String rutaArchivo) {
         archivo = new File(rutaArchivo);
         /**Se creo 1 usuario y 1 admin paara asi administrar*/

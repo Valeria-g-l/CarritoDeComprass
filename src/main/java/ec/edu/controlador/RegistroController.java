@@ -17,6 +17,15 @@ public class RegistroController {
     private UsuarioController usuarioController;
     private MensajeInternacionalizacionHandler mensajeHandler;
 
+    /**
+     * Constructor del controlador de registro.
+     *
+     * @param usuarioDAO         DAO para gestión de usuarios.
+     * @param registroView       Vista Swing para el registro de usuario.
+     * @param usuarioController  Controlador general de usuario.
+     * @param handler            Manejador de internacionalización.
+     */
+
 
     public RegistroController(UsuarioDAO usuarioDAO,
                               RegistrarUsuarioView registroView,

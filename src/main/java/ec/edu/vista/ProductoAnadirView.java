@@ -32,7 +32,16 @@ public class ProductoAnadirView extends  JInternalFrame implements ActualizableP
         this.productoController = productoController;
     }
 
-
+    /**
+     * Constructor para la ventana de añadir productos.
+     * <p>
+     * Inicializa la interfaz con el manejador de internacionalización, actualiza los textos,
+     * configura el panel principal, título, tamaño y opciones de la ventana (cerrable,
+     * iconificable, maximizable, redimensionable) y comportamiento al cerrar.
+     * </p>
+     *
+     * @param handler Manejador para la internacionalización de mensajes.
+     */
     public ProductoAnadirView(MensajeInternacionalizacionHandler handler) {
         this.mensajeHandler = Main.mensajeHandler;
         actualizarTextos(Main.mensajeHandler.getBundle());

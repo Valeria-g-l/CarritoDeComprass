@@ -9,7 +9,12 @@ import java.util.List;
 
 public class ProductoDAOArchivoTexto implements ProductoDAO {
     private final File archivo;
-
+    /**
+     * Constructor que inicializa el archivo de texto para almacenar productos.
+     * Si el archivo no existe, se crea uno nuevo en la ruta especificada.
+     *
+     * @param ruta Ruta del archivo de texto para productos.
+     */
     public ProductoDAOArchivoTexto(String ruta) {
         archivo = new File(ruta);
         try {

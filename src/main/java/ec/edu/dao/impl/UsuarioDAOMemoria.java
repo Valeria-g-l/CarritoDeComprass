@@ -11,7 +11,13 @@ import java.util.List;
 public class UsuarioDAOMemoria implements UsuarioDAO {
 
     private List<Usuario> usuarios;
-
+    /**
+     * Constructor que inicializa el DAO de usuarios en memoria.
+     * <p>
+     * Crea una lista vacía y añade dos usuarios por defecto:
+     * un administrador y un usuario estándar con contraseñas predeterminadas.
+     * </p>
+     */
     public UsuarioDAOMemoria() {
         usuarios = new ArrayList<>();
         crear(new Usuario("admin", "12345", Rol.ADMINISTRADOR));

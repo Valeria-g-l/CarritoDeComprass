@@ -14,6 +14,15 @@ public class UsuarioGestionController {
     private final UsuarioDAO usuarioDAO;
     private final UsuarioGestionView vista;
 
+    /**
+     * Constructor del controlador para la gestión de usuarios.
+     *
+     * Inicializa el DAO y la vista, configura los eventos y carga los usuarios en la tabla.
+     *
+     * @param usuarioDAO DAO encargado de acceder y manipular los datos de usuarios.
+     * @param vista Vista principal para la gestión de usuarios (lista, edición, etc.).
+     */
+
     public UsuarioGestionController(UsuarioDAO usuarioDAO, UsuarioGestionView vista) {
         this.usuarioDAO = usuarioDAO;
         this.vista = vista;

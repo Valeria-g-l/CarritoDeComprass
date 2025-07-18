@@ -33,7 +33,13 @@ public class UsuarioController {
         usuarioEnProceso.setRespuesta3(r3);
     }
 
-
+    /**
+     * Constructor para el controlador de usuario que se utiliza durante el proceso de login.
+     *
+     * @param usuarioDAO  DAO para acceder y manipular datos de usuarios.
+     * @param loginView   Vista de login que controla la autenticación del usuario.
+     * @param handler     Manejador de mensajes para internacionalización.
+     */
     public UsuarioController(UsuarioDAO usuarioDAO, LoginView loginView, MensajeInternacionalizacionHandler handler) {
         this.usuarioDAO = usuarioDAO;
         this.loginView = loginView;

@@ -20,6 +20,13 @@ public class ProductoDAOMemoria implements ProductoDAO {
         productos.add(producto);
     }
 
+    /**
+     * Busca un producto en la lista por su código único.
+     *
+     * @param codigo Código del producto a buscar.
+     * @return El producto con el código especificado, o null si no se encuentra.
+     */
+
     @Override
     public Producto buscarPorCodigo(int codigo) {
         for (Producto producto : productos) {
