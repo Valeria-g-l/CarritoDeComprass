@@ -28,12 +28,12 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
 
 
     public LoginView(MensajeInternacionalizacionHandler handler) {
+        this.mensajeHandler = Main.mensajeHandler;
+        $$$setupUI$$$();
 
         JMenuBar menuBar = new JMenuBar();
 
-        this.mensajeHandler = Main.mensajeHandler;
-        $$$setupUI$$$();
-        actualizarTextos(Main.mensajeHandler.getBundle());
+
         setTitle("Iniciar Sesión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -41,6 +41,7 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
         setLayout(new BorderLayout());
         add(PanelPrincipal, BorderLayout.CENTER);
         setJMenuBar(menuBar);
+        actualizarTextos(Main.mensajeHandler.getBundle());
 
         JMenu menuIdioma = new JMenu("Idioma");
 
@@ -79,10 +80,10 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
         ImageIcon iconIngresar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
         BtnIngresar.setIcon(new ImageIcon(iconIngresar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconRegistrarse = new ImageIcon(getClass().getResource("/Imagenes/user-add.png"));
+        ImageIcon iconRegistrarse = new ImageIcon(getClass().getResource("/imagenes/user-add.png"));
         BtnRegistrarse.setIcon(new ImageIcon(iconRegistrarse.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconOlvide = new ImageIcon(getClass().getResource("/Imagenes/exclamation.png"));
+        ImageIcon iconOlvide = new ImageIcon(getClass().getResource("/imagenes/exclamation.png"));
         BtnOlvideContrasena.setIcon(new ImageIcon(iconOlvide.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
     }
 
@@ -166,4 +167,3 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
     }
 
 }
-

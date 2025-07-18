@@ -67,19 +67,19 @@ public class CarritoController {
     }
     private void configurarEventosMenu() {
 
-            menuPrincipalView.getMenuItemCrearCarrito().addActionListener(e -> {
-                menuPrincipalView.agregarVentanaInterna(carritoAnadirView);
-            });
+        menuPrincipalView.getMenuItemCrearCarrito().addActionListener(e -> {
+            menuPrincipalView.agregarVentanaInterna(carritoAnadirView);
+        });
 
-            menuPrincipalView.getMenuItemModificarMiCarrito().addActionListener(e -> {
-                menuPrincipalView.agregarVentanaInterna(carritoModificarView);
-                cargarProductosCarritoEnModificar();
-            });
+        menuPrincipalView.getMenuItemModificarMiCarrito().addActionListener(e -> {
+            menuPrincipalView.agregarVentanaInterna(carritoModificarView);
+            cargarProductosCarritoEnModificar();
+        });
 
-            menuPrincipalView.getMenuItemVerMisCarritos().addActionListener(e -> {
-                menuPrincipalView.agregarVentanaInterna(carritoListaView);
-                cargarCarritosEnTabla();
-            });
+        menuPrincipalView.getMenuItemVerMisCarritos().addActionListener(e -> {
+            menuPrincipalView.agregarVentanaInterna(carritoListaView);
+            cargarCarritosEnTabla();
+        });
     }
 
 

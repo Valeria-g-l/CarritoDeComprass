@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarritoDAOArchivoBinario implements CarritoDAO {
+public class CarritoDAOArchivoBinario implements CarritoDAO {//implementamos CarritoDAO
     private final File archivo;
     private int secuenciaCodigo = 1;
 
@@ -20,6 +20,10 @@ public class CarritoDAOArchivoBinario implements CarritoDAO {
             System.out.println("Error creando archivo binario de carritos: " + e.getMessage());
         }
     }
+/**
+ * Guarda un nuevo carrito en la lista persistente.
+ * Se asigna un código único automáticamente.
+ */
 
     @Override
     public void crear(Carrito carrito) {
@@ -29,6 +33,7 @@ public class CarritoDAOArchivoBinario implements CarritoDAO {
         guardarLista(carritos);
     }
 
+    /**Buscar un carrito por su codigo unico*/
     @Override
     public Carrito buscarPorCodigo(int codigo) {
         for (Carrito c : listarTodos()) {
@@ -37,6 +42,7 @@ public class CarritoDAOArchivoBinario implements CarritoDAO {
         return null;
     }
 
+    /**Actualiza lps datos del carrito existente*/
     @Override
     public void actualizar(Carrito carritoModificado) {
         List<Carrito> carritos = listarTodos();
@@ -48,6 +54,7 @@ public class CarritoDAOArchivoBinario implements CarritoDAO {
         }
         guardarLista(carritos);
     }
+    /**Elimina carritos de la lista*/
 
     @Override
     public void eliminar(int codigo) {
@@ -55,6 +62,8 @@ public class CarritoDAOArchivoBinario implements CarritoDAO {
         carritos.removeIf(c -> c.getCodigo() == codigo);
         guardarLista(carritos);
     }
+
+    /**Muestra todos los carritos*/
 
     @Override
     public List<Carrito> listarTodos() {
@@ -66,7 +75,7 @@ public class CarritoDAOArchivoBinario implements CarritoDAO {
             return new ArrayList<>();
         }
     }
-
+//Se lista todos los carritos existentes
     @Override
     public List<Carrito> listarPorUsuario(Usuario usuario) {
         List<Carrito> carritos = listarTodos();

@@ -19,6 +19,7 @@ public class ProductoDAOArchivoTexto implements ProductoDAO {
         }
     }
 
+/**Crea productos y esos se escriben en un archivo*/
     @Override
     public void crear(Producto producto) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
@@ -29,6 +30,8 @@ public class ProductoDAOArchivoTexto implements ProductoDAO {
         }
     }
 
+    /**Buscar por codigo un producto*/
+
     @Override
     public Producto buscarPorCodigo(int codigo) {
         for (Producto p : listarTodos()) {
@@ -36,7 +39,7 @@ public class ProductoDAOArchivoTexto implements ProductoDAO {
         }
         return null;
     }
-
+    /**Se bucar por el nombre del producto*/
     @Override
     public List<Producto> buscarPorNombre(String nombre) {
         List<Producto> encontrados = new ArrayList<>();
@@ -47,7 +50,7 @@ public class ProductoDAOArchivoTexto implements ProductoDAO {
         }
         return encontrados;
     }
-
+//Actualiza el nombre y precio del producto
     @Override
     public void actualizar(Producto productoActualizado) {
         List<Producto> productos = listarTodos();
@@ -59,7 +62,7 @@ public class ProductoDAOArchivoTexto implements ProductoDAO {
         }
         escribirTodo(productos);
     }
-
+//Elimina un producto
     @Override
     public void eliminar(int codigo) {
         List<Producto> productos = listarTodos();
