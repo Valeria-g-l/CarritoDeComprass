@@ -9,10 +9,29 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.util.List;
-
+/**
+ * Controlador responsable de la gestión de usuarios en la interfaz administrativa.
+ * Permite crear, buscar, editar y eliminar usuarios, validando sus datos
+ * antes de realizar operaciones con el DAO correspondiente.
+ *
+ * Vincula la lógica con la vista Swing `UsuarioGestionView`, mostrando mensajes
+ * contextuales y manteniendo actualizada la tabla de usuarios.
+ *
+ * @author Valeria
+ * @version 1.0
+ */
 public class UsuarioGestionController {
     private final UsuarioDAO usuarioDAO;
     private final UsuarioGestionView vista;
+
+    /**
+     * Constructor del controlador para la gestión de usuarios.
+     *
+     * Inicializa el DAO y la vista, configura los eventos y carga los usuarios en la tabla.
+     *
+     * @param usuarioDAO DAO encargado de acceder y manipular los datos de usuarios.
+     * @param vista Vista principal para la gestión de usuarios (lista, edición, etc.).
+     */
 
     public UsuarioGestionController(UsuarioDAO usuarioDAO, UsuarioGestionView vista) {
         this.usuarioDAO = usuarioDAO;
@@ -21,7 +40,10 @@ public class UsuarioGestionController {
         inicializarEventos();
         cargarUsuariosEnTabla();
     }
-
+    /**
+     * Configura todos los eventos de botones de la vista, incluyendo crear, buscar,
+     * editar y eliminar usuarios. Se implementan validaciones antes de ejecutar acciones.
+     */
     private void inicializarEventos() {
 
         vista.getBtnCrear().addActionListener(e -> {
@@ -35,8 +57,24 @@ public class UsuarioGestionController {
                 return;
             }
 
+            if (!Usuario.esCedulaValida(username)) {
+                JOptionPane.showMessageDialog(vista, "El username ingresado no es válida.");
+                return;
+            }
+
+            if (!Usuario.esContrasenaValida(contrasena)) {
+                JOptionPane.showMessageDialog(vista,
+                        "La contraseña debe tener mínimo 6 caracteres, una mayúscula, un número y un carácter especial.");
+                return;
+            }
+
+            if (!correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+                JOptionPane.showMessageDialog(vista, "El correo electrónico no tiene formato válido.");
+                return;
+            }
+
             if (usuarioDAO.buscarPorUsername(username) != null) {
-                JOptionPane.showMessageDialog(vista, "El nombre de usuario ya existe.");
+                JOptionPane.showMessageDialog(vista, "Ya existe un usuario con esa cédula.");
                 return;
             }
 
@@ -52,6 +90,7 @@ public class UsuarioGestionController {
             limpiarCamposCrear();
             cargarUsuariosEnTabla();
         });
+
 
 
         vista.getBtnBuscar().addActionListener(e -> {
@@ -146,11 +185,18 @@ public class UsuarioGestionController {
             }
         });
     }
+    /**
+     * Carga todos los usuarios disponibles en la base de datos y los muestra
+     * en la tabla de la vista.
+     */
 
     private void cargarUsuariosEnTabla() {
         List<Usuario> usuarios = usuarioDAO.obtenerTodos();
         vista.cargarUsuariosEnTabla(usuarios);
     }
+    /**
+     * Limpia los campos del formulario de creación de usuario en la vista.
+     */
 
     private void limpiarCamposCrear() {
         vista.getTxtNombre().setText("");

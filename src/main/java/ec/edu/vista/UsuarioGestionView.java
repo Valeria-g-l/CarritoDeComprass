@@ -37,7 +37,14 @@ public class UsuarioGestionView extends JInternalFrame implements ActualizablePo
     private JLabel LblUsername1;
     private JLabel LblRespuesta;
     private JLabel LblNombre1;
-
+    /**
+     * Constructor para la vista de gestión de usuarios.
+     * <p>
+     * Configura las propiedades de la ventana, incluyendo si es cerrable, iconificable,
+     * maximizable y redimensionable. También establece el título, tamaño, el panel principal
+     * y hace visible la ventana.
+     * </p>
+     */
     public UsuarioGestionView() {
         setClosable(true);
         setIconifiable(true);

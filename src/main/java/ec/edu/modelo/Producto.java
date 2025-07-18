@@ -1,13 +1,22 @@
 package ec.edu.modelo;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int codigo;
     private String nombre;
     private double precio;
 
     public Producto() {
     }
-
+    /**
+     * Constructor que inicializa un producto con código, nombre y precio.
+     *
+     * @param codigo Código único que identifica al producto.
+     * @param nombre Nombre descriptivo del producto.
+     * @param precio Precio unitario del producto.
+     */
     public Producto(int codigo, String nombre, double precio) {
         this.codigo = codigo;
         this.nombre = nombre;

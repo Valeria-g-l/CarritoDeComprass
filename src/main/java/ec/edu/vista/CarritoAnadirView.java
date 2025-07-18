@@ -39,7 +39,11 @@ public class CarritoAnadirView extends JInternalFrame implements ActualizablePor
     private JLabel LblIVA;
     private JLabel LblTotal;
     private CarritoController carritoController;
-
+    /**
+     * Asigna el controlador de carrito a esta vista.
+     *
+     * @param carritoController El controlador de carrito que se asignará.
+     */
     public void setCarritoController(CarritoController carritoController) {
         this.carritoController = carritoController;
     }

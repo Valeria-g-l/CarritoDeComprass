@@ -22,6 +22,11 @@ public class ProductoEliminarView  extends  JInternalFrame implements Actualizab
     private JButton BtnCancelar;
     private MensajeInternacionalizacionHandler mensajeHandler;
     private ProductoController productoController;
+    /**
+     * Establece el controlador de productos para esta vista.
+     *
+     * @param productoController El controlador de productos que se asignará.
+     */
 
     public void setProductoController(ProductoController productoController) {
         this.productoController = productoController;
