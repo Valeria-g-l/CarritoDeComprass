@@ -37,11 +37,18 @@ public class RegistroController {
         this.mensajeHandler = handler;
         configurarEventos();
     }
-
+    /**
+     * Configura los eventos de la vista de registro,
+     * incluyendo el botón de registro de usuario.
+     */
     private void configurarEventos() {
         registroView.getBtnRegistrarse().addActionListener(e -> registrarUsuario());
     }
-
+    /**
+     * Realiza el registro del usuario validando todos los campos ingresados.
+     * Lanza excepciones si se encuentran errores en formato o lógica de negocio.
+     * En caso exitoso, redirige a preguntas de seguridad.
+     */
     private void registrarUsuario() {
         String username = registroView.getTxtNombre().getText().trim();
         String contrasena = new String(registroView.getTxtContraseña().getPassword()).trim();
@@ -100,7 +107,11 @@ public class RegistroController {
     }
 
 
-
+    /**
+     * Devuelve el manejador de mensajes internacionalizados.
+     *
+     * @return el manejador de internacionalización usado por el controlador
+     */
     public MensajeInternacionalizacionHandler getMensajeHandler() {
         return mensajeHandler;
     }

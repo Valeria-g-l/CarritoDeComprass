@@ -8,7 +8,19 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+/**
+ * Implementación del DAO de usuarios con persistencia en archivo binario.
+ *
+ * Gestiona usuarios realizando operaciones CRUD y autenticación.
+ * Al inicializar, crea automáticamente un administrador y un usuario por defecto,
+ * facilitando la configuración inicial del sistema.
+ *
+ * Utiliza {@link ObjectInputStream} y {@link ObjectOutputStream} para serializar
+ * y deserializar objetos de tipo {@link Usuario}. La persistencia es local y no requiere base de datos.
+ *
+ * @author Valeria
+ * @version 1.0
+ */
 public class UsuarioDAOArchivoBinario implements UsuarioDAO {
     private final File archivo;
     /**
@@ -22,7 +34,13 @@ public class UsuarioDAOArchivoBinario implements UsuarioDAO {
      */
     public UsuarioDAOArchivoBinario(String rutaArchivo) {
         archivo = new File(rutaArchivo);
-        /**Se creo 1 usuario y 1 admin paara asi administrar*/
+        /**
+         * Autentica un usuario comparando username y contraseña.
+         *
+         * @param username nombre de usuario
+         * @param contrasenia contraseña del usuario
+         * @return el usuario autenticado o null si no coincide
+         */
         if (!archivo.exists() || archivo.length() == 0) {
             crear(new Usuario("admin", "Admin123!", Rol.ADMINISTRADOR));
             crear(new Usuario("user", "User123!", Rol.USUARIO));
@@ -43,12 +61,20 @@ public class UsuarioDAOArchivoBinario implements UsuarioDAO {
         }
         return null;
     }
-/**Crear un muevo usuario*/
+    /**
+     * Registra un nuevo usuario en el archivo.
+     *
+     * @param usuario usuario a crear
+     */
     @Override
     public void crear(Usuario usuario) {
         guardar(usuario);
     }
-    /**Agregar el usuarii*/
+    /**
+     * Agrega un nuevo usuario a la lista persistente.
+     *
+     * @param nuevoUsuario el usuario a guardar
+     */
     @Override
     public void guardar(Usuario nuevoUsuario) {
         List<Usuario> usuarios = obtenerTodos();
@@ -56,7 +82,11 @@ public class UsuarioDAOArchivoBinario implements UsuarioDAO {
         escribirTodos(usuarios);
     }
 
-    /**muestra cuantos usuarios hay registrados*/
+    /**
+     * Obtiene la lista completa de usuarios almacenados.
+     *
+     * @return lista de usuarios existentes
+     */
     @Override
     public List<Usuario> obtenerTodos() {
         if (!archivo.exists() || archivo.length() == 0) return new ArrayList<>();
@@ -68,7 +98,12 @@ public class UsuarioDAOArchivoBinario implements UsuarioDAO {
         }
     }
 
-    //Buscar por la cedula al los usuarios
+    /**
+     * Busca un usuario por su nombre de usuario.
+     *
+     * @param username nombre de usuario
+     * @return el usuario encontrado o null
+     */
     @Override
     public Usuario buscarPorUsername(String username) {
         for (Usuario u : obtenerTodos()) {
@@ -76,20 +111,33 @@ public class UsuarioDAOArchivoBinario implements UsuarioDAO {
         }
         return null;
     }
- //Elimiinar usuarios
+    /**
+     * Elimina un usuario según su nombre de usuario.
+     *
+     * @param username nombre del usuario a eliminar
+     */
     @Override
     public void eliminar(String username) {
         List<Usuario> usuarios = obtenerTodos();
         usuarios.removeIf(u -> u.getUsername().equals(username));
         escribirTodos(usuarios);
     }
-
+    /**
+     * Elimina el usuario especificado.
+     *
+     * @param usuario usuario a eliminar
+     */
 
     @Override
     public void eliminar(Usuario usuario) {
         eliminar(usuario.getUsername());
     }
-//Actualizar
+
+    /**
+     * Actualiza los datos de un usuario existente.
+     *
+     * @param usuarioModificado usuario con nueva información
+     */
     @Override
     public void actualizar(Usuario usuarioModificado) {
         List<Usuario> usuarios = obtenerTodos();
@@ -102,7 +150,12 @@ public class UsuarioDAOArchivoBinario implements UsuarioDAO {
         escribirTodos(usuarios);
     }
 
-    //Se lista dependiendo si es Administrador o Usuario
+    /**
+     * Lista usuarios según el rol (ADMINISTRADOR o USUARIO).
+     *
+     * @param rol rol a filtrar
+     * @return lista de usuarios con el rol especificado
+     */
     @Override
     public List<Usuario> listarPorRol(Rol rol) {
         List<Usuario> resultado = new ArrayList<>();
@@ -114,6 +167,11 @@ public class UsuarioDAOArchivoBinario implements UsuarioDAO {
         return resultado;
     }
 
+    /**
+     * Guarda toda la lista de usuarios en el archivo binario.
+     *
+     * @param usuarios lista completa de usuarios actualizada
+     */
     private void escribirTodos(List<Usuario> usuarios) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivo))) {
             oos.writeObject(usuarios);

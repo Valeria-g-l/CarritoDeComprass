@@ -13,8 +13,30 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 import static ec.edu.vista.Main.cerrarVentanaExistente;
-
+/**
+ * Vista principal de la aplicación que representa el menú de navegación para usuarios autenticados.
+ *
+ * Esta interfaz gráfica se adapta dinámicamente según el rol del usuario (ADMINISTRADOR o USUARIO),
+ * permitiendo gestionar productos, carritos de compra y configuraciones de cuenta.
+ *
+ * También incorpora soporte para internacionalización, permitiendo cambiar el idioma de la interfaz.
+ * Las ventanas internas se organizan dentro de un {@link JDesktopPane}, y cada módulo es gestionado
+ * por sus respectivos controladores.
+ *
+ * @author Valeria
+ * @version 1.0
+ */
 public class MenuPrincipalView extends JFrame {
+    /**
+     * Constructor que inicializa todos los menús, ítems, controladores y configuraciones de rol e idioma.
+     *
+     * @param handler manejador de mensajes internacionalizados
+     * @param productoController controlador de productos
+     * @param carritoController controlador de carritos
+     * @param usuarioController controlador de usuarios
+     * @param usuarioAutenticado usuario que inició sesión
+     * @param usuarioDAO DAO para operaciones de usuario
+     */
     private MensajeInternacionalizacionHandler mensajeHandler;
     private JMenuBar menuBar;
 
@@ -137,7 +159,12 @@ public class MenuPrincipalView extends JFrame {
 
         menuBar.add(menuIdiomas);
     }
-
+    /**
+     * Cambia el idioma activo de la aplicación y actualiza los textos en ventanas abiertas.
+     *
+     * @param lang código de idioma (e.g. "es", "en")
+     * @param country código de país (e.g. "EC", "US")
+     */
     private void cambiarIdioma(String lang, String country) {
         mensajeHandler.setLenguaje(lang, country);
         actualizarTextos();
@@ -234,6 +261,11 @@ public class MenuPrincipalView extends JFrame {
         }
     }
 
+    /**
+     * Agrega una ventana interna al escritorio y la centra automáticamente.
+     *
+     * @param ventana ventana interna que se va a mostrar
+     */
     public void agregarVentanaInterna(JInternalFrame ventana) {
 
         cerrarVentanaExistente(ventana.getClass(), jDesktopPane);

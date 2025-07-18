@@ -9,7 +9,17 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.util.List;
-
+/**
+ * Controlador responsable de la gestión de usuarios en la interfaz administrativa.
+ * Permite crear, buscar, editar y eliminar usuarios, validando sus datos
+ * antes de realizar operaciones con el DAO correspondiente.
+ *
+ * Vincula la lógica con la vista Swing `UsuarioGestionView`, mostrando mensajes
+ * contextuales y manteniendo actualizada la tabla de usuarios.
+ *
+ * @author Valeria
+ * @version 1.0
+ */
 public class UsuarioGestionController {
     private final UsuarioDAO usuarioDAO;
     private final UsuarioGestionView vista;
@@ -30,7 +40,10 @@ public class UsuarioGestionController {
         inicializarEventos();
         cargarUsuariosEnTabla();
     }
-
+    /**
+     * Configura todos los eventos de botones de la vista, incluyendo crear, buscar,
+     * editar y eliminar usuarios. Se implementan validaciones antes de ejecutar acciones.
+     */
     private void inicializarEventos() {
 
         vista.getBtnCrear().addActionListener(e -> {
@@ -172,11 +185,18 @@ public class UsuarioGestionController {
             }
         });
     }
+    /**
+     * Carga todos los usuarios disponibles en la base de datos y los muestra
+     * en la tabla de la vista.
+     */
 
     private void cargarUsuariosEnTabla() {
         List<Usuario> usuarios = usuarioDAO.obtenerTodos();
         vista.cargarUsuariosEnTabla(usuarios);
     }
+    /**
+     * Limpia los campos del formulario de creación de usuario en la vista.
+     */
 
     private void limpiarCamposCrear() {
         vista.getTxtNombre().setText("");

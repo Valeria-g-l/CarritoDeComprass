@@ -1,7 +1,22 @@
 package ec.edu.modelo;
 
 import java.io.Serializable;
-
+/**
+ * Representa un usuario dentro del sistema.
+ *
+ * Un usuario puede tener rol de administrador o usuario estándar, y está identificado
+ * principalmente por su nombre de usuario (usualmente su cédula).
+ *
+ * También almacena información personal, datos de autenticación y preguntas de seguridad
+ * para procesos de recuperación.
+ *
+ * Incluye métodos estáticos para validar cédulas ecuatorianas y contraseñas seguras.
+ *
+ * Esta clase es serializable para permitir persistencia en archivos.
+ *
+ * @author Valeria
+ * @version 1.0
+ */
 public class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;
     private String username;
@@ -35,6 +50,14 @@ public class Usuario implements Serializable{
         this.nombre = nombre;
         this.correo = correo;
     }
+
+    /**
+     * Constructor alternativo que inicializa un usuario con solo username, contraseña y rol.
+     *
+     * @param username Nombre de usuario o cédula.
+     * @param contrasena Contraseña del usuario.
+     * @param rol Rol asignado.
+     */
     public Usuario(String username, String contrasena, Rol rol) {
         this.username = username;
         this.contrasenia = contrasena;
@@ -144,7 +167,11 @@ public class Usuario implements Serializable{
                 contrasena.matches(".*[!@#$%^&*()].*");
     }
 
-
+    /**
+     * Devuelve una representación textual del usuario para fines de depuración.
+     *
+     * @return cadena con información básica del usuario.
+     */
 
     @Override
     public String toString() {

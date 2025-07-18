@@ -11,6 +11,19 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+/**
+ * Implementación del DAO de carritos utilizando persistencia en archivos de texto plano.
+ *
+ * Permite crear, buscar, actualizar, eliminar y listar carritos.
+ * Los datos se serializan en formato delimitado con ';' y '|', permitiendo la reconstrucción
+ * de objetos de dominio como `Carrito`, `ItemCarrito` y `Producto`.
+ *
+ * Además, se ofrece soporte para cargar productos desde un archivo separado,
+ * lo que permite enlazar los ítems del carrito con sus productos correspondientes.
+ *
+ * @author Valeria
+ * @version 1.0
+ */
 public class CarritoDAOArchivoTexto implements CarritoDAO {
     private final File archivo;
     private int secuenciaCodigo = 1;
@@ -30,6 +43,13 @@ public class CarritoDAOArchivoTexto implements CarritoDAO {
             System.out.println("Error creando archivo de carritos: " + e.getMessage());
         }
     }
+    /**
+     * Carga los productos disponibles desde un archivo de texto.
+     *
+     * Cada línea del archivo debe tener el formato: código,nombre,precio
+     *
+     * @param rutaProductos Ruta del archivo de productos
+     */
     public void cargarProductosDesdeArchivo(String rutaProductos) {
         productosDisponibles.clear(); // limpia antes de cargar
 
@@ -60,7 +80,11 @@ public class CarritoDAOArchivoTexto implements CarritoDAO {
         }
     }
 
-
+    /**
+     * Crea un nuevo carrito y lo guarda en el archivo.
+     *
+     * @param carrito el carrito a guardar
+     */
 
     @Override
     public void crear(Carrito carrito) {
@@ -83,7 +107,12 @@ public class CarritoDAOArchivoTexto implements CarritoDAO {
             System.out.println("Error guardando carrito: " + e.getMessage());
         }
     }
-
+    /**
+     * Busca un carrito por su código único.
+     *
+     * @param codigo el código del carrito
+     * @return el carrito encontrado o null si no existe
+     */
     @Override
     public Carrito buscarPorCodigo(int codigo) {
         for (Carrito c : listarTodos()) {
@@ -92,6 +121,12 @@ public class CarritoDAOArchivoTexto implements CarritoDAO {
         return null;
     }
 
+    /**
+     * Lista todos los carritos que pertenecen a un usuario específico.
+     *
+     * @param usuario el propietario de los carritos
+     * @return lista de carritos asociados al usuario
+     */
     @Override
     public List<Carrito> listarPorUsuario(Usuario usuario) {
         List<Carrito> carritos = new ArrayList<>();
@@ -103,6 +138,11 @@ public class CarritoDAOArchivoTexto implements CarritoDAO {
         return carritos;
     }
 
+    /**
+     * Actualiza un carrito existente en el archivo.
+     *
+     * @param carritoModificado el carrito actualizado
+     */
     @Override
     public void actualizar(Carrito carritoModificado) {
         List<Carrito> carritos = listarTodos();
@@ -114,14 +154,22 @@ public class CarritoDAOArchivoTexto implements CarritoDAO {
         }
         escribirTodos(carritos);
     }
-
+    /**
+     * Elimina un carrito del archivo según su código.
+     *
+     * @param codigo el código del carrito a eliminar
+     */
     @Override
     public void eliminar(int codigo) {
         List<Carrito> carritos = listarTodos();
         carritos.removeIf(c -> c.getCodigo() == codigo);
         escribirTodos(carritos);
     }
-
+    /**
+     * Lista todos los carritos registrados en el archivo de texto.
+     *
+     * @return lista completa de carritos
+     */
     @Override
     public List<Carrito> listarTodos() {
         List<Carrito> carritos = new ArrayList<>();
@@ -167,7 +215,11 @@ public class CarritoDAOArchivoTexto implements CarritoDAO {
         return carritos;
     }
 
-
+    /**
+     * Lista todos los carritos registrados en el archivo de texto.
+     *
+     * @return lista completa de carritos
+     */
 
     private void escribirTodos(List<Carrito> carritos) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, false))) {

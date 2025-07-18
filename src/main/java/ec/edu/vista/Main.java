@@ -12,7 +12,21 @@ import ec.edu.modelo.Usuario;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
-
+/**
+ * Clase principal que inicia la ejecución de la aplicación de gestión de compras.
+ *
+ * Presenta al usuario opciones para seleccionar el tipo de persistencia (memoria, archivo texto o binario),
+ * configura el entorno según esa elección y lanza la interfaz gráfica de usuario utilizando Swing.
+ *
+ * Se encarga de inicializar los DAOs correspondientes, enlazar los controladores con las vistas,
+ * y gestionar el flujo de autenticación y navegación por el sistema.
+ *
+ * Utiliza internacionalización mediante {@link MensajeInternacionalizacionHandler}
+ * y maneja la reautenticación tras cierre de sesión.
+ *
+ * @author Valeria
+ * @version 1.0
+ */
 public class Main {
     public static MensajeInternacionalizacionHandler mensajeHandler = new MensajeInternacionalizacionHandler("es", "EC");
     /**
@@ -87,7 +101,18 @@ public class Main {
             iniciarSesion(usuarioDAO, productoDAO, carritoDAO);
         });
     }
-
+    /**
+     * Inicia el proceso de autenticación del usuario.
+     * <p>
+     * Después de un login exitoso, configura las vistas del menú principal y
+     * enlaza los controladores de usuario, producto y carrito.
+     * Si el usuario cierra sesión, vuelve a mostrar la ventana de login.
+     * </p>
+     *
+     * @param usuarioDAO DAO que gestiona datos de usuarios.
+     * @param productoDAO DAO que gestiona datos de productos.
+     * @param carritoDAO DAO que gestiona datos de carritos.
+     */
 
     private static void iniciarSesion(UsuarioDAO usuarioDAO, ProductoDAO productoDAO, CarritoDAO carritoDAO) {
         LoginView loginView = new LoginView(mensajeHandler);
