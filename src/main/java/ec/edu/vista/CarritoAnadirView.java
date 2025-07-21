@@ -71,19 +71,19 @@ public class CarritoAnadirView extends JInternalFrame implements ActualizablePor
             }
         });
 
-        ImageIcon iconBuscar = new ImageIcon(getClass().getResource("/imagenes/search.png"));
+        ImageIcon iconBuscar = new ImageIcon(getClass().getResource("/Imagenes/search.png"));
         btnBuscar.setIcon(new ImageIcon(iconBuscar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconAnadir = new ImageIcon(getClass().getResource("/imagenes/plus.png"));
+        ImageIcon iconAnadir = new ImageIcon(getClass().getResource("/Imagenes/plus.png"));
         BtnAñadir.setIcon(new ImageIcon(iconAnadir.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconGuardar = new ImageIcon(getClass().getResource("/imagenes/shield-check.png"));
+        ImageIcon iconGuardar = new ImageIcon(getClass().getResource("/Imagenes/shield-check.png"));
         BtnGuardar.setIcon(new ImageIcon(iconGuardar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconLimpiar = new ImageIcon(getClass().getResource("/imagenes/broom.png"));
+        ImageIcon iconLimpiar = new ImageIcon(getClass().getResource("/Imagenes/broom.png"));
         BtnLimpiar.setIcon(new ImageIcon(iconLimpiar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
         BtnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         BtnCancelar.addActionListener(new ActionListener() {
             @Override

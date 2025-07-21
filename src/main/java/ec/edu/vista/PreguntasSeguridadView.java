@@ -67,7 +67,7 @@ public class PreguntasSeguridadView extends JFrame implements ActualizablePorIdi
             }
         });
 
-        ImageIcon iconoGuardar = new ImageIcon(getClass().getResource("/imagenes/shield-check.png"));
+        ImageIcon iconoGuardar = new ImageIcon(getClass().getResource("/Imagenes/shield-check.png"));
         Image imagenEscalada = iconoGuardar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         BtnAccion.setIcon(new ImageIcon(imagenEscalada));
     }

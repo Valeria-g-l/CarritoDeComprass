@@ -40,10 +40,10 @@ public class ProductoEliminarView  extends  JInternalFrame implements Actualizab
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
 
-        ImageIcon iconBuscar = new ImageIcon(getClass().getResource("/imagenes/shield-check.png"));
+        ImageIcon iconBuscar = new ImageIcon(getClass().getResource("/Imagenes/shield-check.png"));
         btnBuscar.setIcon(new ImageIcon(iconBuscar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
         BtnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
         setLocation(100,500);

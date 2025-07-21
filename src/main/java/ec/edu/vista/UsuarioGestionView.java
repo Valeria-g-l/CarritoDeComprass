@@ -55,25 +55,25 @@ public class UsuarioGestionView extends JInternalFrame implements ActualizablePo
         setContentPane(panel1);
         setVisible(true);
 
-        ImageIcon iconGuardar = new ImageIcon(getClass().getResource("/imagenes/shield-check.png"));
+        ImageIcon iconGuardar = new ImageIcon(getClass().getResource("/Imagenes/shield-check.png"));
         BtnCrear.setIcon(new ImageIcon(iconGuardar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
         BtnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconCancelar3 = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconCancelar3 = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
         BtnCancelar3.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconBuscar = new ImageIcon(getClass().getResource("/imagenes/search.png"));
+        ImageIcon iconBuscar = new ImageIcon(getClass().getResource("/Imagenes/search.png"));
         BtnBuscar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconCancelar2 = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconCancelar2 = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
         BtnCancelar2.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconEditar = new ImageIcon(getClass().getResource("/imagenes/plus.png"));
+        ImageIcon iconEditar = new ImageIcon(getClass().getResource("/Imagenes/plus.png"));
         BtnEditar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconEliminar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconEliminar = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
         BtnEliminar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
         modelo = new DefaultTableModel();

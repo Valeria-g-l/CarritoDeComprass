@@ -48,13 +48,13 @@ public class ProductoModificarView extends  JInternalFrame implements Actualizab
         setSize(500, 500);
 
 
-        ImageIcon iconActualizar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
+        ImageIcon iconActualizar = new ImageIcon(getClass().getResource("/Imagenes/check.png"));
         btnActualizar.setIcon(new ImageIcon(iconActualizar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconLimpiar = new ImageIcon(getClass().getResource("/imagenes/broom.png"));
+        ImageIcon iconLimpiar = new ImageIcon(getClass().getResource("/Imagenes/broom.png"));
         btnLimpiar.setIcon(new ImageIcon(iconLimpiar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
         btnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
         setResizable(true);

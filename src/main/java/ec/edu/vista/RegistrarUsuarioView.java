@@ -51,7 +51,7 @@ public class RegistrarUsuarioView extends JFrame  implements ActualizablePorIdio
         dispose();
         setVisible(true);
 
-        ImageIcon iconRegistrarse = new ImageIcon(getClass().getResource("/imagenes/user-add.png"));
+        ImageIcon iconRegistrarse = new ImageIcon(getClass().getResource("/Imagenes/user-add.png"));
         BtnRegistrarse.setIcon(new ImageIcon(iconRegistrarse.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
 

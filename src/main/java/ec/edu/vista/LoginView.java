@@ -85,13 +85,13 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
         });
 
 
-        ImageIcon iconIngresar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
+        ImageIcon iconIngresar = new ImageIcon(getClass().getResource("/Imagenes/check.png"));
         BtnIngresar.setIcon(new ImageIcon(iconIngresar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconRegistrarse = new ImageIcon(getClass().getResource("/imagenes/user-add.png"));
+        ImageIcon iconRegistrarse = new ImageIcon(getClass().getResource("/Imagenes/user-add.png"));
         BtnRegistrarse.setIcon(new ImageIcon(iconRegistrarse.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconOlvide = new ImageIcon(getClass().getResource("/imagenes/exclamation.png"));
+        ImageIcon iconOlvide = new ImageIcon(getClass().getResource("/Imagenes/exclamation.png"));
         BtnOlvideContrasena.setIcon(new ImageIcon(iconOlvide.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
     }
 

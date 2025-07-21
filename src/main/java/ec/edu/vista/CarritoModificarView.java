@@ -86,17 +86,17 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
         });
 
 
-        ImageIcon iconActualizar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
+        ImageIcon iconActualizar = new ImageIcon(getClass().getResource("/Imagenes/check.png"));
         BtnActualizarCantidad.setIcon(new ImageIcon(iconActualizar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
 
-        ImageIcon iconEliminar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconEliminar = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
         BtnEliminar.setIcon(new ImageIcon(iconEliminar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
 
-        ImageIcon iconAgregar = new ImageIcon(getClass().getResource("/imagenes/plus.png"));
+        ImageIcon iconAgregar = new ImageIcon(getClass().getResource("/Imagenes/plus.png"));
         BtnAgregar.setIcon(new ImageIcon(iconAgregar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
 
         BtnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
