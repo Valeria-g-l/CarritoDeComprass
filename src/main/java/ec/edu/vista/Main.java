@@ -6,27 +6,113 @@ import ec.edu.controlador.UsuarioController;
 import ec.edu.dao.CarritoDAO;
 import ec.edu.dao.ProductoDAO;
 import ec.edu.dao.UsuarioDAO;
-import ec.edu.dao.impl.CarritoDAOMemoria;
-import ec.edu.dao.impl.ProductoDAOMemoria;
-import ec.edu.dao.impl.UsuarioDAOMemoria;
+import ec.edu.dao.impl.*;
 import ec.edu.modelo.Rol;
 import ec.edu.modelo.Usuario;
 import ec.edu.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
-
+/**
+ * Clase principal que inicia la ejecución de la aplicación de gestión de compras.
+ *
+ * Presenta al usuario opciones para seleccionar el tipo de persistencia (memoria, archivo texto o binario),
+ * configura el entorno según esa elección y lanza la interfaz gráfica de usuario utilizando Swing.
+ *
+ * Se encarga de inicializar los DAOs correspondientes, enlazar los controladores con las vistas,
+ * y gestionar el flujo de autenticación y navegación por el sistema.
+ *
+ * Utiliza internacionalización mediante {@link MensajeInternacionalizacionHandler}
+ * y maneja la reautenticación tras cierre de sesión.
+ *
+ * @author Valeria
+ * @version 1.0
+ */
 public class Main {
     public static MensajeInternacionalizacionHandler mensajeHandler = new MensajeInternacionalizacionHandler("es", "EC");
-
+    /**
+     * Método principal que inicia la aplicación.
+     * <p>
+     * Muestra un cuadro de diálogo para que el usuario seleccione el tipo de
+     * persistencia de datos que desea utilizar: memoria, archivo de texto o archivo binario.
+     * Luego, se inicializa la interfaz gráfica en el hilo de despacho de eventos de Swing.
+     * </p>
+     *
+     * @param args Argumentos de línea de comandos (no utilizados).
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
-            ProductoDAO productoDAO = new ProductoDAOMemoria();
-            CarritoDAO carritoDAO = new CarritoDAOMemoria();
+            String[] opciones = {"Memoria", "Texto", "Binario"};
+            String seleccion = (String) JOptionPane.showInputDialog(
+                    null,
+                    "¿Cómo deseas manejar los datos?",
+                    "Tipo de persistencia",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    opciones,
+                    opciones[0]
+            );
+
+            if (seleccion == null) {
+                JOptionPane.showMessageDialog(null, "Cancelado.");
+                System.exit(0);
+            }
+
+            String ruta = null;
+            if (seleccion.equals("Texto") || seleccion.equals("Binario")) {
+                JFileChooser chooser = new JFileChooser();
+                chooser.setDialogTitle("Selecciona una carpeta para guardar los datos");
+                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int resultado = chooser.showOpenDialog(null);
+
+                if (resultado == JFileChooser.APPROVE_OPTION) {
+                    ruta = chooser.getSelectedFile().getAbsolutePath();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No seleccionaste ninguna carpeta.");
+                    System.exit(0);
+                }
+            }
+
+
+            UsuarioDAO usuarioDAO;
+            ProductoDAO productoDAO;
+            CarritoDAO carritoDAO;
+
+            switch (seleccion) {
+                case "Texto":
+                    usuarioDAO = new UsuarioDAOArchivoTexto(ruta + "/usuarios.txt");
+                    productoDAO = new ProductoDAOArchivoTexto(ruta + "/productos.txt");
+                    carritoDAO = new CarritoDAOArchivoTexto(ruta + "/carritos.txt");
+                    ((CarritoDAOArchivoTexto) carritoDAO).cargarProductosDesdeArchivo(ruta + "/productos.txt");
+
+
+                    break;
+                case "Binario":
+                    usuarioDAO = new UsuarioDAOArchivoBinario(ruta + "/usuarios.dat");
+                    productoDAO = new ProductoDAOArchivoBinario(ruta + "/productos.dat");
+                    carritoDAO  = new CarritoDAOArchivoBinario(ruta + "/carritos.dat");
+                    break;
+                default:
+                    usuarioDAO = new UsuarioDAOMemoria();
+                    productoDAO = new ProductoDAOMemoria();
+                    carritoDAO  = new CarritoDAOMemoria();
+                    break;
+            }
 
             iniciarSesion(usuarioDAO, productoDAO, carritoDAO);
         });
     }
+    /**
+     * Inicia el proceso de autenticación del usuario.
+     * <p>
+     * Después de un login exitoso, configura las vistas del menú principal y
+     * enlaza los controladores de usuario, producto y carrito.
+     * Si el usuario cierra sesión, vuelve a mostrar la ventana de login.
+     * </p>
+     *
+     * @param usuarioDAO DAO que gestiona datos de usuarios.
+     * @param productoDAO DAO que gestiona datos de productos.
+     * @param carritoDAO DAO que gestiona datos de carritos.
+     */
 
     private static void iniciarSesion(UsuarioDAO usuarioDAO, ProductoDAO productoDAO, CarritoDAO carritoDAO) {
         LoginView loginView = new LoginView(mensajeHandler);

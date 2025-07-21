@@ -32,7 +32,16 @@ public class ProductoAnadirView extends  JInternalFrame implements ActualizableP
         this.productoController = productoController;
     }
 
-
+    /**
+     * Constructor para la ventana de añadir productos.
+     * <p>
+     * Inicializa la interfaz con el manejador de internacionalización, actualiza los textos,
+     * configura el panel principal, título, tamaño y opciones de la ventana (cerrable,
+     * iconificable, maximizable, redimensionable) y comportamiento al cerrar.
+     * </p>
+     *
+     * @param handler Manejador para la internacionalización de mensajes.
+     */
     public ProductoAnadirView(MensajeInternacionalizacionHandler handler) {
         this.mensajeHandler = Main.mensajeHandler;
         actualizarTextos(Main.mensajeHandler.getBundle());
@@ -54,13 +63,13 @@ public class ProductoAnadirView extends  JInternalFrame implements ActualizableP
             }
         });
 
-        ImageIcon iconGuardar = new ImageIcon(getClass().getResource("/imagenes/shield-check.png"));
+        ImageIcon iconGuardar = new ImageIcon(getClass().getResource("/Imagenes/shield-check.png"));
         btnGuardar.setIcon(new ImageIcon(iconGuardar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
         btnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconLimpiar = new ImageIcon(getClass().getResource("/imagenes/broom.png"));
+        ImageIcon iconLimpiar = new ImageIcon(getClass().getResource("/Imagenes/broom.png"));
         BtnLimpiarr.setIcon(new ImageIcon(iconLimpiar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
     pack();

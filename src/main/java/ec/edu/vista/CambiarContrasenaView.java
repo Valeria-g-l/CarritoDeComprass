@@ -19,7 +19,15 @@ public class CambiarContrasenaView extends JInternalFrame implements Actualizabl
     private JLabel LblContraseñaA;
     private MensajeInternacionalizacionHandler mensajeHandler;
     private JButton BtnCancelar;
-
+    /**
+     * Constructor para la ventana de cambio de contraseña.
+     * <p>
+     * Inicializa la interfaz con el manejador de internacionalización, configura
+     * textos, panel principal, título, tamaño y comportamiento al cerrar.
+     * </p>
+     *
+     * @param handler Manejador para la internacionalización de mensajes.
+     */
     public CambiarContrasenaView(MensajeInternacionalizacionHandler handler) {
         this.mensajeHandler = Main.mensajeHandler;
         actualizarTextos(Main.mensajeHandler.getBundle());
@@ -28,7 +36,7 @@ public class CambiarContrasenaView extends JInternalFrame implements Actualizabl
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
 
-        ImageIcon iconoGuardar = new ImageIcon(getClass().getResource("/imagenes/shield-check.png"));
+        ImageIcon iconoGuardar = new ImageIcon(getClass().getResource("/Imagenes/shield-check.png"));
         Image imagenEscalada = iconoGuardar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         BtnGuardar.setIcon(new ImageIcon(imagenEscalada));
 

@@ -47,7 +47,15 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
 
     private DefaultTableModel modelo;
     private CarritoController carritoController;
-
+    /**
+     * Constructor para la ventana de modificación de carritos.
+     * <p>
+     * Inicializa la interfaz con el manejador de internacionalización, actualiza los textos,
+     * configura el título, tamaño, comportamiento al cerrar y establece el panel principal.
+     * </p>
+     *
+     * @param handler Manejador para la internacionalización de mensajes.
+     */
     public CarritoModificarView(MensajeInternacionalizacionHandler handler) {
         this.mensajeHandler = Main.mensajeHandler;
         actualizarTextos(Main.mensajeHandler.getBundle());
@@ -78,17 +86,17 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
         });
 
 
-        ImageIcon iconActualizar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
+        ImageIcon iconActualizar = new ImageIcon(getClass().getResource("/Imagenes/check.png"));
         BtnActualizarCantidad.setIcon(new ImageIcon(iconActualizar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
 
-        ImageIcon iconEliminar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconEliminar = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
         BtnEliminar.setIcon(new ImageIcon(iconEliminar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
 
-        ImageIcon iconAgregar = new ImageIcon(getClass().getResource("/imagenes/plus.png"));
+        ImageIcon iconAgregar = new ImageIcon(getClass().getResource("/Imagenes/plus.png"));
         BtnAgregar.setIcon(new ImageIcon(iconAgregar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
 
         BtnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
@@ -296,6 +304,12 @@ public class CarritoModificarView extends JInternalFrame implements Actualizable
 
 
     public void actualizarTotales() {
+        Carrito carrito = carritoController.getCarrito();
+        if (carrito == null) {
+            System.out.println("[ERROR] No hay carrito seleccionado.");
+            return;
+        }
+
         double subtotal = 0.0;
 
         for (ItemCarrito item : carritoController.getCarrito().getItems()) {

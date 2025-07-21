@@ -26,7 +26,11 @@ public class ProductoListaView extends JInternalFrame implements ActualizablePor
     private MensajeInternacionalizacionHandler mensajeHandler;
     private ProductoController productoController;
 
-
+    /**
+     * Asigna el controlador de producto a esta vista.
+     *
+     * @param productoController Controlador que manejará la lógica de producto.
+     */
     public void setProductoController(ProductoController productoController) {
         this.productoController = productoController;
     }
@@ -41,10 +45,10 @@ public class ProductoListaView extends JInternalFrame implements ActualizablePor
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
 
-        ImageIcon iconBuscar = new ImageIcon(getClass().getResource("/imagenes/search.png"));
+        ImageIcon iconBuscar = new ImageIcon(getClass().getResource("/Imagenes/search.png"));
         btnBuscar.setIcon(new ImageIcon(iconBuscar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
-        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/imagenes/cross (1).png"));
+        ImageIcon iconCancelar = new ImageIcon(getClass().getResource("/Imagenes/cross (1).png"));
         btnCancelar.setIcon(new ImageIcon(iconCancelar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
         modelo = new DefaultTableModel();

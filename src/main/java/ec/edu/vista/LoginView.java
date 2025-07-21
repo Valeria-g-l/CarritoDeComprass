@@ -26,14 +26,22 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
 
 
 
-
+    /**
+     * Constructor para la ventana de inicio de sesión (LoginView).
+     * <p>
+     * Inicializa la interfaz gráfica, asigna el manejador de internacionalización,
+     * y configura los componentes de la interfaz, incluyendo el menú.
+     * </p>
+     *
+     * @param handler Manejador para la internacionalización de mensajes.
+     */
     public LoginView(MensajeInternacionalizacionHandler handler) {
+        this.mensajeHandler = Main.mensajeHandler;
+        $$$setupUI$$$();
 
         JMenuBar menuBar = new JMenuBar();
 
-        this.mensajeHandler = Main.mensajeHandler;
-        $$$setupUI$$$();
-        actualizarTextos(Main.mensajeHandler.getBundle());
+
         setTitle("Iniciar Sesión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -41,6 +49,7 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
         setLayout(new BorderLayout());
         add(PanelPrincipal, BorderLayout.CENTER);
         setJMenuBar(menuBar);
+        actualizarTextos(Main.mensajeHandler.getBundle());
 
         JMenu menuIdioma = new JMenu("Idioma");
 
@@ -76,7 +85,7 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
         });
 
 
-        ImageIcon iconIngresar = new ImageIcon(getClass().getResource("/imagenes/check.png"));
+        ImageIcon iconIngresar = new ImageIcon(getClass().getResource("/Imagenes/check.png"));
         BtnIngresar.setIcon(new ImageIcon(iconIngresar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
         ImageIcon iconRegistrarse = new ImageIcon(getClass().getResource("/Imagenes/user-add.png"));
@@ -166,4 +175,3 @@ public class LoginView extends JFrame implements ActualizablePorIdioma {
     }
 
 }
-

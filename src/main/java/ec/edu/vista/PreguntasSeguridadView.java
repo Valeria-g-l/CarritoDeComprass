@@ -38,7 +38,19 @@ public class PreguntasSeguridadView extends JFrame implements ActualizablePorIdi
     private UsuarioController usuarioController;
     private String modo;
     private MensajeInternacionalizacionHandler mensajeHandler;
-
+    /**
+     * Constructor para la ventana de preguntas de seguridad.
+     * <p>
+     * Inicializa la interfaz con el manejador de internacionalización, el controlador de usuario,
+     * y el modo en que se abrirá la ventana (por ejemplo, registro o recuperación de contraseña).
+     * Configura el título, tamaño, comportamiento al cerrar y el panel principal.
+     * También asocia el evento del botón de acción.
+     * </p>
+     *
+     * @param handler            Manejador para la internacionalización de mensajes.
+     * @param usuarioController  Controlador para la gestión de usuarios.
+     * @param modo               Modo de funcionamiento de la ventana (e.g., "registro", "recuperacion").
+     */
     public PreguntasSeguridadView(MensajeInternacionalizacionHandler handler, UsuarioController usuarioController, String modo) {
         this.usuarioController = usuarioController;
         this.modo = modo;
@@ -55,7 +67,7 @@ public class PreguntasSeguridadView extends JFrame implements ActualizablePorIdi
             }
         });
 
-        ImageIcon iconoGuardar = new ImageIcon(getClass().getResource("/imagenes/shield-check.png"));
+        ImageIcon iconoGuardar = new ImageIcon(getClass().getResource("/Imagenes/shield-check.png"));
         Image imagenEscalada = iconoGuardar.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         BtnAccion.setIcon(new ImageIcon(imagenEscalada));
     }
